@@ -5,7 +5,7 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatBadgeModule,
-  MatButtonModule,
+  MatButtonModule, MatCardModule,
   MatChipsModule,
   MatIconModule,
   MatListModule,
@@ -28,7 +28,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     MatListModule,
     MatIconModule,
     MatChipsModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

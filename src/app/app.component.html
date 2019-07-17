@@ -8,17 +8,61 @@
           <mat-icon matListIcon>panorama_fish_eye</mat-icon>
           <a matLine href="#">{{ link }}</a>
           <div style="margin-left: 50px;">20</div>
-<!--          <mat-icon style="margin-left: 50px;">-->
-<!--            ghfdkshgkfhsdg-->
-<!--          </mat-icon>-->
+          <!--          <mat-icon style="margin-left: 50px;">-->
+          <!--            ghfdkshgkfhsdg-->
+          <!--          </mat-icon>-->
         </mat-list-item>
         <mat-divider style="margin-left: 30px;margin-right: 30px;"></mat-divider>
       </div>
 
     </mat-nav-list>
+
+    <mat-nav-list>
+      <mat-list-item>
+        <mat-icon matListIcon>panorama_fish_eye</mat-icon>
+        <a matLine href="#">LOG OUT</a>
+      </mat-list-item>
+    </mat-nav-list>
+
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar>DASHBOARD</mat-toolbar>
+    <mat-toolbar>
+
+      <span>DASHBOARD</span>
+      <span class="toolbar-spacer"></span>
+
+      <button mat-icon-button>
+        <mat-icon matBadge="8" aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+      </button>
+
+      <button mat-icon-button>
+        <mat-icon matBadge="8" aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+      </button>
+
+      <button mat-flat-button color="primary">
+        <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+        NEW　POST
+      </button>
+
+      <button mat-icon-button>
+        <div mat-card-avatar class="example-header-image mat-card-avatar"></div>
+      </button>
+
+
+    </mat-toolbar>
+
+    <div>
+
+      <div>
+        Views
+        <button mat-button>
+          Click me!
+          <mat-icon aria-label="Example icon-button with a heart icon">expand_more</mat-icon>
+        </button>
+      </div>
+
+    </div>
+
     <h3>Basic Buttons</h3>
     <div class="example-button-row">
       <button mat-button>Basic</button>

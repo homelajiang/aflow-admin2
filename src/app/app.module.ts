@@ -13,10 +13,23 @@ import {
   MatToolbarModule
 } from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {PostDashboardItemComponent} from './post/post-dashboard-item/post-dashboard-item.component';
+import {PostListComponent} from './post/post-list/post-list.component';
+import {PostListItemComponent} from './post/post-list-item/post-list-item.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
+import {appRouting} from './app.router';
+import { LoginComponent } from './login/login.component';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PostDashboardItemComponent,
+    PostListComponent,
+    PostListItemComponent,
+    DashboardComponent,
+    LoginComponent,
+    MainComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +42,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     MatIconModule,
     MatChipsModule,
     MatBadgeModule,
-    MatCardModule
+    MatCardModule,
+    appRouting
   ],
   providers: [],
   bootstrap: [AppComponent]

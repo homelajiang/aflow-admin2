@@ -1,0 +1,63 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav opened mode="side">
+    <mat-toolbar color="primary">Dashboard</mat-toolbar>
+
+    <mat-nav-list>
+      <div *ngFor="let link of ['DASHBOARD','POSTS','COMMENTS','STATS','LAYOUT','TEMPLATE','SETTINGS']">
+        <mat-list-item>
+          <mat-icon matListIcon>panorama_fish_eye</mat-icon>
+          <a matLine href="#">{{ link }}</a>
+          <div style="margin-left: 50px;">20</div>
+          <!--          <mat-icon style="margin-left: 50px;">-->
+          <!--            ghfdkshgkfhsdg-->
+          <!--          </mat-icon>-->
+        </mat-list-item>
+        <mat-divider style="margin-left: 30px;margin-right: 30px;"></mat-divider>
+      </div>
+
+    </mat-nav-list>
+
+    <mat-nav-list>
+      <mat-list-item>
+        <mat-icon matListIcon>panorama_fish_eye</mat-icon>
+        <a matLine href="#">LOG OUT</a>
+      </mat-list-item>
+    </mat-nav-list>
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar>
+
+      <span>DASHBOARD</span>
+      <span class="toolbar-spacer"></span>
+
+      <button mat-icon-button>
+        <mat-icon matBadge="8" aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+      </button>
+
+      <button mat-icon-button>
+        <mat-icon matBadge="8" aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+      </button>
+
+      <button mat-flat-button color="primary">
+        <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+        NEW　POST
+      </button>
+
+      <button mat-icon-button>
+        <div mat-card-avatar class="example-header-image mat-card-avatar"></div>
+      </button>
+
+
+    </mat-toolbar>
+
+    <router-outlet></router-outlet>
+
+<!--    <div fxLayout="row wrap">-->
+<!--      <div fxFlex="50" fxFlex.lt-sm="100" fxFlex.gt-md="33.33" style="background-color: brown;height: 100px;"></div>-->
+<!--      <div fxFlex="50" fxFlex.lt-sm="100" fxFlex.gt-md="33.33" style="background-color: blue;height: 100px"></div>-->
+<!--      <div fxFlex="50" fxFlex.lt-sm="100" fxFlex.gt-md="33.33" style="background-color: yellow;height: 100px"></div>-->
+<!--    </div>-->
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

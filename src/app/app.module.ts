@@ -5,11 +5,11 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatBadgeModule,
-  MatButtonModule, MatCardModule,
-  MatChipsModule,
-  MatIconModule,
-  MatListModule,
-  MatSidenavModule,
+  MatButtonModule, MatCardModule, MatCheckboxModule,
+  MatChipsModule, MatFormFieldModule,
+  MatIconModule, MatInputModule,
+  MatListModule, MatOptionModule, MatRadioModule, MatSelectModule,
+  MatSidenavModule, MatSlideToggleModule,
   MatToolbarModule
 } from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -20,6 +20,7 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {appRouting} from './app.router';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
+import { PostEditComponent } from './post/post-edit/post-edit.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { MainComponent } from './main/main.component';
     DashboardComponent,
     LoginComponent,
     MainComponent,
+    PostEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +45,14 @@ import { MainComponent } from './main/main.component';
     MatChipsModule,
     MatBadgeModule,
     MatCardModule,
-    appRouting
+    appRouting,
+    MatFormFieldModule,
+    MatInputModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatSlideToggleModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

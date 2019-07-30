@@ -1,21 +1,35 @@
 <!--<p>post-list works!</p>-->
 
+<div fxLayout="row" style="padding: 20px 0;margin-top: 50px;">
+
+  <span fxFlex="1 1 auto"></span>
+  <div>
+    <input style="border: 2px solid #fd4c5d;padding: 0 10px;height: 30px;border-right: none;border-radius: 3px 0 0 3px">
+    <button
+      style="height: 34px;width:70px;padding:  10px;color: white;
+      background-color: #fd4c5d;vertical-align: top;border: none;border-radius: 0 3px 3px 0">
+      搜索
+    </button>
+  </div>
+
+</div>
+
 
 <div fxLayout="row wrap">
 
-  <mat-card class="example-card" fxFlex="33"
+  <mat-card class="example-card" fxFlex="33.3"
             *ngFor="let temp of [1,2,3,4,5,6,7]">
 
-    <img mat-card-image src="https://via.placeholder.com/260x160.png" alt="Photo of a Shiba Inu">
+    <img mat-card-image src="https://via.placeholder.com/240x160.png" alt="Photo of a Shiba Inu">
 
-    <mat-card-title style="font-size: 16px;text-align: center;">
-      The Shiba Inu is the smallest of the six original
+    <mat-card-title style="font-size: 20px;">
+      学不会这几种搭配技巧买什么衣服都白费
     </mat-card-title>
 
-    <mat-card-content style="text-align: center;">
-      <i>3天前</i>
+    <mat-card-content>
+      穿衣搭配绝对是一个技术活，很多女孩子虽然衣服也不少，钱也没少花但是穿出来的衣服也并没有觉得多么的好看，原来都是不会穿搭衣服所造成的啊~所以现在竟...
     </mat-card-content>
-    <mat-card-actions fxLayout="row" fxLayoutAlign="space-evenly center">
+    <mat-card-actions fxLayout="row">
       <div fxLayout="row" fxLayoutAlign="start center">
         <mat-icon>home</mat-icon>
         <span>9,345</span>
@@ -26,15 +40,21 @@
         <span>1,000</span>
       </div>
 
+      <div fxFlex="1 1 auto"></div>
+
+      <div fxFlex="">
+        3天前
+      </div>
+
       <!--      <button mat-button>LIKE</button>-->
       <!--      <button mat-button>SHARE</button>-->
     </mat-card-actions>
   </mat-card>
 
 
-  <mat-card class="example-card" fxFlex="33" *ngFor="let temp of [1,2,3,4,5,6,7]">
+  <mat-card class="example-card" fxFlex="33.3" *ngFor="let temp of [1,2,3,4,5,6,7]">
     <mat-card-content>
-      <img src="https://via.placeholder.com/50x50.png" style="border-radius: 10px;"/>
+      <img src="https://via.placeholder.com/50x50.png" style="border-radius: 10px;width: 50px;height: 50px;"/>
       <div>
         Angular
       </div>
@@ -49,10 +69,10 @@
     </button>
   </mat-card>
 
-  <mat-card class="example-card" fxFlex="33" *ngFor="let temp of [1,2,3,4,5,6,7]">
+  <mat-card class="example-card" fxFlex="33.3" *ngFor="let temp of [1,2,3,4,5,6,7]">
     <mat-card-content fxLayout="column" fxLayoutAlign="start center">
 
-      <img src="https://via.placeholder.com/50x50.png" style="border-radius: 30px;width: 60px;height: 60px;"/>
+      <img src="https://via.placeholder.com/60x60.png" style="border-radius: 30px;width: 60px;height: 60px;"/>
 
       <h3>
         Angular

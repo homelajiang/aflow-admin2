@@ -1,0 +1,98 @@
+<div fxLayout="row">
+
+  <div fxFlex=""></div>
+  <div style="width: 300px;">
+    <div>
+      POST SETTING
+    </div>
+    <mat-divider></mat-divider>
+
+    <div>
+      <mat-icon>home</mat-icon>
+      <span>状态:</span>
+      <b>草稿</b>
+    </div>
+
+    <div>
+      <mat-icon>home</mat-icon>
+      <span>权限:</span>
+      <b>公开</b>
+      <button mat-button color="primary">编辑</button>
+    </div>
+
+    <mat-radio-group style=" display: inline-flex;flex-direction: column;">
+      <mat-radio-button value="1" style="margin: 5px;">
+        public
+      </mat-radio-button>
+      <mat-checkbox>置顶该文章</mat-checkbox>
+      <mat-radio-button value="2" style="margin: 5px;">
+        protect
+      </mat-radio-button>
+
+      <mat-form-field>
+        <input matInput placeholder="input password">
+      </mat-form-field>
+
+      <mat-radio-button value="3" style="margin: 5px;">
+        private
+      </mat-radio-button>
+
+    </mat-radio-group>
+
+    <div>
+      <button mat-stroked-button color="primary">ensure</button>
+      <button mat-stroked-button>cancel</button>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div>
+      <mat-icon>home</mat-icon>
+      <span>评论:</span>
+      <b>草稿</b>
+      <button mat-button color="primary">编辑</button>
+    </div>
+
+    <mat-radio-group style=" display: inline-flex;flex-direction: column;">
+      <mat-radio-button value="1" style="margin: 5px;">
+        public
+      </mat-radio-button>
+      <mat-radio-button value="2" style="margin: 5px;">
+        pending
+      </mat-radio-button>
+      <mat-radio-button value="3" style="margin: 5px;">
+        private
+      </mat-radio-button>
+    </mat-radio-group>
+
+    <div>
+      <button mat-stroked-button color="primary">ensure</button>
+      <button mat-stroked-button>cancel</button>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div>Tag</div>
+
+    <mat-radio-group style=" display: inline-flex;flex-direction: column;">
+      <mat-radio-button value="1" style="margin: 5px;">
+        public
+      </mat-radio-button>
+      <mat-radio-button value="2" style="margin: 5px;">
+        pending
+      </mat-radio-button>
+      <mat-radio-button value="3" style="margin: 5px;">
+        private
+      </mat-radio-button>
+    </mat-radio-group>
+
+    <button mat-flat-button color="primary">
+      <mat-icon>add</mat-icon>
+      New Categories
+    </button>
+
+
+
+  </div>
+
+</div>

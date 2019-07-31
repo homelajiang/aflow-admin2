@@ -4,9 +4,10 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
+  MatAutocompleteModule,
   MatBadgeModule,
   MatButtonModule, MatCardModule, MatCheckboxModule,
-  MatChipsModule, MatFormFieldModule,
+  MatChipsModule, MatDialogModule, MatFormFieldModule,
   MatIconModule, MatInputModule,
   MatListModule, MatOptionModule, MatRadioModule, MatSelectModule,
   MatSidenavModule, MatSlideToggleModule,
@@ -18,9 +19,12 @@ import {PostListComponent} from './post/post-list/post-list.component';
 import {PostListItemComponent} from './post/post-list-item/post-list-item.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {appRouting} from './app.router';
-import { LoginComponent } from './login/login.component';
-import { MainComponent } from './main/main.component';
-import { PostEditComponent } from './post/post-edit/post-edit.component';
+import {LoginComponent} from './login/login.component';
+import {MainComponent} from './main/main.component';
+import {PostEditComponent} from './post/post-edit/post-edit.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MediaComponent, MediaInfoDialogComponent} from './media/media.component';
+import {MediaItemComponent} from './media/media-item/media-item.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +36,9 @@ import { PostEditComponent } from './post/post-edit/post-edit.component';
     LoginComponent,
     MainComponent,
     PostEditComponent,
+    MediaComponent,
+    MediaItemComponent,
+    MediaInfoDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,8 +59,12 @@ import { PostEditComponent } from './post/post-edit/post-edit.component';
     MatSelectModule,
     MatRadioModule,
     MatSlideToggleModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatDialogModule
   ],
+  entryComponents: [MediaInfoDialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

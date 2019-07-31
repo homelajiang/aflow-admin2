@@ -1,0 +1,27 @@
+<div fxLayout="row" style="padding: 20px 0;margin-top: 50px;">
+
+  <button mat-flat-button color="primary">
+    <mat-icon>add</mat-icon>
+    Upload File
+  </button>
+
+  <span fxFlex="1 1 auto"></span>
+  <div>
+    <input style="border: 2px solid #fd4c5d;padding: 0 10px;height: 30px;border-right: none;border-radius: 3px 0 0 3px">
+    <button
+      style="height: 34px;width:70px;color: white;
+      background-color: #fd4c5d;vertical-align: top;border: none;border-radius: 0 3px 3px 0">
+      搜索
+    </button>
+  </div>
+
+</div>
+
+
+<div fxLayout="row wrap">
+
+
+  <app-media-item fxFlex="16.66" *ngFor="let a of [1,2,3,4,5,6,7,8,9]" (click)="onMediaClick(a)"></app-media-item>
+
+
+</div>

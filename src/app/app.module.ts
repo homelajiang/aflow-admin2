@@ -6,7 +6,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatAutocompleteModule,
   MatBadgeModule,
-  MatButtonModule, MatCardModule, MatCheckboxModule,
+  MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule,
   MatChipsModule, MatDialogModule, MatFormFieldModule,
   MatIconModule, MatInputModule,
   MatListModule, MatOptionModule, MatRadioModule, MatSelectModule,
@@ -62,7 +62,8 @@ import {MediaItemComponent} from './media/media-item/media-item.component';
     MatCheckboxModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
-    MatDialogModule
+    MatDialogModule,
+    MatButtonToggleModule
   ],
   entryComponents: [MediaInfoDialogComponent],
   providers: [],

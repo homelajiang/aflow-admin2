@@ -16,7 +16,11 @@ export class MediaComponent implements OnInit {
 
 
   onMediaClick(media) {
-    const dialogRef = this.dialog.open(MediaInfoDialogComponent);
+    const dialogRef = this.dialog.open(MediaInfoDialogComponent, {
+      width: 'calc(100vw - 60px)',
+      maxWidth: '100vw',
+      height: 'calc(100vh - 60px)'
+    });
     dialogRef.afterClosed().subscribe(result => {
       console.log('Dialog result: ${result}');
     });

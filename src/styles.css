@@ -4,3 +4,8 @@
 body {
   margin: 0
 }
+
+.mat-button-toggle-appearance-standard div.mat-button-toggle-label-content{
+  line-height: 36px;
+  font-size:14px;
+}

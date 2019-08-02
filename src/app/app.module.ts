@@ -22,9 +22,10 @@ import {appRouting} from './app.router';
 import {LoginComponent} from './login/login.component';
 import {MainComponent} from './main/main.component';
 import {PostEditComponent} from './post/post-edit/post-edit.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MediaComponent, MediaInfoDialogComponent} from './media/media.component';
 import {MediaItemComponent} from './media/media-item/media-item.component';
+import { MdeditorComponent } from './mdeditor/mdeditor.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import {MediaItemComponent} from './media/media-item/media-item.component';
     MediaComponent,
     MediaItemComponent,
     MediaInfoDialogComponent,
+    MdeditorComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,7 +65,8 @@ import {MediaItemComponent} from './media/media-item/media-item.component';
     ReactiveFormsModule,
     MatAutocompleteModule,
     MatDialogModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    FormsModule
   ],
   entryComponents: [MediaInfoDialogComponent],
   providers: [],

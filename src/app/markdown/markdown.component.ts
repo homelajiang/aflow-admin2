@@ -83,6 +83,10 @@ export class MarkdownComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+
+    // 使布局不可滚动
+    document.querySelector('#sidenav-content').setAttribute('style', 'overflow-y: hidden');
+
     this.codeMirrorInit();
     this.scroller = new MoeScroll();
     this.moeMode = new MoeMode();
@@ -249,12 +253,12 @@ export class MarkdownComponent implements OnInit, AfterViewInit {
 
         for (let i = 0; i < imgs.length; i++) {
           const src = imgs[i].getAttribute('src');
-/*          if (url.parse(src).protocol === null) {
-            if (!path.isAbsolute(src)) {
-              src = path.resolve(this.preTemp.directory, src);
-            }
-            src = url.resolve('file://', src);
-          }*/
+          /*          if (url.parse(src).protocol === null) {
+                      if (!path.isAbsolute(src)) {
+                        src = path.resolve(this.preTemp.directory, src);
+                      }
+                      src = url.resolve('file://', src);
+                    }*/
           imgs[i].setAttribute('src', src);
         }
 

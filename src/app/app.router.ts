@@ -13,9 +13,9 @@ const router: Routes = [
     children: [
       {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
       {path: 'dashboard', component: DashboardComponent},
-      {path: 'posts', component: PostListComponent},
-      {path: 'posts/edit', component: PostEditComponent},
-      {path: 'medias', component: MediaComponent}
+      {path: 'post', component: PostListComponent},
+      {path: 'post/edit', component: PostEditComponent},
+      {path: 'media', component: MediaComponent}
     ]
   }
 ];

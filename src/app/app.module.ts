@@ -25,7 +25,7 @@ import {PostEditComponent} from './post/post-edit/post-edit.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MediaComponent, MediaInfoDialogComponent} from './media/media.component';
 import {MediaItemComponent} from './media/media-item/media-item.component';
-import { MdeditorComponent } from './mdeditor/mdeditor.component';
+import { MarkdownComponent } from './markdown/markdown.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +40,7 @@ import { MdeditorComponent } from './mdeditor/mdeditor.component';
     MediaComponent,
     MediaItemComponent,
     MediaInfoDialogComponent,
-    MdeditorComponent,
+    MarkdownComponent,
   ],
   imports: [
     BrowserModule,

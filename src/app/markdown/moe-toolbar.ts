@@ -283,7 +283,6 @@ export class MoeToolbar {
           el.className = el.className.replace(/\s*active\s*/g, '');
         }
       }
-      console.log('cursorActivity');
     });
     const toolbar = document.getElementById('main-container');
     toolbar.parentNode.insertBefore(bar, toolbar);

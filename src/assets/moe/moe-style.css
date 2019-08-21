@@ -126,8 +126,7 @@ html, body {
 }
 
 #md-main.read-mode #left-panel {
-  left: -50%;
-  width: 50%;
+  width: 0;
 }
 
 #md-main.read-mode #right-panel {
@@ -140,17 +139,16 @@ html, body {
   width: calc(100% - 10px);
 }
 
-#md-main.write-mode #left-panel {
-  width: 100%;
-}
-
 #md-main.read-mode #left-panel .cover-top {
   width: calc(100% - 10px);
 }
 
+#md-main.write-mode #left-panel {
+  width: 100%;
+}
+
 #md-main.write-mode #right-panel {
-  right: -50%;
-  width: 50%;
+  width: 0;
 }
 
 #editor {

@@ -10,6 +10,9 @@ export class MoeMode {
   editor;
   container;
 
+  modeList = ['write-wide', 'write-medium', 'write-narrow', 'preview', 'read-wide', 'read-medium', 'read-narrow'];
+  index = 0;
+
   constructor() {
     this.titlebar = document.getElementById('electron-titlebar');
     this.main = document.getElementById('md-main');
@@ -22,7 +25,9 @@ export class MoeMode {
 
     this.setMode(MoeApp.config['edit-mode']);
     this.modeButton.addEventListener('click', (e) => {
-      this.setMode('write-medium');
+      // this.setMode('write-wide');
+      this.setMode(this.modeList[this.index % 7]);
+      this.index++;
     });
 
     // for (const it of this.modeMenuItems) {

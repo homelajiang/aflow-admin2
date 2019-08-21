@@ -1,22 +1,23 @@
 <div fxLayout="row" style="height:calc(100% - 64px)">
 
-  <div fxFlex="">
+  <div fxFlex style="width: calc(100% - 320px);">
 
     <input style="font-size: 1.6em;border-radius: 4px;border: 1px solid #bbb;font-weight: 500;height: 50px;
-      padding: 0 10px;
-      box-sizing: border-box;
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;" matInput
+          padding: 0 10px;
+          box-sizing: border-box;
+          -webkit-box-sizing: border-box;
+          -moz-box-sizing: border-box;" matInput
            placeholder="Please Input Title">
 
-    <div style="height: calc(100% - 50px)">
+    <div style="height: calc(100% - 50px);">
       <app-markdown></app-markdown>
     </div>
 
   </div>
 
 
-  <div style="width: 300px;background: #1a88d7;height: 100%;overflow-y: auto;overflow-x: hidden;">
+  <div style="margin-left:20px;width: 300px;background: azure;height: 100%;overflow-y: auto;overflow-x: hidden;"
+       fxFlex="nogrow">
     <div>
       POST SETTING
     </div>
@@ -139,7 +140,6 @@
     <img src="https://via.placeholder.com/240x160.png">
 
     <button mat-button color="primary">Select Cover</button>
-
 
   </div>
 

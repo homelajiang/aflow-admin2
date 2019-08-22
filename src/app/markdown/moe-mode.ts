@@ -45,7 +45,8 @@ export class MoeMode {
     });
 
     this.rightPanel.addEventListener('transitionend', (e) => {
-      if (e.target === this.rightPanel && (MoeApp.editMode.startsWith('read') || MoeApp.editMode.startsWith('preview'))) {
+      if (e.target === this.rightPanel && (MoeApp.config['edit-mode'].startsWith('read')
+        || MoeApp.config['edit-mode'].startsWith('preview'))) {
         // TODO
         // window.updatePreview(true);
       }
@@ -88,7 +89,7 @@ export class MoeMode {
       this.main.classList.add('read-mode-thin');
     }
 
-    if (MoeApp.editMode === m) {
+    if (MoeApp.config['edit-mode'] === m) {
       return;
     }
 
@@ -96,15 +97,23 @@ export class MoeMode {
     //   it.getElementsByClassName('fa')[0].style.opacity = (it.attributes['data-name'].value === m) ? '1' : '0';
     // }
 
-    MoeApp.editMode = m;
+    if (!this.isReadMode(MoeApp.config['edit-mode']) && this.isReadMode(m)) {
+      MoeApp.config['edit-mode'] = m;
+      MoeApp.moeMd.updatePre(true);
+    }
     MoeApp.config['edit-mode'] = m;
+
     document.getElementById('md-main').classList.remove('notransition');
     setTimeout(() => {
       document.getElementById('md-main').classList.add('notransition');
     }, 500);
   }
 
-  setBaseMode(bm, m) {
+  private isReadMode(mode: string) {
+    return !(mode === 'write-wide' || mode === 'write-medium' || 'write-narrow');
+  }
+
+  private setBaseMode(bm, m) {
     document.body.setAttribute('settings-mode', bm);
     if (bm === 'write') {
       this.main.classList.add('write-mode');

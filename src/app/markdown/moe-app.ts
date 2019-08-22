@@ -1,10 +1,15 @@
-export class MoeApp {
+import {MoeMode} from './moe-mode';
+import {MarkdownComponent} from './markdown.component';
 
-  public static editMode = 'preview';
+export class MoeApp {
+  static moeMd: MarkdownComponent;
   public static lineNumbers: number[];
   public static scrollMap = new Array(2); // 滚动记录器
   public static lineNumberTags;
   public static editor;
+  public static toolbarElements: any;
+  static moeMode: MoeMode;
+
 
   public static options = {
     blockStyles: {
@@ -24,7 +29,7 @@ export class MoeApp {
     'debug-mode': false,
     'scale-factor': 1.0,
     'tab-size': 4,
-    'edit-mode': 'preview',
+    'edit-mode': 'write-wide',
     'edit-mode-read': 'read-mode-wide',
     'edit-mode-write': 'write-mode-wide',
     'focus-mode': false,
@@ -42,5 +47,4 @@ export class MoeApp {
     'custom-csss': {},
     'inline-breaks': false
   };
-
 }

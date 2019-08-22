@@ -29,7 +29,7 @@ export class MoeScroll {
   }
 
   editorToPreviewer() {
-    if (MoeApp.editMode !== 'preview') {
+    if (MoeApp.config['edit-mode'] !== 'preview') {
       MoeApp.scrollMap = undefined;
       return;
     }
@@ -68,7 +68,7 @@ export class MoeScroll {
   }
 
   previewerToEditor() {
-    if (MoeApp.editMode !== 'preview') {
+    if (MoeApp.config['edit-mode'] !== 'preview') {
       MoeApp.scrollMap = undefined;
       return;
     }

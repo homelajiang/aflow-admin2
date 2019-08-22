@@ -84,12 +84,15 @@ export class MarkdownComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
 
+    MoeApp.moeMd = this;
+
     // 使布局不可滚动
     document.querySelector('#sidenav-content').setAttribute('style', 'overflow-y: hidden');
 
     this.codeMirrorInit();
     this.scroller = new MoeScroll();
     this.moeMode = new MoeMode();
+    MoeApp.moeMode = this.moeMode;
     const toolbar = new MoeToolbar();
     toolbar.createToolbar(['bold', 'italic', 'heading', '|',
       'quote', 'code', 'unordered-list', 'ordered-list', '|',
@@ -204,8 +207,8 @@ export class MarkdownComponent implements OnInit, AfterViewInit {
       this.preTemp.document_edited = true;
     }
 
-    if (MoeApp.editMode && !MoeApp.editMode.startsWith('preview')
-      && !MoeApp.editMode.startsWith('read')) {
+    if (MoeApp.config['edit-mode'] && !MoeApp.config['edit-mode'].startsWith('preview')
+      && !MoeApp.config['edit-mode'].startsWith('read')) {
       this.updatePreviewRunning = false;
       if (this.updatePreviewing) {
         setTimeout(() => {

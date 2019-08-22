@@ -131,7 +131,6 @@ html, body {
 
 #md-main.read-mode #right-panel {
   width: 100%;
-  padding-right: 4px;
 }
 
 #md-main.read-mode #right-panel .cover-top {
@@ -160,19 +159,19 @@ html, body {
 }
 
 #md-main.write-mode.write-mode-thin .CodeMirror-scroll {
-  width: calc(100% / 3 + 6px) !important;
+  width: calc(100% / 3) !important;
   padding-left: calc(100% / 3) !important;
   padding-right: calc(100% / 3) !important;
 }
 
 #md-main.write-mode.write-mode-medium .CodeMirror-scroll {
-  width: calc(100% / 2 + 6px) !important;
+  width: calc(100% / 2) !important;
   padding-left: calc(100% / 4) !important;
   padding-right: calc(100% / 4) !important;
 }
 
 #md-main.write-mode.write-mode-wide .CodeMirror-scroll {
-  width: calc((100% / 3) * 2 + 6px) !important;
+  width: calc((100% / 3) * 2) !important;
   padding-left: calc(100% / 6) !important;
   padding-right: calc(100% / 6) !important;
 }
@@ -235,9 +234,9 @@ html, body {
 }
 
 #cover-bottom {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  position: relative;
+  /*bottom: 0;*/
+  /*left: 0;*/
   width: 100%;
   height: 25px;
   z-index: 1000;
@@ -262,7 +261,7 @@ html, body {
 }
 
 #md-main.read-mode #cover-bottom-background-left {
-  left: -50%;
+  width: 0;
 }
 
 #md-main.read-mode #cover-bottom-background-right {
@@ -274,7 +273,7 @@ html, body {
 }
 
 #md-main.write-mode #cover-bottom-background-right {
-  right: -50%;
+  width: 0;
 }
 
 #cover-bottom .button-bottom {

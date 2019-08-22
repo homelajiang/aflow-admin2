@@ -1,7 +1,6 @@
 import {MoeApp} from './moe-app';
 
 export class MoeToolbar {
-  savedOverflow = '';
 
   bindings = {
     toggleBold: this.toggleBold,
@@ -239,7 +238,6 @@ export class MoeToolbar {
 
     const toolbarData = {};
 
-
     for (let item of items) {
 
       // 匹配string类型菜单
@@ -270,6 +268,8 @@ export class MoeToolbar {
       toolbarData[item.name || item] = el;
       bar.appendChild(el);
     }
+
+    MoeApp.toolbarElements = toolbarData;
 
     // Will be fired when the cursor or selection moves, or any change is made to the editor content.
     MoeApp.editor.on('cursorActivity', () => {
@@ -832,44 +832,45 @@ export class MoeToolbar {
    * Toggle full screen of the editor.
    */
   private toggleFullScreen() {
-        // Set fullscreen
-        MoeApp.editor.setOption('fullScreen', !MoeApp.editor.getOption('fullScreen'));
+    // Set fullscreen
+    MoeApp.editor.setOption('fullScreen', !MoeApp.editor.getOption('fullScreen'));
 
 
-        // Prevent scrolling on body during fullscreen active
-        if (MoeApp.editor.getOption('fullScreen')) {
-          this.savedOverflow = document.body.style.overflow;
-          document.body.style.overflow = 'hidden';
-        } else {
-          document.body.style.overflow = this.savedOverflow;
-        }
+    // Prevent scrolling on body during fullscreen active
+    if (MoeApp.editor.getOption('fullScreen')) {
+      document.querySelector('#md-main')
+        .classList.add('editor-fullscreen');
 
+      document.querySelector('.editor-toolbar')
+        .classList.add('fullscreen');
 
-        // Update toolbar class
-        const wrap = MoeApp.editor.getWrapperElement();
+      document.querySelector('mat-sidenav')
+        .setAttribute('style', 'visibility: hidden;transform: none;');
 
-        if (!/fullscreen/.test(wrap.previousSibling.className)) {
-          wrap.previousSibling.className += ' fullscreen';
-        } else {
-          wrap.previousSibling.className = wrap.previousSibling.className.replace(/\s*fullscreen\b/, '');
-        }
+      MoeApp.moeMode.setMode('preview');
 
+    } else {
+      document.querySelector('#md-main')
+        .classList.remove('editor-fullscreen');
 
-/*        // Update toolbar button
-        const toolbarButton = editor.toolbarElements.fullscreen;
+      document.querySelector('.editor-toolbar')
+        .classList.remove('fullscreen');
 
-        if (!/active/.test(toolbarButton.className)) {
-          toolbarButton.className += ' active';
-        } else {
-          toolbarButton.className = toolbarButton.className.replace(/\s*active\s*!/g, '');
-        }
+      document.querySelector('mat-sidenav')
+        .setAttribute('style', 'visibility: visible;transform: none;');
 
+      MoeApp.moeMode.setMode('write-wide');
+    }
 
-        // Hide side by side if needed
-        const sidebyside = MoeApp.editor.getWrapperElement().nextSibling;
-        if (/editor-preview-active-side/.test(sidebyside.className)) {
-          this.toggleSideBySide(editor);
-        }*/
+    // Update toolbar button
+    const toolbarButton = MoeApp.toolbarElements.fullscreen;
+
+    if (!/active/.test(toolbarButton.className)) {
+      toolbarButton.className += ' active';
+    } else {
+      toolbarButton.className = toolbarButton.className.replace(/\s*active\s*/g, '');
+    }
+
   }
 
 }

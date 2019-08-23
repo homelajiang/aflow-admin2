@@ -64,6 +64,10 @@ export class MarkdownComponent implements OnInit, AfterViewInit {
   private editor: CodeMirror.EditorFromTextArea;
   private scroller: MoeScroll;
 
+  wordCount = 0;
+  lineCount = 0;
+  cursorPos = '0:0';
+
   updatePreviewing = false;
   updatePreviewRunning = false;
 
@@ -97,8 +101,8 @@ export class MarkdownComponent implements OnInit, AfterViewInit {
     toolbar.createToolbar(['bold', 'italic', 'heading', '|',
       'quote', 'code', 'unordered-list', 'ordered-list', '|',
       'link', 'image', 'table', '|',
-      'edit', 'preview', 'side-by-side', 'fullscreen', '|',
-      'guide']);
+      'edit', 'preview', 'side-by-side', '|',
+      'fullscreen', 'guide']);
     // toolbar.createToolbar(['bold', 'italic', 'heading', '|', 'quote']);
   }
 
@@ -141,6 +145,10 @@ export class MarkdownComponent implements OnInit, AfterViewInit {
 
     this.editor.on('change', (editor, obj) => {
       this.updatePre(false);
+    });
+
+    this.editor.on('update', () => {
+      this.onUpdateStatusBar();
     });
 
     setTimeout(() => {
@@ -290,6 +298,30 @@ export class MarkdownComponent implements OnInit, AfterViewInit {
         }
       });
     });
+  }
+
+  private getWordCount() {
+    const pattern = /[a-zA-Z0-9_\u0392-\u03c9\u0410-\u04F9]+|[\u4E00-\u9FFF\u3400-\u4dbf\uf900-\ufaff\u3040-\u309f\uac00-\ud7af]+/g;
+    const m = this.editor.getValue().match(pattern);
+    let count = 0;
+    if (m === null) {
+      return count;
+    }
+
+    for (let i = 0; i < m.length; i++) {
+      if (m[i].charCodeAt(0) >= 0x4E00) {
+        count += m[i].length;
+      } else {
+        count += 1;
+      }
+    }
+    this.wordCount = count;
+  }
+
+  onUpdateStatusBar() {
+    this.lineCount = this.editor.lineCount();
+    this.wordCount = this.getWordCount();
+    this.cursorPos = this.editor.getCursor().line + ':' + this.editor.getCursor().ch;
   }
 
 }

@@ -277,13 +277,31 @@ html, body {
 }
 
 #cover-bottom .button-bottom {
-  display: inline-block;
   pointer-events: auto;
   color: #b3b3b3;
   font-size: 14px;
-  margin-top: 5px;
-  margin-left: 3px;
-  margin-right: 3px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 5px;
+  /*  margin-top: 5px;
+    margin-left: 3px;
+    margin-right: 3px;*/
+}
+
+#cover-bottom .text-bottom {
+  pointer-events: auto;
+  color: #b3b3b3;
+  font-size: 12px;
+  display: flex;
+  margin-left: 1em;
+  align-items: center;
+  padding: 0 3px;
+}
+
+#cover-bottom .text-cursor {
+  min-width: 3em;
+  justify-content: flex-end;
 }
 
 #cover-bottom-left {

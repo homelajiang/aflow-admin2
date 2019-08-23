@@ -23,13 +23,24 @@
         <i class="fa fa-bars" aria-hidden="true"></i>
       </div>
     </div>
-    <div id="cover-bottom-right">
+    <div id="cover-bottom-right" style="display: flex;align-items: center;">
+
+      <div style="flex: 1 1 auto;"></div>
+
+      <div class="text-bottom l10n-title">
+        lines: {{lineCount}}
+      </div>
+      <div class="text-bottom l10n-title">
+        words: {{wordCount}}
+      </div>
+      <div class="text-bottom text-cursor l10n-title">
+        {{cursorPos}}
+      </div>
+
       <div class="button-bottom l10n-title" id="button-bottom-focus" title="Toggle focus mode">
-        <i class="fa fa-dot-circle-o" aria-hidden="true"></i>
+        <i class="far fa-dot-circle" aria-hidden="true"></i>
       </div>
-      <div class="button-bottom l10n-title" id="button-bottom-mode" title="Edit mode">
-        <i class="fa fa-eye" aria-hidden="true"></i>
-      </div>
+
     </div>
   </div>
 

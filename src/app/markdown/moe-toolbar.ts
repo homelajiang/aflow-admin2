@@ -279,7 +279,7 @@ export class MoeToolbar {
         const el = toolbarData[key];
         if (stat[key]) {
           el.className += ' active';
-        } else if (key !== 'fullscreen' && key !== 'side-by-side') {
+        } else if (key !== 'fullscreen' && key !== 'side-by-side' && key !== 'edit') {
           el.className = el.className.replace(/\s*active\s*/g, '');
         }
       }
@@ -717,118 +717,6 @@ export class MoeToolbar {
 
 
   /**
-   * Toggle side by side preview
-   */
-  private toggleSideBySide(editor) {
-    // const cm = editor.codemirror;
-    // const wrapper = cm.getWrapperElement();
-    // const preview = wrapper.nextSibling;
-    // const toolbarButton = editor.toolbarElements['side-by-side'];
-    // let useSideBySideListener = false;
-    // if (/editor-preview-active-side/.test(preview.className)) {
-    //   preview.className = preview.className.replace(
-    //     /\s*editor-preview-active-side\s*/g, ''
-    //   );
-    //   toolbarButton.className = toolbarButton.className.replace(/\s*active\s*/g, '');
-    //   wrapper.className = wrapper.className.replace(/\s*CodeMirror-sided\s*/g, ' ');
-    // } else {
-    //   // When the preview button is clicked for the first time,
-    //   // give some time for the transition from editor.css to fire and the view to slide from right to left,
-    //   // instead of just appearing.
-    //   setTimeout(function() {
-    //     if (!cm.getOption('fullScreen')) {
-    //       this.toggleFullScreen(editor);
-    //     }
-    //     preview.className += ' editor-preview-active-side';
-    //   }, 1);
-    //   toolbarButton.className += ' active';
-    //   wrapper.className += ' CodeMirror-sided';
-    //   useSideBySideListener = true;
-    // }
-    //
-    // // Hide normal preview if active
-    // const previewNormal = wrapper.lastChild;
-    // if (/editor-preview-active/.test(previewNormal.className)) {
-    //   previewNormal.className = previewNormal.className.replace(
-    //     /\s*editor-preview-active\s*/g, ''
-    //   );
-    //   const toolbar = editor.toolbarElements.preview;
-    //   const toolbarDiv = wrapper.previousSibling;
-    //   toolbar.className = toolbar.className.replace(/\s*active\s*/g, '');
-    //   toolbarDiv.className = toolbarDiv.className.replace(/\s*disabled-for-preview*/g, '');
-    // }
-    //
-    // const sideBySideRenderingFunction = () => {
-    //   preview.innerHTML = MoeApp.options.previewRender(editor.value(), preview);
-    // };
-    //
-    // if (!cm.sideBySideRenderingFunction) {
-    //   cm.sideBySideRenderingFunction = sideBySideRenderingFunction;
-    // }
-    //
-    // if (useSideBySideListener) {
-    //   preview.innerHTML = MoeApp.options.previewRender(editor.value(), preview);
-    //   cm.on('update', cm.sideBySideRenderingFunction);
-    // } else {
-    //   cm.off('update', cm.sideBySideRenderingFunction);
-    // }
-    //
-    // // Refresh to fix selection being off (#309)
-    // cm.refresh();
-  }
-
-  /**
-   * Edit action
-   */
-  private toggleEdit() {
-
-  }
-
-
-  /**
-   * Preview action.
-   */
-  private togglePreview(editor) {
-    // const cm = editor.codemirror;
-    // const wrapper = cm.getWrapperElement();
-    // const toolbaDiv = wrapper.previousSibling;
-    // const toolbar = MoeApp.options.toolbar ? editor.toolbarElements.preview : false;
-    // let preview = wrapper.lastChild;
-    // if (!preview || !/editor-preview/.test(preview.className)) {
-    //   preview = document.createElement('div');
-    //   preview.className = 'editor-preview';
-    //   wrapper.appendChild(preview);
-    // }
-    // if (/editor-preview-active/.test(preview.className)) {
-    //   preview.className = preview.className.replace(
-    //     /\s*editor-preview-active\s*/g, ''
-    //   );
-    //   if (toolbar) {
-    //     toolbar.className = toolbar.className.replace(/\s*active\s*/g, '');
-    //     toolbaDiv.className = toolbaDiv.className.replace(/\s*disabled-for-preview*/g, '');
-    //   }
-    // } else {
-    //   // When the preview button is clicked for the first time,
-    //   // give some time for the transition from editor.css to fire and the view to slide from right to left,
-    //   // instead of just appearing.
-    //   setTimeout(() => {
-    //     preview.className += ' editor-preview-active';
-    //   }, 1);
-    //   if (toolbar) {
-    //     toolbar.className += ' active';
-    //     toolbaDiv.className += ' disabled-for-preview';
-    //   }
-    // }
-    // preview.innerHTML = MoeApp.options.previewRender(editor.value(), preview);
-    //
-    // // Turn off side by side if needed
-    // const sidebyside = cm.getWrapperElement().nextSibling;
-    // if (/editor-preview-active-side/.test(sidebyside.className)) {
-    //   this.toggleSideBySide(editor);
-    // }
-  }
-
-  /**
    * Toggle full screen of the editor.
    */
   private toggleFullScreen() {
@@ -862,7 +750,6 @@ export class MoeToolbar {
       MoeApp.moeMode.setMode('write-wide');
     }
 
-    // Update toolbar button
     const toolbarButton = MoeApp.toolbarElements.fullscreen;
 
     if (!/active/.test(toolbarButton.className)) {
@@ -870,7 +757,94 @@ export class MoeToolbar {
     } else {
       toolbarButton.className = toolbarButton.className.replace(/\s*active\s*/g, '');
     }
+  }
 
+
+  /**
+   * Toggle side by side preview
+   */
+  private toggleSideBySide() {
+    if (MoeApp.config['edit-mode'] === 'preview') {
+      return;
+    }
+
+    if (MoeApp.editor.getOption('fullScreen')) { // fullScreen
+      // set Preview
+      MoeApp.moeMode.setMode('preview');
+    } else {
+      // set fullScreen、Preview
+      setFullScreen('preview');
+    }
+  }
+
+  /**
+   * Edit action
+   */
+  private toggleEdit() {
+    const mode = MoeApp.config['edit-mode'];
+
+    if (mode === 'write-wide' || mode === 'write-medium' || mode === 'write-narrow') {
+      return;
+    }
+
+    if (MoeApp.editor.getOption('fullScreen')) { // fullScreen
+      // set Preview
+      MoeApp.moeMode.setMode('write-wide');
+    } else {
+      // set fullScreen、Preview
+      setFullScreen('write-wide');
+    }
+
+  }
+
+
+  /**
+   * Preview action.
+   */
+  private togglePreview() {
+    const mode = MoeApp.config['edit-mode'];
+
+    if (mode === 'read-wide' || mode === 'read-medium' || mode === 'read-narrow') {
+      return;
+    }
+
+    if (MoeApp.editor.getOption('fullScreen')) { // fullScreen
+      // set Preview
+      MoeApp.moeMode.setMode('read-wide');
+    } else {
+      // set fullScreen、Preview
+      setFullScreen('read-wide');
+    }
+  }
+
+}
+
+/**
+ * Toggle full screen of the editor.
+ */
+function setFullScreen(mode: string) {
+  // Set fullscreen
+  MoeApp.editor.setOption('fullScreen', true);
+
+
+  // Prevent scrolling on body during fullscreen active
+  document.querySelector('#md-main')
+    .classList.add('editor-fullscreen');
+
+  document.querySelector('.editor-toolbar')
+    .classList.add('fullscreen');
+
+  document.querySelector('mat-sidenav')
+    .setAttribute('style', 'visibility: hidden;transform: none;');
+
+  MoeApp.moeMode.setMode(mode);
+
+  const toolbarButton = MoeApp.toolbarElements.fullscreen;
+
+  if (!/active/.test(toolbarButton.className)) {
+    toolbarButton.className += ' active';
+  } else {
+    toolbarButton.className = toolbarButton.className.replace(/\s*active\s*/g, '');
   }
 
 }

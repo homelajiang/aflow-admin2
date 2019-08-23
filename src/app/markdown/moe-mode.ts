@@ -16,7 +16,6 @@ export class MoeMode {
   constructor() {
     this.titlebar = document.getElementById('electron-titlebar');
     this.main = document.getElementById('md-main');
-    this.modeButton = document.getElementById('button-bottom-mode');
     this.rightPanel = document.getElementById('right-panel');
     this.modeMenu = document.getElementById('popup-menu-mode');
     // this.modeMenuItems = this.modeMenu.getElementsByTagName('li');
@@ -24,11 +23,6 @@ export class MoeMode {
     this.container = document.getElementById('container');
 
     this.setMode(MoeApp.config['edit-mode']);
-    this.modeButton.addEventListener('click', (e) => {
-      // this.setMode('write-wide');
-      this.setMode(this.modeList[this.index % 7]);
-      this.index++;
-    });
 
     // for (const it of this.modeMenuItems) {
     //   it.addEventListener('click', () => {
@@ -89,13 +83,13 @@ export class MoeMode {
       this.main.classList.add('read-mode-thin');
     }
 
+    setTimeout(() => {
+      updateModeStatus();
+    }, 0);
+
     if (MoeApp.config['edit-mode'] === m) {
       return;
     }
-
-    // for (const it of this.modeMenuItems) {
-    //   it.getElementsByClassName('fa')[0].style.opacity = (it.attributes['data-name'].value === m) ? '1' : '0';
-    // }
 
     if (!this.isReadMode(MoeApp.config['edit-mode']) && this.isReadMode(m)) {
       MoeApp.config['edit-mode'] = m;
@@ -107,10 +101,11 @@ export class MoeMode {
     setTimeout(() => {
       document.getElementById('md-main').classList.add('notransition');
     }, 500);
+
   }
 
   private isReadMode(mode: string) {
-    return !(mode === 'write-wide' || mode === 'write-medium' || 'write-narrow');
+    return !(mode === 'write-wide' || mode === 'write-medium' || mode === 'write-narrow');
   }
 
   private setBaseMode(bm, m) {
@@ -124,5 +119,43 @@ export class MoeMode {
     }
   }
 
+}
+
+function updateModeStatus() {
+
+  function setElementActive(element, active) {
+
+    if (!/active/.test(element.className) && active) {
+      element.className += ' active';
+      return;
+    }
+
+    if (/active/.test(element.className) && !active) {
+      element.className = element.className.replace(/\s*active\s*/g, '');
+      return;
+    }
+
+  }
+
+  const mode = MoeApp.config['edit-mode'];
+
+  const editButton = MoeApp.toolbarElements.edit;
+  const readButton = MoeApp.toolbarElements.preview;
+  const sideBySideButton = MoeApp.toolbarElements['side-by-side'];
+
+
+  if (mode === 'read-wide' || mode === 'read-medium' || mode === 'read-narrow') {
+    setElementActive(editButton, false);
+    setElementActive(readButton, true);
+    setElementActive(sideBySideButton, false);
+  } else if (mode === 'write-wide' || mode === 'write-medium' || mode === 'write-narrow') {
+    setElementActive(editButton, true);
+    setElementActive(readButton, false);
+    setElementActive(sideBySideButton, false);
+  } else if (mode === 'preview') {
+    setElementActive(editButton, false);
+    setElementActive(readButton, false);
+    setElementActive(sideBySideButton, true);
+  }
 
 }

@@ -100,7 +100,17 @@ export class MarkdownComponent implements OnInit, AfterViewInit {
     const toolbar = new MoeToolbar();
     toolbar.createToolbar(['bold', 'italic', 'heading', '|',
       'quote', 'code', 'unordered-list', 'ordered-list', '|',
-      'link', 'image', 'table', '|',
+      'link', {
+        name: 'image',
+        action: function customFunction(editor) {
+          // Add your own code
+          console.log('draw image');
+          MoeApp.moeMd.reSelection(false, ['![', '](#url#)'],
+            'https://s2.ax1x.com/2019/08/23/mrfq6x.jpg');
+        },
+        className: 'fas fa-image',
+        title: 'Insert Image',
+      }, 'image', 'table', '|',
       'edit', 'preview', 'side-by-side', '|',
       'fullscreen', 'guide']);
     // toolbar.createToolbar(['bold', 'italic', 'heading', '|', 'quote']);
@@ -316,6 +326,40 @@ export class MarkdownComponent implements OnInit, AfterViewInit {
       }
     }
     this.wordCount = count;
+  }
+
+  private reSelection(active, startEnd, url?) {
+    const cm = MoeApp.editor;
+    if (/editor-preview-active/.test(cm.getWrapperElement().lastChild.className)) {
+      return;
+    }
+    let text;
+    let start = startEnd[0];
+    let end = startEnd[1];
+    const startPoint = cm.getCursor('start');
+    const endPoint = cm.getCursor('end');
+    if (url) {
+      end = end.replace('#url#', url);
+    }
+    if (active) {
+      text = cm.getLine(startPoint.line);
+      start = text.slice(0, startPoint.ch);
+      end = text.slice(startPoint.ch);
+      cm.replaceRange(start + end, {
+        line: startPoint.line,
+        ch: 0
+      });
+    } else {
+      text = cm.getSelection();
+      cm.replaceSelection(start + text + end);
+
+      startPoint.ch += start.length;
+      if (startPoint !== endPoint) {
+        endPoint.ch += start.length;
+      }
+    }
+    cm.setSelection(startPoint, endPoint);
+    cm.focus();
   }
 
   onUpdateStatusBar() {

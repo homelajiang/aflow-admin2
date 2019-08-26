@@ -113,7 +113,6 @@ export class MarkdownComponent implements OnInit, AfterViewInit {
       }, 'image', 'table', '|',
       'edit', 'preview', 'side-by-side', '|',
       'fullscreen', 'guide']);
-    // toolbar.createToolbar(['bold', 'italic', 'heading', '|', 'quote']);
   }
 
 
@@ -130,7 +129,7 @@ export class MarkdownComponent implements OnInit, AfterViewInit {
         Enter: 'newlineAndIndentContinueMarkdownList',
         Home: 'goLineLeft',
         End: 'goLineRight',
-        'Shift-Tab': 'indentLess'
+        'Shift-Tab': 'indentLess',
       },
       tabSize: 4,
       // tabSize: moeApp.config.get('tab-size'),
@@ -325,7 +324,7 @@ export class MarkdownComponent implements OnInit, AfterViewInit {
         count += 1;
       }
     }
-    this.wordCount = count;
+    return count;
   }
 
   private reSelection(active, startEnd, url?) {

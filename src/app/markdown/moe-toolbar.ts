@@ -1,5 +1,7 @@
 import {MoeApp} from './moe-app';
 
+let that;
+
 export class MoeToolbar {
 
   bindings = {
@@ -14,7 +16,7 @@ export class MoeToolbar {
     toggleUnorderedList: this.toggleUnorderedList,
     toggleCodeBlock: this.toggleCodeBlock,
     toggleEdit: this.toggleEdit(),
-    togglePreview: this.togglePreview, //
+    togglePreview: this.togglePreview,
     toggleStrikethrough: this.toggleStrikethrough,
     toggleHeading1: this.toggleHeading1,
     toggleHeading2: this.toggleHeading2,
@@ -228,7 +230,7 @@ export class MoeToolbar {
 
 
   createToolbar(items) {
-
+    that = this;
     if (!items || items.length === 0) {
       return;
     }
@@ -249,7 +251,7 @@ export class MoeToolbar {
       if (item === '|') {
         el = this.createSep();
       } else {
-        el = this.createIcon(item, true, {});
+        el = this.createIcon(item, true, this.shortcuts);
       }
 
       // bind events, special for info
@@ -286,6 +288,33 @@ export class MoeToolbar {
     });
     const toolbar = document.getElementById('main-container');
     toolbar.parentNode.insertBefore(bar, toolbar);
+
+    const keyMaps = {
+      // 'Cmd-Y': 'deleteLine',
+      // 'Shift-Enter': 'goLineEndnewlineAndIndent',
+      Enter: 'newlineAndIndentContinueMarkdownList',
+      Tab: 'tabAndIndentMarkdownList',
+      'Shift-Tab': 'shiftTabAndUnindentMarkdownList',
+      // Esc: undefined,
+    };
+    // 注册快捷键
+    for (const key in this.shortcuts) {
+      if (this.shortcuts[key] !== null && this.bindings[key] != null) {
+        keyMaps[this.fixShortcut(this.shortcuts[key])] = () => {
+          that.bindings[key]();
+        };
+      }
+    }
+
+    // 键位自定义
+    // keyMaps.Esc = (cm) => {
+    //   if (cm.getOption('fullScreen')) {
+    //     this.toggleFullScreen();
+    //   }
+    // };
+
+    MoeApp.editor.setOption('extraKeys', keyMaps);
+
     return bar;
   }
 
@@ -297,7 +326,7 @@ export class MoeToolbar {
     if (options.title && enableTooltips) {
       el.title = this.createTootlip(options.title, options.action, shortcuts);
 
-      if (this.isMac) {
+      if (this.isMac()) {
         el.title = el.title.replace('Ctrl', '⌘');
         el.title = el.title.replace('Alt', '⌥');
       }
@@ -349,7 +378,7 @@ export class MoeToolbar {
 
 
   private isMac() {
-    return false;
+    return /Mac/.test(navigator.platform);
   }
 
   /**

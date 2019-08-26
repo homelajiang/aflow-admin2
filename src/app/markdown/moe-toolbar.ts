@@ -297,7 +297,27 @@ export class MoeToolbar {
       'Shift-Tab': 'shiftTabAndUnindentMarkdownList',
       // Esc: undefined,
     };
+
+    const defaultKeyMaps = {
+      Enter: 'newlineAndIndentContinueMarkdownList',
+      Home: 'goLineLeft',
+      End: 'goLineRight',
+      'Shift-Tab': 'indentLess',
+    };
+
+    // Enter: 'newlineAndIndentContinueMarkdownList',
+    // Tab: 'tabAndIndentMarkdownList',
+    // 'Shift-Tab': 'shiftTabAndUnindentMarkdownList',
+    // 'Cmd-Y': 'deleteLine',
+    // 'Shift-Enter': 'goLineEndnewlineAndIndent',
+
     // 注册快捷键
+    for (const key in defaultKeyMaps) {
+      if (defaultKeyMaps[key]) {
+        keyMaps[this.fixShortcut(key)] = defaultKeyMaps[key];
+      }
+    }
+
     for (const key in this.shortcuts) {
       if (this.shortcuts[key] !== null && this.bindings[key] != null) {
         keyMaps[this.fixShortcut(this.shortcuts[key])] = () => {

@@ -126,10 +126,7 @@ export class MarkdownComponent implements OnInit, AfterViewInit {
       theme: MoeApp.config['editor-theme'],
       lineWrapping: true,
       extraKeys: {
-        Enter: 'newlineAndIndentContinueMarkdownList',
-        Home: 'goLineLeft',
-        End: 'goLineRight',
-        'Shift-Tab': 'indentLess',
+
       },
       tabSize: 4,
       // tabSize: moeApp.config.get('tab-size'),

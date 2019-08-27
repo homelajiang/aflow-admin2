@@ -1011,7 +1011,7 @@ function getState(pos?): RetState {
 }
 
 
-function _replaceSelection(active, startEnd, url?) {
+export function _replaceSelection(active, startEnd, url?) {
   const cm = MoeApp.editor;
   if (/editor-preview-active/.test(cm.getWrapperElement().lastChild.className)) {
     return;

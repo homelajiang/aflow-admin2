@@ -25,6 +25,12 @@ export class MoeApp {
     }
   };
 
+  public static toolbar = ['bold', 'italic', 'heading', '|',
+    'quote', 'code', 'unordered-list', 'ordered-list', '|',
+    'link', 'image', 'table', '|',
+    'edit', 'preview', 'side-by-side', '|',
+    'fullscreen', 'guide'];
+
   public static config = {
     'debug-mode': false,
     'scale-factor': 1.0,

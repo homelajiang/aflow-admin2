@@ -4,6 +4,11 @@ import {FormControl} from '@angular/forms';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatAutocomplete, MatAutocompleteSelectedEvent, MatChipInputEvent} from '@angular/material';
 import {map, startWith} from 'rxjs/operators';
+import {MarkdownComponent, MDOptions} from '../../markdown/markdown.component';
+import {MoeApp} from '../../markdown/moe-app';
+
+let that: PostEditComponent;
+
 
 @Component({
   selector: 'app-post-edit',
@@ -27,7 +32,29 @@ export class PostEditComponent implements OnInit {
   @ViewChild('auto', {static: true})
   matAutocomplete: MatAutocomplete;
 
+  @ViewChild('markdownComponent', {static: true})
+  markdownComponent: MarkdownComponent;
+
+  mdOptions;
+
   constructor() {
+    that = this;
+
+    this.mdOptions = new MDOptions();
+    this.mdOptions.placeholder = 'yuan';
+    this.mdOptions.toolbar = ['bold', 'italic', 'heading', '|',
+      'quote', 'code', 'unordered-list', 'ordered-list', '|',
+      'link', {
+        name: 'image',
+        action: function customFunction(editor) {
+          // Add your own code
+          that.markdownComponent.insertImage('https://s2.ax1x.com/2019/08/23/mrfq6x.jpg');
+        },
+        className: 'fas fa-image',
+        title: 'Insert Image',
+      }, 'image', 'table', '|',
+      'edit', 'preview', 'side-by-side', '|',
+      'fullscreen', 'guide'];
 
     this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
       startWith(null),
@@ -35,6 +62,10 @@ export class PostEditComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  onChanged(event) {
+    // console.log(this.markdownComponent.getValue());
   }
 
 

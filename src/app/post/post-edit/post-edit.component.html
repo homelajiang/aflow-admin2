@@ -11,7 +11,7 @@
            placeholder="Please Input Title">
 
     <div style="height: calc(100% - 50px);">
-      <app-markdown></app-markdown>
+      <app-markdown #markdownComponent (changed)="onChanged($event)" [options]="mdOptions"></app-markdown>
     </div>
 
   </div>

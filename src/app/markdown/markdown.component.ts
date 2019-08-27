@@ -1,14 +1,10 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import CodeMirror from 'codemirror';
 import MoeMark from 'moemark';
 import {MoeditorMathRender} from './moe-math';
 
 import {MoeditorHighlight} from './moe-highlight';
 import {MoeditorUMLRenderer} from './moe-uml';
-import {MoeTest} from './moe-test';
-
-
-import url from 'url';
 import {SVGFixer} from './svgfixer';
 import {MoeApp} from './moe-app';
 
@@ -41,8 +37,10 @@ import 'codemirror/addon/mode/overlay';
 import 'codemirror/addon/mode/multiplex';
 import 'codemirror/addon/scroll/simplescrollbars';
 import 'codemirror/addon/selection/active-line';
+import 'codemirror/addon/display/placeholder';
 import {MoeScroll} from './moe-scroll';
 import {MoeMode} from './moe-mode';
+import * as Toolbar from './moe-toolbar';
 import {MoeToolbar} from './moe-toolbar';
 
 MoeMark.setOptions({
@@ -60,6 +58,12 @@ MoeMark.setOptions({
   styleUrls: ['./markdown.component.css']
 })
 export class MarkdownComponent implements OnInit, AfterViewInit {
+
+  // md content change event
+  @Output() changed = new EventEmitter();
+
+  // md options
+  @Input() options: MDOptions = new MDOptions();
 
   private editor: CodeMirror.EditorFromTextArea;
   private scroller: MoeScroll;
@@ -98,58 +102,64 @@ export class MarkdownComponent implements OnInit, AfterViewInit {
     this.moeMode = new MoeMode();
     MoeApp.moeMode = this.moeMode;
     const toolbar = new MoeToolbar();
-    toolbar.createToolbar(['bold', 'italic', 'heading', '|',
-      'quote', 'code', 'unordered-list', 'ordered-list', '|',
-      'link', {
-        name: 'image',
-        action: function customFunction(editor) {
-          // Add your own code
-          console.log('draw image');
-          MoeApp.moeMd.reSelection(false, ['![', '](#url#)'],
-            'https://s2.ax1x.com/2019/08/23/mrfq6x.jpg');
-        },
-        className: 'fas fa-image',
-        title: 'Insert Image',
-      }, 'image', 'table', '|',
-      'edit', 'preview', 'side-by-side', '|',
-      'fullscreen', 'guide']);
+
+    toolbar.createToolbar(this.options.toolbar || MoeApp.toolbar);
+  }
+
+  /**
+   * 获取markdown value
+   */
+  getValue(): string {
+    return this.editor.getValue();
+  }
+
+  /**
+   * 插入图片
+   * @param src 图片路径
+   */
+  insertImage(src: string) {
+    Toolbar._replaceSelection(false, ['![', '](#url#)'], src);
   }
 
 
   private codeMirrorInit() {
-    this.editor = CodeMirror.fromTextArea(document.querySelector('#editor textarea'), {
-      lineNumbers: false,
-      // mode: MoeApp.config['math-mode'] ? 'gfm_math' : 'gfm',
-      // TODO 自定义主题
-      mode: 'gfm',
-      matchBrackets: true,
-      theme: MoeApp.config['editor-theme'],
-      lineWrapping: true,
-      extraKeys: {
-
-      },
-      tabSize: 4,
-      // tabSize: moeApp.config.get('tab-size'),
-      indentUnit: 4,
-      // indentUnit: moeApp.config.get('tab-size'),
-      viewportMargin: Infinity,
-      styleActiveLine: true,
-      showCursorWhenSelecting: true
-    });
+    const textarea = document.querySelector('#editor textarea');
+    this.editor = CodeMirror.fromTextArea(textarea, {
+        lineNumbers: false,
+        mode: 'gfm',
+        matchBrackets: true,
+        theme: MoeApp.config['editor-theme'],
+        lineWrapping: true,
+        extraKeys: {},
+        tabSize: 4,
+        // tabSize: moeApp.config.get('tab-size'),
+        indentUnit: 4,
+        // indentUnit: moeApp.config.get('tab-size'),
+        viewportMargin: Infinity,
+        styleActiveLine: true,
+        showCursorWhenSelecting: true,
+        placeholder: this.options.placeholder || textarea.getAttribute('placeholder') || '',
+      }
+    );
 
     const codeMirror: any = document.querySelector('#editor > .CodeMirror');
     codeMirror.style.lineHeight = 2;
 
+    // this.editor.setValue(MoeTest.editorText);
+    // codemirror cursor height incorrect , refresh it
+
+    if (this.options.value) {
+      this.editor.setValue(this.options.value);
+    } else {
+      this.editor.setValue('-');
+      this.editor.setValue('');
+    }
+
     this.editor.focus();
 
-    // this.editor.setValue('## 回复可见的是\n' +
-    //   '>引用\n\n* 元\--啦啦--n\n**哇呕**\n```javascript\nfunction(){\nalert("yuan");\n}\n' +
-    //   'module.exports = require(\'./lib/marked\');\n' +
-    //   'import "com.android.utils.*"' + '\n' +
-    //   '```\n' + '$$E=mc^2$$');
-    this.editor.setValue(MoeTest.editorText);
 
     this.editor.on('change', (editor, obj) => {
+      this.changed.emit(obj);
       this.updatePre(false);
     });
 
@@ -181,13 +191,13 @@ export class MarkdownComponent implements OnInit, AfterViewInit {
 
   }
 
-  updatePre(force: boolean) {
+  private updatePre(force: boolean) {
     this.updatePreview(this.editor, force, () => {
       this.scroller.editorToPreviewer();
     });
   }
 
-  updatePreview(editor, force, cb) {
+  private updatePreview(editor, force, cb) {
 
     this.updatePreviewing = true;
 
@@ -199,7 +209,7 @@ export class MarkdownComponent implements OnInit, AfterViewInit {
 
   }
 
-  updateAsync(editor, force, cb) {
+  private updateAsync(editor, force, cb) {
     this.updatePreviewing = false;
     this.updatePreviewRunning = true;
 
@@ -324,39 +334,6 @@ export class MarkdownComponent implements OnInit, AfterViewInit {
     return count;
   }
 
-  private reSelection(active, startEnd, url?) {
-    const cm = MoeApp.editor;
-    if (/editor-preview-active/.test(cm.getWrapperElement().lastChild.className)) {
-      return;
-    }
-    let text;
-    let start = startEnd[0];
-    let end = startEnd[1];
-    const startPoint = cm.getCursor('start');
-    const endPoint = cm.getCursor('end');
-    if (url) {
-      end = end.replace('#url#', url);
-    }
-    if (active) {
-      text = cm.getLine(startPoint.line);
-      start = text.slice(0, startPoint.ch);
-      end = text.slice(startPoint.ch);
-      cm.replaceRange(start + end, {
-        line: startPoint.line,
-        ch: 0
-      });
-    } else {
-      text = cm.getSelection();
-      cm.replaceSelection(start + text + end);
-
-      startPoint.ch += start.length;
-      if (startPoint !== endPoint) {
-        endPoint.ch += start.length;
-      }
-    }
-    cm.setSelection(startPoint, endPoint);
-    cm.focus();
-  }
 
   onUpdateStatusBar() {
     this.lineCount = this.editor.lineCount();
@@ -364,4 +341,10 @@ export class MarkdownComponent implements OnInit, AfterViewInit {
     this.cursorPos = this.editor.getCursor().line + ':' + this.editor.getCursor().ch;
   }
 
+}
+
+export class MDOptions {
+  value: string;
+  placeholder: string;
+  toolbar: Array<object>;
 }

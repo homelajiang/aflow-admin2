@@ -5,19 +5,28 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {PostListComponent} from './post/post-list/post-list.component';
 import {PostEditComponent} from './post/post-edit/post-edit.component';
 import {MediaComponent} from './media/media.component';
+import {CommentComponent} from './comment/comment.component';
+import {TagComponent} from './tag/tag.component';
+import {CategoriesComponent} from './categories/categories.component';
+import {Code404Component} from './error/code404/code404.component';
+import {AuthGuard} from './auth/auth.guard';
 
 const router: Routes = [
   {path: 'login', component: LoginComponent},
   {
-    path: '', component: MainComponent,
+    path: '', component: MainComponent, canActivate: [AuthGuard],
     children: [
       {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
       {path: 'dashboard', component: DashboardComponent},
       {path: 'post', component: PostListComponent},
       {path: 'post/edit', component: PostEditComponent},
-      {path: 'media', component: MediaComponent}
+      {path: 'comment', component: CommentComponent},
+      {path: 'tag', component: TagComponent},
+      {path: 'media', component: MediaComponent},
+      {path: 'categories', component: CategoriesComponent}
     ]
-  }
+  },
+  {path: '**', component: Code404Component}
 ];
 
 export const appRouting = RouterModule.forRoot(router);

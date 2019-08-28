@@ -1,0 +1,41 @@
+<div fxLayout="row" style="padding: 20px 0;margin-top: 50px;">
+
+  <span fxFlex="1 1 auto"></span>
+
+  <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+    <mat-button-toggle style="font-size: 14px;line-height: 36px;" value="bold">待审核</mat-button-toggle>
+    <mat-button-toggle value="italic">已发布</mat-button-toggle>
+    <mat-button-toggle value="underline">已删除</mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <div>
+    <input style="border: 2px solid #fd4c5d;padding: 0 10px;height: 34px;border-right: none;border-radius: 3px 0 0 3px">
+    <button
+      style="height: 38px;width:70px;color: white;
+      background-color: #fd4c5d;vertical-align: top;
+      border: none;border-radius: 0 3px 3px 0">
+      搜索
+    </button>
+  </div>
+
+</div>
+
+<div fxLayout="row wrap">
+
+  <mat-card class="example-card" fxFlex="33.3" *ngFor="let temp of [1,2,3,4,5,6,7]">
+    <mat-card-content>
+      <img src="https://via.placeholder.com/50x50.png" style="border-radius: 10px;width: 50px;height: 50px;"/>
+      <div>
+        Angular
+      </div>
+      <p>
+        学会用 Angular 构建应用，把这些代码用在多种多种不同平台的应用上。
+      </p>
+    </mat-card-content>
+    <button mat-icon-button style="position: absolute;
+    top: 5px;
+    right: 5px;">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card>
+</div>

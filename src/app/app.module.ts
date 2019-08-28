@@ -25,7 +25,13 @@ import {PostEditComponent} from './post/post-edit/post-edit.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MediaComponent, MediaInfoDialogComponent} from './media/media.component';
 import {MediaItemComponent} from './media/media-item/media-item.component';
-import { MarkdownComponent } from './markdown/markdown.component';
+import {MarkdownComponent} from './markdown/markdown.component';
+import {CommentComponent} from './comment/comment.component';
+import {TagComponent} from './tag/tag.component';
+import {CategoriesComponent} from './categories/categories.component';
+import {Code404Component} from './error/code404/code404.component';
+import {httpInterceptorProviders} from './http-interceptor';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -41,6 +47,10 @@ import { MarkdownComponent } from './markdown/markdown.component';
     MediaItemComponent,
     MediaInfoDialogComponent,
     MarkdownComponent,
+    CommentComponent,
+    TagComponent,
+    CategoriesComponent,
+    Code404Component,
   ],
   imports: [
     BrowserModule,
@@ -66,11 +76,108 @@ import { MarkdownComponent } from './markdown/markdown.component';
     MatAutocompleteModule,
     MatDialogModule,
     MatButtonToggleModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   entryComponents: [MediaInfoDialogComponent],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule {
+}
+
+export interface PageModel<T> {
+  hasNextPage: boolean;
+  pageSize: number;
+  pageNum: number;
+  count: number;
+  list: Array<T>;
+}
+
+export class Media {
+  id: string;
+  name: string;
+  path: string;
+  description: string;
+  mimeType: string;
+  createDate: string;
+  modifyDate: string;
+}
+
+export class Profile {
+  id: string;
+  username: string;
+  nickname: string;
+  userImg: string;
+  gender: number;
+  email: string;
+  signature: string;
+  confirmed: boolean;
+  lastLoginDate: string;
+  joinDate: string;
+  mobile: string;
+  status: number;
+  role: number;
+}
+
+export class Tag {
+  id: string;
+  name: string;
+  alias: string;
+  image: string;
+  description: string;
+  color: string;
+}
+
+export class Categories {
+  id: string;
+  name = '未分类';
+  alias: string;
+  image: string;
+  description: string;
+}
+
+export class Post {
+  id = '';
+  title = '';
+  description = '';
+  content = '';
+  createDate = '';
+  modifyDate = '';
+  publishDate = '';
+  cover = null;
+  stick = false;
+  open = 0;
+  password = '';
+  openComment = true;
+  needReview = false;
+  status = 0;
+  categories = null;
+  tags: Tag[] = [];
+}
+
+export class Comment {
+  id: string;
+  status: number;
+  content: string;
+  creator: Creator;
+  createDate: string;
+  post: Post;
+  deleteDate: string;
+  deleteReason: string;
+
+}
+
+export class Creator {
+  name: string;
+  email: string;
+  host: string;
+  img: string;
+}
+
+export class Auth {
+  accessToken: string;
+  // token_type: string;
+  // epires_in: number;
+  // refresh_token: string;
 }

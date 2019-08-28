@@ -191,7 +191,7 @@ export class MarkdownComponent implements OnInit, AfterViewInit {
 
   }
 
-  private updatePre(force: boolean) {
+  updatePre(force: boolean) {
     this.updatePreview(this.editor, force, () => {
       this.scroller.editorToPreviewer();
     });

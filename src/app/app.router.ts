@@ -10,6 +10,7 @@ import {TagComponent} from './tag/tag.component';
 import {CategoriesComponent} from './categories/categories.component';
 import {Code404Component} from './error/code404/code404.component';
 import {AuthGuard} from './auth/auth.guard';
+import {MediaUploadComponent} from './media/media-upload/media-upload.component';
 
 const router: Routes = [
   {path: 'login', component: LoginComponent},
@@ -23,6 +24,7 @@ const router: Routes = [
       {path: 'comment', component: CommentComponent},
       {path: 'tag', component: TagComponent},
       {path: 'media', component: MediaComponent},
+      {path: 'file', component: MediaUploadComponent},
       {path: 'categories', component: CategoriesComponent}
     ]
   },

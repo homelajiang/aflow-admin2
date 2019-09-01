@@ -9,7 +9,7 @@ import {
   MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule,
   MatChipsModule, MatDialogModule, MatFormFieldModule,
   MatIconModule, MatInputModule,
-  MatListModule, MatOptionModule, MatRadioModule, MatSelectModule,
+  MatListModule, MatOptionModule, MatProgressBarModule, MatRadioModule, MatSelectModule,
   MatSidenavModule, MatSlideToggleModule,
   MatToolbarModule
 } from '@angular/material';
@@ -32,6 +32,7 @@ import {CategoriesComponent} from './categories/categories.component';
 import {Code404Component} from './error/code404/code404.component';
 import {httpInterceptorProviders} from './http-interceptor';
 import {HttpClientModule} from "@angular/common/http";
+import { MediaUploadComponent } from './media/media-upload/media-upload.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import {HttpClientModule} from "@angular/common/http";
     TagComponent,
     CategoriesComponent,
     Code404Component,
+    MediaUploadComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,7 +79,8 @@ import {HttpClientModule} from "@angular/common/http";
     MatDialogModule,
     MatButtonToggleModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressBarModule
   ],
   entryComponents: [MediaInfoDialogComponent],
   providers: [httpInterceptorProviders],

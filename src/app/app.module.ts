@@ -31,8 +31,15 @@ import {TagComponent} from './tag/tag.component';
 import {CategoriesComponent} from './categories/categories.component';
 import {Code404Component} from './error/code404/code404.component';
 import {httpInterceptorProviders} from './http-interceptor';
-import {HttpClientModule} from "@angular/common/http";
-import { MediaUploadComponent } from './media/media-upload/media-upload.component';
+import {HttpClientModule} from '@angular/common/http';
+import {MediaUploadComponent} from './media/media-upload/media-upload.component';
+import {ClipboardModule} from 'ngx-clipboard';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTabsModule} from '@angular/material/tabs';
+import { PostInsertImageComponent } from './post/post-insert-image/post-insert-image.component';
+import {Subscription} from 'rxjs';
+import * as prettyBytes from 'pretty-bytes';
 
 @NgModule({
   declarations: [
@@ -53,6 +60,7 @@ import { MediaUploadComponent } from './media/media-upload/media-upload.componen
     CategoriesComponent,
     Code404Component,
     MediaUploadComponent,
+    PostInsertImageComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,7 +88,11 @@ import { MediaUploadComponent } from './media/media-upload/media-upload.componen
     MatButtonToggleModule,
     FormsModule,
     HttpClientModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    ClipboardModule,
+    MatTooltipModule,
+    MatSnackBarModule,
+    MatTabsModule
   ],
   entryComponents: [MediaInfoDialogComponent],
   providers: [httpInterceptorProviders],
@@ -183,4 +195,41 @@ export class Auth {
   // token_type: string;
   // epires_in: number;
   // refresh_token: string;
+}
+
+export class FileUploadModel {
+  /** upload status  0 uploading , -1 upload error , 1 upload success */
+  status: number;
+  data: File;
+  state: string;
+  inProgress: boolean;
+  progress: number;
+  canRetry: boolean;
+  canCancel: boolean;
+  sub?: Subscription;
+  result: any;
+
+  constructor(file: File) {
+    this.data = file;
+    this.state = 'in';
+    this.inProgress = false;
+    this.progress = 0;
+    this.canRetry = false;
+    this.canCancel = true;
+  }
+
+
+  public getDisplayName(): string {
+    if (this.data) {
+      return this.data.name;
+    }
+    return '';
+  }
+
+  public getDisplayOther(): string {
+    if (this.data) {
+      return prettyBytes(this.data.size);
+    }
+    return '';
+  }
 }

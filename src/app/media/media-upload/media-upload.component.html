@@ -1,11 +1,11 @@
-<div fxLayout="row" style="height: 500px">
+<div fxLayout="row" style="height: 360px">
   <div fxFlex style="width: 300px;border-radius: 10px;"
        [ngStyle]="{'border':dragOver?'#3f51b5 3px dashed':'#dddddd 3px dashed','background':dragOver?'#eeeeee':'#eeeeee'}"
        id="upload_div" fxLayout="column"
        fxLayoutAlign="center center">
 
-    <mat-icon>cloud_upload</mat-icon>
-    <div>Drag and drop files here</div>
+    <mat-icon style="font-size: 80px;height: 80px;width: 80px;color: #f8fffe;">cloud_upload</mat-icon>
+    <div style="font-size: 20px;">Drag and drop files here</div>
     <div>or</div>
 
     <button mat-flat-button color="primary" (click)="selectFile()">选择文件</button>
@@ -31,12 +31,14 @@
         </div>
 
         <!--        upload fail-->
-        <button mat-icon-button color="warn" *ngIf="file.status<0">
+        <button mat-icon-button color="warn" *ngIf="file.status<0" (click)="retryFile(file)">
           <mat-icon aria-label="Example icon-button with a heart icon">refresh</mat-icon>
         </button>
 
         <!--        upload success-->
-        <button mat-icon-button color="primary" *ngIf="file.status>0">
+        <button ngxClipboard mat-icon-button color="primary" *ngIf="file.status>0"
+                matTooltip="copy link" aria-label="copy upload file link."
+                [cbContent]="file.result.path" (cbOnSuccess)="copyLinkSuccess();" (cbOnError)="copyLinkFail()">
           <mat-icon aria-label="Example icon-button with a heart icon">offline_pin</mat-icon>
         </button>
 
@@ -58,5 +60,3 @@
 
 
 <input type="file" id="file_input" style="display: none" multiple>
-
-

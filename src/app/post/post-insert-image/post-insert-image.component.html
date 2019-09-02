@@ -1,0 +1,83 @@
+
+<h1 mat-dialog-title>Insert Image</h1>
+<div mat-dialog-content>
+  <mat-tab-group>
+    <mat-tab label="Upload Image">
+
+      <div fxLayout="row" style="height: 360px">
+        <div fxFlex style="width: 300px;border-radius: 10px;"
+             [ngStyle]="{'border':dragOver?'#3f51b5 3px dashed':'#dddddd 3px dashed','background':dragOver?'#eeeeee':'#eeeeee'}"
+             id="upload_div" fxLayout="column"
+             fxLayoutAlign="center center">
+
+          <mat-icon style="font-size: 80px;height: 80px;width: 80px;color: #f8fffe;">cloud_upload</mat-icon>
+          <div style="font-size: 20px;">Drag and drop files here</div>
+          <div>or</div>
+
+          <button mat-flat-button color="primary" (click)="selectFile()">选择文件</button>
+
+        </div>
+
+        <div fxFlex style="height: 100%;overflow-y: scroll;">
+
+          <div style="font-size: 14px;color:rgba(0, 0, 0, 0.54);font-weight: 500;padding: 16px; ">Upload History</div>
+
+          <div style="position: relative;" *ngFor="let file of files">
+
+            <div fxLayout="row" fxLayoutAlign="start center" style="padding: 0 16px;height: 72px;">
+              <div fxFlex="none" style="height: 40px;width: 40px;background: #6a9fb5;margin-right: 16px;"></div>
+
+              <div fxLayout="column" fxFlex="grow">
+                <div>{{file.getDisplayName()}}</div>
+                <div style="font-size: 14px;">{{file.getDisplayOther()}}</div>
+              </div>
+
+              <div fxFlex="none" style="font-size: 48px;opacity: 0.1;">
+                {{file.progress + '%'}}
+              </div>
+
+              <!--        upload fail-->
+              <button mat-icon-button color="warn" *ngIf="file.status<0" (click)="retryFile(file)">
+                <mat-icon aria-label="Example icon-button with a heart icon">refresh</mat-icon>
+              </button>
+
+              <!--        upload success-->
+              <button ngxClipboard mat-icon-button color="primary" *ngIf="file.status>0"
+                      matTooltip="copy link" aria-label="copy upload file link."
+                      [cbContent]="file.result.path" (cbOnSuccess)="copyLinkSuccess();" (cbOnError)="copyLinkFail()">
+                <mat-icon aria-label="Example icon-button with a heart icon">offline_pin</mat-icon>
+              </button>
+
+              <!--        cancel upload-->
+              <button mat-icon-button color="warn" *ngIf="file.status===0" (click)="cancelFile(file)">
+                <mat-icon aria-label="Example icon-button with a heart icon">cancel</mat-icon>
+              </button>
+
+            </div>
+
+            <mat-progress-bar mode="determinate" [value]="file.progress"
+                              style="height: 72px;position: absolute;top: 0;z-index: -1;opacity:0.2;"></mat-progress-bar>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <input type="file" id="file_input" style="display: none" multiple>
+    </mat-tab>
+    <mat-tab label="Form Medias">
+      <app-media></app-media>
+    </mat-tab>
+
+  </mat-tab-group>
+</div>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Insert</button>
+</mat-dialog-actions>
+
+
+

@@ -1,17 +1,16 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {of, Subscription} from 'rxjs';
-import {HttpClient, HttpErrorResponse, HttpEventType, HttpHeaders, HttpRequest} from '@angular/common/http';
-import {catchError, last, map, tap} from 'rxjs/operators';
-import * as prettyBytes from 'pretty-bytes';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {FileUploadModel} from '../../app.module';
+import {HttpClient, HttpErrorResponse, HttpEventType, HttpRequest} from '@angular/common/http';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {catchError, last, map, tap} from 'rxjs/operators';
+import {of} from 'rxjs';
 
 @Component({
-  selector: 'app-media-upload',
-  templateUrl: './media-upload.component.html',
-  styleUrls: ['./media-upload.component.css']
+  selector: 'app-post-insert-image',
+  templateUrl: './post-insert-image.component.html',
+  styleUrls: ['./post-insert-image.component.css']
 })
-export class MediaUploadComponent implements OnInit, AfterViewInit {
+export class PostInsertImageComponent implements OnInit, AfterViewInit {
 
   /** multiple upload */
   @Input()

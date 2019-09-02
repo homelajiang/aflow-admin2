@@ -11,6 +11,7 @@ import {CategoriesComponent} from './categories/categories.component';
 import {Code404Component} from './error/code404/code404.component';
 import {AuthGuard} from './auth/auth.guard';
 import {MediaUploadComponent} from './media/media-upload/media-upload.component';
+import {PostInsertImageComponent} from './post/post-insert-image/post-insert-image.component';
 
 const router: Routes = [
   {path: 'login', component: LoginComponent},
@@ -25,6 +26,7 @@ const router: Routes = [
       {path: 'tag', component: TagComponent},
       {path: 'media', component: MediaComponent},
       {path: 'file', component: MediaUploadComponent},
+      {path: 'file/dialog', component: PostInsertImageComponent},
       {path: 'categories', component: CategoriesComponent}
     ]
   },

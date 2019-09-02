@@ -6,6 +6,8 @@ import {MatAutocomplete, MatAutocompleteSelectedEvent, MatChipInputEvent} from '
 import {map, startWith} from 'rxjs/operators';
 import {MarkdownComponent, MDOptions} from '../../markdown/markdown.component';
 import {MoeApp} from '../../markdown/moe-app';
+import {MatDialog} from '@angular/material/dialog';
+import {PostInsertImageComponent} from '../post-insert-image/post-insert-image.component';
 
 let that: PostEditComponent;
 
@@ -37,7 +39,7 @@ export class PostEditComponent implements OnInit {
 
   mdOptions;
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
     that = this;
 
     this.mdOptions = new MDOptions();
@@ -47,8 +49,18 @@ export class PostEditComponent implements OnInit {
       'link', {
         name: 'image',
         action: function customFunction(editor) {
-          // Add your own code
-          that.markdownComponent.insertImage('https://s2.ax1x.com/2019/08/23/mrfq6x.jpg');
+
+          const dialogRef = that.dialog.open(PostInsertImageComponent, {
+            width: '80vw',
+            maxWidth: '100vw',
+            height: '80vh'
+          });
+          dialogRef.afterClosed().subscribe(result => {
+            console.log('Closed');
+          });
+
+          // // Add your own code
+          // that.markdownComponent.insertImage('https://s2.ax1x.com/2019/08/23/mrfq6x.jpg');
         },
         className: 'fas fa-image',
         title: 'Insert Image',

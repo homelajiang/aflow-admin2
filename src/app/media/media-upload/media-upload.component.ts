@@ -4,7 +4,7 @@ import {HttpClient, HttpErrorResponse, HttpEventType, HttpHeaders, HttpRequest} 
 import {catchError, last, map, tap} from 'rxjs/operators';
 import * as prettyBytes from 'pretty-bytes';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {FileUploadModel} from '../../app.module';
+import {FileUploadModel} from '../../entry';
 
 @Component({
   selector: 'app-media-upload',

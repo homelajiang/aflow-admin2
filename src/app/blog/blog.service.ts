@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
-import {Comment, Auth, Categories, Media, PageModel, Tag, Post} from '../app.module';
+import {Comment, Auth, Categories, Media, PageModel, Tag, Post} from '../entry';
 import {tap} from 'rxjs/operators';
 
 @Injectable({

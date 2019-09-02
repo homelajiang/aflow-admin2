@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FileUploadModel} from '../../app.module';
+import {FileUploadModel} from '../../entry';
 import {HttpClient, HttpErrorResponse, HttpEventType, HttpRequest} from '@angular/common/http';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {catchError, last, map, tap} from 'rxjs/operators';

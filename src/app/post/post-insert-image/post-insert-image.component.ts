@@ -42,7 +42,7 @@ export class PostInsertImageComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    const uploadDiv = document.getElementById('upload_div');
+/*    const uploadDiv = document.getElementById('upload_div');
 
     uploadDiv.addEventListener('dragover', (event) => {
       event.preventDefault();
@@ -64,7 +64,7 @@ export class PostInsertImageComponent implements OnInit, AfterViewInit {
       event.stopPropagation();
 
       this.onSelectFiles(event.dataTransfer.files);
-    }, false);
+    }, false);*/
   }
 
 // click select file button

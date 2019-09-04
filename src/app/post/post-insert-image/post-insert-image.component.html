@@ -11,13 +11,13 @@
   </div>
 
   <div fxFlex="grow" style="overflow-y: auto;">
-    <app-media-list></app-media-list>
+    <app-media-list [selectMode]="true" [selectMultiple]="false" (selectMediaEvent)="onSelectMedia($event)"></app-media-list>
   </div>
 
   <div fxFlex="none">
     <mat-dialog-actions align="end">
       <button mat-button mat-dialog-close>Cancel</button>
-      <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Insert</button>
+      <button mat-button cdkFocusInitial [mat-dialog-close]="selectMedias">Insert</button>
     </mat-dialog-actions>
   </div>
 </div>

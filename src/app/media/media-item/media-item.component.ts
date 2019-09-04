@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Media} from '../../entry';
 
 @Component({
   selector: 'app-media-item',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MediaItemComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  media: Media;
+
+  constructor() {
+  }
 
   ngOnInit() {
   }

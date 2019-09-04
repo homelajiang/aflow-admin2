@@ -2,12 +2,14 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Observable} from 'rxjs';
 import {FormControl} from '@angular/forms';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {MatAutocomplete, MatAutocompleteSelectedEvent, MatChipInputEvent} from '@angular/material';
+import {MatAutocomplete, MatAutocompleteSelectedEvent, MatChipInputEvent, MatSnackBar} from '@angular/material';
 import {map, startWith} from 'rxjs/operators';
 import {MarkdownComponent, MDOptions} from '../../markdown/markdown.component';
 import {MoeApp} from '../../markdown/moe-app';
 import {MatDialog} from '@angular/material/dialog';
 import {PostInsertImageComponent} from '../post-insert-image/post-insert-image.component';
+import {Media} from '../../entry';
+import {SnackBar} from '../../utils/snack-bar';
 
 let that: PostEditComponent;
 
@@ -39,7 +41,7 @@ export class PostEditComponent implements OnInit {
 
   mdOptions;
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog, private snackBar: MatSnackBar) {
     that = this;
 
     this.mdOptions = new MDOptions();
@@ -56,11 +58,16 @@ export class PostEditComponent implements OnInit {
             height: '80vh'
           });
           dialogRef.afterClosed().subscribe(result => {
-            console.log('Closed');
+            if (result instanceof Array) {
+              if (result.length === 0) {
+                SnackBar.open(that.snackBar, '请选择要插入的图片');
+              } else {
+                // Add your own code
+                that.markdownComponent.insertImage(result[0].path);
+              }
+            }
           });
 
-          // // Add your own code
-          // that.markdownComponent.insertImage('https://s2.ax1x.com/2019/08/23/mrfq6x.jpg');
         },
         className: 'fas fa-image',
         title: 'Insert Image',

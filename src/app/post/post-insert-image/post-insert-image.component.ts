@@ -1,9 +1,12 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FileUploadModel} from '../../entry';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {FileUploadModel, Media} from '../../entry';
 import {HttpClient, HttpErrorResponse, HttpEventType, HttpRequest} from '@angular/common/http';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {catchError, last, map, tap} from 'rxjs/operators';
 import {of} from 'rxjs';
+import {PostListComponent} from '../post-list/post-list.component';
+import {MediaListComponent} from '../../media/media-list/media-list.component';
+import {SnackBar} from '../../utils/snack-bar';
 
 @Component({
   selector: 'app-post-insert-image',
@@ -34,6 +37,8 @@ export class PostInsertImageComponent implements OnInit, AfterViewInit {
   /** */
   dragOver;
 
+  selectMedias: Array<Media> = [];
+
   constructor(private httpClient: HttpClient, private snackBar: MatSnackBar) {
   }
 
@@ -42,30 +47,8 @@ export class PostInsertImageComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-/*    const uploadDiv = document.getElementById('upload_div');
-
-    uploadDiv.addEventListener('dragover', (event) => {
-      event.preventDefault();
-    }, false);
-
-    uploadDiv.addEventListener('dragenter', (event) => {
-      this.dragOver = true;
-      event.preventDefault();
-    }, false);
-
-    uploadDiv.addEventListener('dragleave', (event) => {
-      this.dragOver = false;
-      event.preventDefault();
-    }, false);
-
-    uploadDiv.addEventListener('drop', (event) => {
-      this.dragOver = false;
-      event.preventDefault();
-      event.stopPropagation();
-
-      this.onSelectFiles(event.dataTransfer.files);
-    }, false);*/
   }
+
 
 // click select file button
   selectFile() {
@@ -160,5 +143,9 @@ export class PostInsertImageComponent implements OnInit, AfterViewInit {
 
   copyLinkFail() {
     this.snackBar.open('复制失败', '', {duration: 2000});
+  }
+
+  onSelectMedia(medias: Array<Media>) {
+    this.selectMedias = medias;
   }
 }

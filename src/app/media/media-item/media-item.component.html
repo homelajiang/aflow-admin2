@@ -5,18 +5,19 @@
     <div style="margin: 10px;background-color: rgb(238, 238, 238);padding-bottom: calc(72% - 20px);
          background-repeat: no-repeat;
          background-position: center center;
-         background-size: contain;
-         background-image: url(https://i.loli.net/2019/09/04/YpADJy1XoHx6W7q.jpg);">
+         background-size: contain;"
+         [ngStyle]="{'background-image': 'url('+media.path+')'}">
 
     </div>
 
-      <mat-icon style="color: #fd4c5d;position: absolute;top: 10px;right: 10px;">check_circle</mat-icon>
+    <mat-icon style="color: #fd4c5d;position: absolute;top: 10px;right: 10px;" *ngIf="media.selected">check_circle
+    </mat-icon>
 
   </div>
 
   <div style="padding: 5px 10px;font-weight: 600;overflow: hidden;
     text-overflow: ellipsis;white-space: nowrap;font-size: 14px;color: rgba(0, 0, 0, 0.65);">
-    xxxxxfdsfxfdsafdsx.jpg
+    {{media.name}}
   </div>
 
 </div>

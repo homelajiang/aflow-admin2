@@ -39,7 +39,7 @@
         <button ngxClipboard mat-icon-button color="primary" *ngIf="file.status>0"
                 matTooltip="copy link" aria-label="copy upload file link."
                 [cbContent]="file.result.path" (cbOnSuccess)="copyLinkSuccess();" (cbOnError)="copyLinkFail()">
-          <mat-icon aria-label="Example icon-button with a heart icon">offline_pin</mat-icon>
+          <mat-icon aria-label="Example icon-button with a heart icon">check_circle</mat-icon>
         </button>
 
         <!--        cancel upload-->

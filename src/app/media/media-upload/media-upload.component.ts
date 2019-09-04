@@ -5,6 +5,7 @@ import {catchError, last, map, tap} from 'rxjs/operators';
 import * as prettyBytes from 'pretty-bytes';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {FileUploadModel} from '../../entry';
+import {SnackBar} from '../../utils/snack-bar';
 
 @Component({
   selector: 'app-media-upload',
@@ -156,10 +157,10 @@ export class MediaUploadComponent implements OnInit, AfterViewInit {
   }
 
   copyLinkSuccess() {
-    this.snackBar.open('复制成功', '', {duration: 2000});
+    SnackBar.open(this.snackBar, '复制成功');
   }
 
   copyLinkFail() {
-    this.snackBar.open('复制失败', '', {duration: 2000});
+    SnackBar.open(this.snackBar, '复制失败');
   }
 }

@@ -17,6 +17,7 @@ export class Media {
   mimeType: string;
   createDate: string;
   modifyDate: string;
+  selected: boolean;
 }
 
 export class Profile {
@@ -132,4 +133,11 @@ export class FileUploadModel {
     }
     return '';
   }
+}
+
+export class LoadStatus {
+  public static GONE = 0;
+  public static LOAD_MORE = 1;
+  public static LOADING = 2;
+  public static NO_MORE = 3;
 }

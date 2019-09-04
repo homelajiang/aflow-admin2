@@ -9,7 +9,7 @@ import {
   MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule,
   MatChipsModule, MatDialogModule, MatFormFieldModule,
   MatIconModule, MatInputModule,
-  MatListModule, MatOptionModule, MatProgressBarModule, MatRadioModule, MatSelectModule,
+  MatListModule, MatOptionModule, MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatSelectModule,
   MatSidenavModule, MatSlideToggleModule,
   MatToolbarModule
 } from '@angular/material';
@@ -44,6 +44,8 @@ import { SearchBarComponent } from './component/search-bar/search-bar.component'
 import { MediaListComponent } from './media/media-list/media-list.component';
 import { MediaInfoComponent } from './media/media-info/media-info.component';
 import { PostComponent } from './post/post/post.component';
+import { LoadingComponent } from './component/loading/loading.component';
+import { LoadMoreComponent } from './component/load-more/load-more.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +70,8 @@ import { PostComponent } from './post/post/post.component';
     MediaListComponent,
     MediaInfoComponent,
     PostComponent,
+    LoadingComponent,
+    LoadMoreComponent,
   ],
   imports: [
     BrowserModule,
@@ -99,7 +103,8 @@ import { PostComponent } from './post/post/post.component';
     ClipboardModule,
     MatTooltipModule,
     MatSnackBarModule,
-    MatTabsModule
+    MatTabsModule,
+    MatProgressSpinnerModule
   ],
   entryComponents: [MediaInfoComponent],
   providers: [httpInterceptorProviders],

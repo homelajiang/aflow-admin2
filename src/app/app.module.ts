@@ -16,14 +16,14 @@ import {
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {PostDashboardItemComponent} from './post/post-dashboard-item/post-dashboard-item.component';
 import {PostListComponent} from './post/post-list/post-list.component';
-import {PostListItemComponent} from './post/post-list-item/post-list-item.component';
+import {PostItemComponent} from './post/post-item/post-item.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {appRouting} from './app.router';
 import {LoginComponent} from './login/login.component';
 import {MainComponent} from './main/main.component';
 import {PostEditComponent} from './post/post-edit/post-edit.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MediaComponent, MediaInfoDialogComponent} from './media/media.component';
+import {MediaComponent} from './media/media.component';
 import {MediaItemComponent} from './media/media-item/media-item.component';
 import {MarkdownComponent} from './markdown/markdown.component';
 import {CommentComponent} from './comment/comment.component';
@@ -40,20 +40,23 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { PostInsertImageComponent } from './post/post-insert-image/post-insert-image.component';
 import {Subscription} from 'rxjs';
 import * as prettyBytes from 'pretty-bytes';
+import { SearchBarComponent } from './component/search-bar/search-bar.component';
+import { MediaListComponent } from './media/media-list/media-list.component';
+import { MediaInfoComponent } from './media/media-info/media-info.component';
+import { PostComponent } from './post/post/post.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PostDashboardItemComponent,
     PostListComponent,
-    PostListItemComponent,
+    PostItemComponent,
     DashboardComponent,
     LoginComponent,
     MainComponent,
     PostEditComponent,
     MediaComponent,
     MediaItemComponent,
-    MediaInfoDialogComponent,
     MarkdownComponent,
     CommentComponent,
     TagComponent,
@@ -61,6 +64,10 @@ import * as prettyBytes from 'pretty-bytes';
     Code404Component,
     MediaUploadComponent,
     PostInsertImageComponent,
+    SearchBarComponent,
+    MediaListComponent,
+    MediaInfoComponent,
+    PostComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,7 +101,7 @@ import * as prettyBytes from 'pretty-bytes';
     MatSnackBarModule,
     MatTabsModule
   ],
-  entryComponents: [MediaInfoDialogComponent],
+  entryComponents: [MediaInfoComponent],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })

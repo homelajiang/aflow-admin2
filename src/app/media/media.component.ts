@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'app-media',
@@ -8,29 +7,9 @@ import {MatDialog} from '@angular/material';
 })
 export class MediaComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) {
+  constructor() {
   }
 
   ngOnInit() {
   }
-
-
-  onMediaClick(media) {
-    const dialogRef = this.dialog.open(MediaInfoDialogComponent, {
-      width: 'calc(100vw - 60px)',
-      maxWidth: '100vw',
-      height: 'calc(100vh - 60px)'
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('Dialog result: ${result}');
-    });
-  }
-
-}
-
-@Component({
-  selector: 'app-media-info-dialog',
-  templateUrl: 'media-info-dialog.html'
-})
-export class MediaInfoDialogComponent {
 }

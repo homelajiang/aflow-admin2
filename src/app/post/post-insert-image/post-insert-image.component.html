@@ -1,8 +1,17 @@
 <div style="height: 100%;" fxLayout="column">
-    <h1 mat-dialog-title fxFlex="none">Insert Image</h1>
+  <h1 mat-dialog-title fxFlex="none">Insert Image</h1>
+
+  <div fxLayout="row" style="padding: 20px 0;">
+    <button mat-flat-button color="primary">
+      <mat-icon>add</mat-icon>
+      Upload File
+    </button>
+    <span fxFlex="1 1 auto"></span>
+    <app-search-bar></app-search-bar>
+  </div>
 
   <div fxFlex="grow" style="overflow-y: auto;">
-    <app-media></app-media>
+    <app-media-list></app-media-list>
   </div>
 
   <div fxFlex="none">

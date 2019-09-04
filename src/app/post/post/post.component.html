@@ -1,0 +1,15 @@
+<div fxLayout="row" style="padding: 20px 0;margin-top: 50px;">
+
+  <span fxFlex="1 1 auto"></span>
+
+  <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+    <mat-button-toggle style="font-size: 14px;line-height: 36px;" value="bold">待审核</mat-button-toggle>
+    <mat-button-toggle value="italic">已发布</mat-button-toggle>
+    <mat-button-toggle value="underline">已删除</mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <app-search-bar></app-search-bar>
+
+</div>
+
+<app-post-list></app-post-list>

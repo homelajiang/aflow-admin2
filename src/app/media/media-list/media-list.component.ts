@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {MediaInfoComponent} from '../media-info/media-info.component';
 
@@ -9,7 +9,16 @@ import {MediaInfoComponent} from '../media-info/media-info.component';
 })
 export class MediaListComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  /** View or select */
+  @Input()
+  selectMode: boolean;
+
+  /** single select or multiple select */
+  @Input()
+  selectMultiple: boolean;
+
+  constructor(public dialog: MatDialog) {
+  }
 
   ngOnInit() {
   }

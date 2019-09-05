@@ -1,16 +1,16 @@
 <div fxLayout="row wrap">
 
   <mat-card class="example-card" fxFlex="33.3"
-            *ngFor="let temp of [1,2,3,4,5,6,7]">
+            *ngFor="let post of posts">
 
     <img mat-card-image src="https://via.placeholder.com/240x160.png" alt="Photo of a Shiba Inu">
 
     <mat-card-title style="font-size: 20px;">
-      学不会这几种搭配技巧买什么衣服都白费
+      {{post.title}}
     </mat-card-title>
 
     <mat-card-content>
-      穿衣搭配绝对是一个技术活，很多女孩子虽然衣服也不少，钱也没少花但是穿出来的衣服也并没有觉得多么的好看，原来都是不会穿搭衣服所造成的啊~所以现在竟...
+      {{post.description}}
     </mat-card-content>
     <mat-card-actions fxLayout="row">
       <div fxLayout="row" fxLayoutAlign="start center">
@@ -26,7 +26,7 @@
       <div fxFlex="1 1 auto"></div>
 
       <div fxFlex="">
-        3天前
+        {{post.createDate}}
       </div>
 
       <!--      <button mat-button>LIKE</button>-->

@@ -148,4 +148,7 @@ export class PostInsertImageComponent implements OnInit, AfterViewInit {
   onSelectMedia(medias: Array<Media>) {
     this.selectMedias = medias;
   }
+
+  onSearch($event: string) {
+  }
 }

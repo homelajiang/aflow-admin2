@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpEventType, HttpHeaders, HttpParams, HttpRequest} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {Observable} from 'rxjs';
-import {Comment, Auth, Categories, Media, PageModel, Tag, Post} from '../entry';
-import {tap} from 'rxjs/operators';
+import {Observable, of} from 'rxjs';
+import {Comment, Auth, Categories, Media, PageModel, Tag, Post, FileUploadModel} from '../entry';
+import {catchError, last, map, tap} from 'rxjs/operators';
+import {error} from "util";
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +42,35 @@ export class BlogService {
 
   logout(): void {
     removeAccessToken();
+  }
+
+  uploadFile(file: FileUploadModel): Observable<any> {
+    const fd = new FormData();
+    fd.append('file', file.data);
+
+    const req = new HttpRequest('POST', 'api/v1/file', fd, {reportProgress: true});
+    file.inProgress = true;
+    return this.http.request(req)
+      .pipe(
+        map(event => {
+          switch (event.type) {
+            case HttpEventType.UploadProgress:
+              file.progress = Math.round(event.loaded * 100 / event.total);
+              break;
+            case HttpEventType.Response:
+              return event;
+          }
+        }),
+        tap(message => {
+        }),
+        last(),
+        catchError((err: HttpErrorResponse) => {
+          file.inProgress = false;
+          file.canRetry = true;
+          file.status = -1;
+          return of(`${file.data.name} upload failed.`);
+        })
+      );
   }
 
   getMedias(page: number, keyword?: string): Observable<PageModel<Media>> {
@@ -157,9 +187,9 @@ export class BlogService {
     return this.http.post<Post>(`api/v1/post/${post.id}`, post, this.defaultHttpOptions);
   }
 
-  getPosts(page: number, pageSize: number, type: string, keyword?: string): Observable<PageModel<Post>> {
+  getPosts(page: number, type: string, keyword?: string): Observable<PageModel<Post>> {
     let params: HttpParams = new HttpParams()
-      .set('pageSize', pageSize.toString())
+      .set('pageSize', '10')
       .set('pageNum', page.toString());
 
     if (keyword && keyword.trim()) {

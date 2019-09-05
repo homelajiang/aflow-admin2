@@ -43,9 +43,10 @@ import * as prettyBytes from 'pretty-bytes';
 import { SearchBarComponent } from './component/search-bar/search-bar.component';
 import { MediaListComponent } from './media/media-list/media-list.component';
 import { MediaInfoComponent } from './media/media-info/media-info.component';
-import { PostComponent } from './post/post/post.component';
+import { PostComponent } from './post/post.component';
 import { LoadingComponent } from './component/loading/loading.component';
 import { LoadMoreComponent } from './component/load-more/load-more.component';
+import { UploadButtonComponent } from './component/upload-button/upload-button.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { LoadMoreComponent } from './component/load-more/load-more.component';
     PostComponent,
     LoadingComponent,
     LoadMoreComponent,
+    UploadButtonComponent,
   ],
   imports: [
     BrowserModule,

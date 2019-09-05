@@ -2,16 +2,14 @@
   <h1 mat-dialog-title fxFlex="none">Insert Image</h1>
 
   <div fxLayout="row" style="padding: 20px 0;">
-    <button mat-flat-button color="primary">
-      <mat-icon>add</mat-icon>
-      Upload File
-    </button>
+    <app-upload-button (uploadResult)="mediaListComponent.addMedia($event)"></app-upload-button>
     <span fxFlex="1 1 auto"></span>
-    <app-search-bar></app-search-bar>
+    <app-search-bar (search)="mediaListComponent.searchByWord($event)"></app-search-bar>
   </div>
 
   <div fxFlex="grow" style="overflow-y: auto;">
-    <app-media-list [selectMode]="true" [selectMultiple]="false" (selectMediaEvent)="onSelectMedia($event)"></app-media-list>
+    <app-media-list #mediaListComponent [selectMode]="true" [selectMultiple]="false"
+                    (selectMediaEvent)="onSelectMedia($event)"></app-media-list>
   </div>
 
   <div fxFlex="none">

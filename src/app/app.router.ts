@@ -11,7 +11,7 @@ import {Code404Component} from './error/code404/code404.component';
 import {AuthGuard} from './auth/auth.guard';
 import {MediaUploadComponent} from './media/media-upload/media-upload.component';
 import {PostInsertImageComponent} from './post/post-insert-image/post-insert-image.component';
-import {PostComponent} from './post/post/post.component';
+import {PostComponent} from './post/post.component';
 
 const router: Routes = [
   {path: 'login', component: LoginComponent},

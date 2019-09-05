@@ -24,6 +24,8 @@ export class MediaListComponent implements OnInit {
   @Output()
   selectMediaEvent = new EventEmitter<Array<Media>>();
 
+  private searchText: string;
+
   /*  loading bar status*/
   private loadingStatus: number;
 
@@ -31,7 +33,6 @@ export class MediaListComponent implements OnInit {
   private preSelectMedia: Media;
 
   private page = 1;
-  private searchText: string;
   private medias: Array<Media> = [];
 
   constructor(private  dialog: MatDialog, private  blogService: BlogService, private snackBar: MatSnackBar) {
@@ -118,5 +119,15 @@ export class MediaListComponent implements OnInit {
     });
     return temp;
   }
+
+  searchByWord(keyword: string) {
+    this.searchText = keyword;
+    this.getMedias(true);
+  }
+
+  addMedia(media: Media) {
+    this.medias.unshift(media);
+  }
+
 }
 

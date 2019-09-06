@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {LoadStatus, PageModel, Post} from '../../entry';
 import {BlogService} from '../../blog/blog.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {MatButtonToggleChange} from "@angular/material/button-toggle";
+import {MatButtonToggleChange} from '@angular/material/button-toggle';
 
 @Component({
   selector: 'app-post-list',
@@ -50,4 +50,12 @@ export class PostListComponent implements OnInit {
     this.getPosts(true);
   }
 
+  search(keyword: string) {
+    this.searchText = keyword;
+    this.getPosts(true);
+  }
+
+  private onLoadMore() {
+    this.getPosts(false);
+  }
 }

@@ -47,6 +47,9 @@ import { PostComponent } from './post/post.component';
 import { LoadingComponent } from './component/loading/loading.component';
 import { LoadMoreComponent } from './component/load-more/load-more.component';
 import { UploadButtonComponent } from './component/upload-button/upload-button.component';
+import { CreateTagDialogComponent } from './tag/create-tag-dialog/create-tag-dialog.component';
+import { ImageCropComponent } from './component/image-crop/image-crop.component';
+import {ImageCropperModule} from "ngx-img-cropper";
 
 @NgModule({
   declarations: [
@@ -74,6 +77,8 @@ import { UploadButtonComponent } from './component/upload-button/upload-button.c
     LoadingComponent,
     LoadMoreComponent,
     UploadButtonComponent,
+    CreateTagDialogComponent,
+    ImageCropComponent,
   ],
   imports: [
     BrowserModule,
@@ -106,7 +111,8 @@ import { UploadButtonComponent } from './component/upload-button/upload-button.c
     MatTooltipModule,
     MatSnackBarModule,
     MatTabsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    ImageCropperModule
   ],
   entryComponents: [MediaInfoComponent],
   providers: [httpInterceptorProviders],

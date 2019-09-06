@@ -132,9 +132,9 @@ export class BlogService {
     return this.http.post<Tag>(`api/v1/tag/${tag.id}`, tag, this.defaultHttpOptions);
   }
 
-  getTags(page: number, pageSize: number, keyword?: string): Observable<PageModel<Tag>> {
+  getTags(page: number, keyword?: string): Observable<PageModel<Tag>> {
     let params: HttpParams = new HttpParams()
-      .set('pageSize', pageSize.toString())
+      .set('pageSize', '10')
       .set('pageNum', page.toString());
 
     if (keyword && keyword.trim()) {

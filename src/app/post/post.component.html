@@ -1,4 +1,4 @@
-<div fxLayout="row" style="padding: 20px 0;margin-top: 50px;">
+<div fxLayout="row" fxLayoutAlign="none center" style="padding: 20px 0;margin-top: 50px;">
 
   <span fxFlex="1 1 auto"></span>
 
@@ -10,7 +10,7 @@
     <mat-button-toggle value="-1">已删除</mat-button-toggle>
   </mat-button-toggle-group>
 
-  <app-search-bar></app-search-bar>
+  <app-search-bar (search)="postListComponent.search($event)"></app-search-bar>
 
 </div>
 

@@ -12,6 +12,7 @@ import {AuthGuard} from './auth/auth.guard';
 import {MediaUploadComponent} from './media/media-upload/media-upload.component';
 import {PostInsertImageComponent} from './post/post-insert-image/post-insert-image.component';
 import {PostComponent} from './post/post.component';
+import {ImageCropComponent} from './component/image-crop/image-crop.component';
 
 const router: Routes = [
   {path: 'login', component: LoginComponent},
@@ -28,6 +29,7 @@ const router: Routes = [
       {path: 'file', component: MediaUploadComponent},
       {path: 'file/dialog', component: PostInsertImageComponent},
       {path: 'categories', component: CategoriesComponent},
+      {path: 'crop', component: ImageCropComponent},
     ]
   },
   {path: '**', component: Code404Component}

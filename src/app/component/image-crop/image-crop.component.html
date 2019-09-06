@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Crop Image</h1>
+<div mat-dialog-content>
+  <div class="file-upload">
+    <input id="custom-input" type="file" (change)="fileChangeListener($event)" />
+  </div>
+  <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+  <br />
+  <span class="result rounded" *ngIf="data.image">
+  <img
+    [src]="data.image"
+    [width]="cropperSettings.croppedWidth"
+    [height]="cropperSettings.croppedHeight"
+  />
+</span>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Crop</button>
+</div>

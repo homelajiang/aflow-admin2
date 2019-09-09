@@ -47,9 +47,9 @@ import { PostComponent } from './post/post.component';
 import { LoadingComponent } from './component/loading/loading.component';
 import { LoadMoreComponent } from './component/load-more/load-more.component';
 import { UploadButtonComponent } from './component/upload-button/upload-button.component';
-import { CreateTagDialogComponent } from './tag/create-tag-dialog/create-tag-dialog.component';
+import { CreateTagComponent } from './tag/create-tag/create-tag.component';
 import { ImageCropComponent } from './component/image-crop/image-crop.component';
-import {ImageCropperModule} from "ngx-img-cropper";
+import {ImageCropperModule} from 'ngx-img-cropper';
 
 @NgModule({
   declarations: [
@@ -77,7 +77,7 @@ import {ImageCropperModule} from "ngx-img-cropper";
     LoadingComponent,
     LoadMoreComponent,
     UploadButtonComponent,
-    CreateTagDialogComponent,
+    CreateTagComponent,
     ImageCropComponent,
   ],
   imports: [

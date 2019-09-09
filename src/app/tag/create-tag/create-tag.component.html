@@ -1,0 +1,31 @@
+<div style="height: 100%;" fxLayout="column">
+  <h1 mat-dialog-title fxFlex="none">New Tag</h1>
+
+  <div fxFlex="grow" style="overflow-y: auto;">
+
+    <form class="example-container">
+      <mat-checkbox formControlName="hideRequired">Hide required marker</mat-checkbox>
+      <div>
+        <label>Float label: </label>
+        <mat-radio-group formControlName="floatLabel">
+          <mat-radio-button value="auto">Auto</mat-radio-button>
+          <mat-radio-button value="always">Always</mat-radio-button>
+          <mat-radio-button value="never">Never</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </form>
+
+    <mat-form-field>
+      <input matInput placeholder="Simple placeholder" required>
+    </mat-form-field>
+
+  </div>
+
+  <div fxFlex="none">
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Cancel</button>
+      <button mat-button cdkFocusInitial [mat-dialog-close]="true">Insert</button>
+    </mat-dialog-actions>
+  </div>
+</div>
+

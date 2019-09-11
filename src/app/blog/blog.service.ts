@@ -4,7 +4,6 @@ import {Router} from '@angular/router';
 import {Observable, of} from 'rxjs';
 import {Comment, Auth, Categories, Media, PageModel, Tag, Post, FileUploadModel} from '../entry';
 import {catchError, last, map, tap} from 'rxjs/operators';
-import {error} from "util";
 
 @Injectable({
   providedIn: 'root'
@@ -44,7 +43,19 @@ export class BlogService {
     removeAccessToken();
   }
 
-  uploadFile(file: FileUploadModel): Observable<any> {
+  uploadFile(file: File): Observable<any> {
+    const fd = new FormData();
+    fd.append('file', file);
+
+    const req = new HttpRequest('POST', 'api/v1/file', fd, {reportProgress: true});
+
+    return this.http.request(req)
+      .pipe(
+        last()
+      );
+  }
+
+  uploadFileModel(file: FileUploadModel): Observable<any> {
     const fd = new FormData();
     fd.append('file', file.data);
 

@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Crop image</h1>
+
+<mat-dialog-content>
+
+  <app-image-crop #cropComponent></app-image-crop>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button cdkFocusInitial [mat-dialog-close]="cropComponent.data.image">Ok</button>
+</mat-dialog-actions>

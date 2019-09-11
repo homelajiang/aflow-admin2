@@ -29,7 +29,6 @@ export class ImageCropComponent implements OnInit {
     this.cropperSettings.rounded = true;
     this.cropperSettings.cropperDrawSettings.strokeWidth = 2;
     this.cropperSettings.cropperDrawSettings.strokeColor = 'red';
-    this.cropperSettings.keepAspect = false;
     this.data = {};
   }
 

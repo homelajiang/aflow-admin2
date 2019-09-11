@@ -1,9 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {LoadStatus, PageModel, Tag} from '../entry';
-import {MatDialog} from "@angular/material/dialog";
-import {BlogService} from "../blog/blog.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {SnackBar} from "../utils/snack-bar";
+import {LoadStatus, Media, PageModel, Tag} from '../entry';
+import {MatDialog} from '@angular/material/dialog';
+import {BlogService} from '../blog/blog.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {SnackBar} from '../utils/snack-bar';
+import {CreateTagComponent} from './create-tag/create-tag.component';
+import {Decoder} from '../utils/Decoder';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-tag',
@@ -42,7 +45,7 @@ export class TagComponent implements OnInit {
         tagPage.hasNextPage ? this.loadingStatus = LoadStatus.LOAD_MORE :
           this.loadingStatus = LoadStatus.NO_MORE;
       }, error => {
-        SnackBar.open(this.snackBar, error)
+        SnackBar.open(this.snackBar, error);
         this.loadingStatus = LoadStatus.LOAD_MORE;
       });
   }
@@ -56,7 +59,45 @@ export class TagComponent implements OnInit {
   }
 
   createTag() {
+    const createTagDialogRef = this.dialog.open(CreateTagComponent);
+    createTagDialogRef.afterClosed().subscribe(tag => {
+      if (!tag) {
+        return;
+      }
+      if (!tag.title) {
+        SnackBar.open(this.snackBar, '标签名称不能为空');
+        return;
+      }
+      if (tag.cover) {
+        const file: File = Decoder.dataURLtoFile(tag.cover, `tag_${tag.title}`);
+        this.blogService.uploadFile(file)
+          .pipe(
+          )
+          .subscribe(res => {
+            tag.cover = res.body.path;
+            this.saveTag(tag);
+          }, err => {
+            SnackBar.open(this.snackBar, '图片上传失败');
+          });
+      } else {
+        this.saveTag(tag);
+      }
 
+    });
+
+  }
+
+  saveTag(tag: any) {
+    const temp = new Tag();
+    temp.name = tag.title;
+    temp.description = tag.description;
+    temp.image = tag.cover;
+    this.blogService.createTag(temp)
+      .subscribe(res => {
+          console.log(res);
+          this.tags.unshift(res);
+        }
+      );
   }
 
   private onLoadMore() {

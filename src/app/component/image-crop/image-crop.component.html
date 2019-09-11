@@ -1,19 +1,22 @@
-<h1 mat-dialog-title>Crop Image</h1>
-<div mat-dialog-content>
-  <div class="file-upload">
-    <input id="custom-input" type="file" (change)="fileChangeListener($event)" />
+<div>
+  <div style="display: none;">
+    <input #image_input type="file" accept="image/*" (change)="fileChangeListener($event)"/>
   </div>
-  <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
-  <br />
-  <span class="result rounded" *ngIf="data.image">
-  <img
-    [src]="data.image"
-    [width]="cropperSettings.croppedWidth"
-    [height]="cropperSettings.croppedHeight"
-  />
-</span>
-</div>
-<div mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Crop</button>
+
+  <div>
+    <button mat-button color="primary" (click)="image_input.click()">选择文件</button>
+  </div>
+
+  <div fxLayout fxLayoutAlign="none start" style="margin-top: 15px;">
+    <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+    <div style="margin-left: 24px;">
+      <div style="margin-bottom: 10px;"> 预览</div>
+      <img
+        [src]="data.image?data.image:'https://via.placeholder.com/100x100.png'"
+        [width]="cropperSettings.croppedWidth"
+        [height]="cropperSettings.croppedHeight"/>
+    </div>
+
+  </div>
+
 </div>

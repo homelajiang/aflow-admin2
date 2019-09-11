@@ -37,19 +37,20 @@ import {ClipboardModule} from 'ngx-clipboard';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTabsModule} from '@angular/material/tabs';
-import { PostInsertImageComponent } from './post/post-insert-image/post-insert-image.component';
+import {PostInsertImageComponent} from './post/post-insert-image/post-insert-image.component';
 import {Subscription} from 'rxjs';
 import * as prettyBytes from 'pretty-bytes';
-import { SearchBarComponent } from './component/search-bar/search-bar.component';
-import { MediaListComponent } from './media/media-list/media-list.component';
-import { MediaInfoComponent } from './media/media-info/media-info.component';
-import { PostComponent } from './post/post.component';
-import { LoadingComponent } from './component/loading/loading.component';
-import { LoadMoreComponent } from './component/load-more/load-more.component';
-import { UploadButtonComponent } from './component/upload-button/upload-button.component';
-import { CreateTagComponent } from './tag/create-tag/create-tag.component';
-import { ImageCropComponent } from './component/image-crop/image-crop.component';
+import {SearchBarComponent} from './component/search-bar/search-bar.component';
+import {MediaListComponent} from './media/media-list/media-list.component';
+import {MediaInfoComponent} from './media/media-info/media-info.component';
+import {PostComponent} from './post/post.component';
+import {LoadingComponent} from './component/loading/loading.component';
+import {LoadMoreComponent} from './component/load-more/load-more.component';
+import {UploadButtonComponent} from './component/upload-button/upload-button.component';
+import {CreateTagComponent} from './tag/create-tag/create-tag.component';
+import {ImageCropComponent} from './component/image-crop/image-crop.component';
 import {ImageCropperModule} from 'ngx-img-cropper';
+import {ImageCropDialogComponent} from './component/image-crop-dialog/image-crop-dialog.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import {ImageCropperModule} from 'ngx-img-cropper';
     UploadButtonComponent,
     CreateTagComponent,
     ImageCropComponent,
+    ImageCropDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -114,7 +116,7 @@ import {ImageCropperModule} from 'ngx-img-cropper';
     MatProgressSpinnerModule,
     ImageCropperModule
   ],
-  entryComponents: [MediaInfoComponent],
+  entryComponents: [MediaInfoComponent, CreateTagComponent, ImageCropDialogComponent],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })

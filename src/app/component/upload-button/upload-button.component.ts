@@ -29,7 +29,7 @@ export class UploadButtonComponent implements OnInit {
   }
 
   private uploadFile(file: FileUploadModel) {
-    file.sub = this.blogService.uploadFile(file)
+    file.sub = this.blogService.uploadFileModel(file)
       .subscribe((event: any) => {
         if (typeof (event) === 'object') {
           file.status = 1;
@@ -38,6 +38,8 @@ export class UploadButtonComponent implements OnInit {
         } else {
           SnackBar.open(this.snackBar, event);
         }
+      }, error => {
+        console.log(error);
       });
   }
 }

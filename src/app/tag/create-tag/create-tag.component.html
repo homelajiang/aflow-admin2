@@ -1,31 +1,25 @@
-<div style="height: 100%;" fxLayout="column">
-  <h1 mat-dialog-title fxFlex="none">New Tag</h1>
+<h1 mat-dialog-title>New Tag</h1>
+<mat-dialog-content>
 
-  <div fxFlex="grow" style="overflow-y: auto;">
+  <div (click)="changeCover()">
+    <img [src]="tag.cover?tag.cover:'https://via.placeholder.com/50x50.png'"
+         style="border-radius: 10px;width: 50px;height: 50px;"/>
+  </div>
 
-    <form class="example-container">
-      <mat-checkbox formControlName="hideRequired">Hide required marker</mat-checkbox>
-      <div>
-        <label>Float label: </label>
-        <mat-radio-group formControlName="floatLabel">
-          <mat-radio-button value="auto">Auto</mat-radio-button>
-          <mat-radio-button value="always">Always</mat-radio-button>
-          <mat-radio-button value="never">Never</mat-radio-button>
-        </mat-radio-group>
-      </div>
-    </form>
-
-    <mat-form-field>
-      <input matInput placeholder="Simple placeholder" required>
+  <div class="example-form">
+    <mat-form-field class="example-full-width">
+      <input [(ngModel)]="tag.title" matInput placeholder="Tag name" required>
     </mat-form-field>
 
+    <mat-form-field class="example-full-width">
+      <input [(ngModel)]="tag.description" matInput placeholder="Tag description">
+    </mat-form-field>
   </div>
 
-  <div fxFlex="none">
-    <mat-dialog-actions align="end">
-      <button mat-button mat-dialog-close>Cancel</button>
-      <button mat-button cdkFocusInitial [mat-dialog-close]="true">Insert</button>
-    </mat-dialog-actions>
-  </div>
-</div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button cdkFocusInitial [mat-dialog-close]="tag">Insert</button>
+</mat-dialog-actions>
 

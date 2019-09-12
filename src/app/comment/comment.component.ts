@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Comment, LoadStatus, PageModel} from '../entry';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {BlogService} from '../blog/blog.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {SnackBar} from '../utils/snack-bar';
+import {MatButtonToggleChange} from '@angular/material/button-toggle';
+import {filter, switchMap} from "rxjs/operators";
 
 @Component({
   selector: 'app-comment',
@@ -6,10 +13,127 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./comment.component.css']
 })
 export class CommentComponent implements OnInit {
+  private loadingStatus: number;
+  private searchText: string;
+  private page = 1;
+  private type = '100'; // 0 发布 1 待审核 -1 删除
+  private postId: string;
 
-  constructor() { }
+  comments: Array<Comment> = [];
 
-  ngOnInit() {
+  constructor(private dialog: MatDialog, private blogService: BlogService,
+              private snackBar: MatSnackBar) {
   }
 
+  ngOnInit() {
+    this.getDataList(true);
+  }
+
+  private getDataList(refresh: boolean) {
+    this.loadingStatus = LoadStatus.LOADING;
+    if (refresh) {
+      this.page = 1;
+    }
+    this.blogService.getComments(this.page, this.type, this.searchText, this.postId)
+      .subscribe((commentPage: PageModel<Comment>) => {
+        this.page++;
+        if (refresh) {
+          this.comments = commentPage.list;
+        } else {
+          this.comments = this.comments.concat(commentPage.list);
+        }
+        commentPage.hasNextPage ? this.loadingStatus = LoadStatus.LOAD_MORE :
+          this.loadingStatus = LoadStatus.NO_MORE;
+      }, error => {
+        SnackBar.open(this.snackBar, error);
+        this.loadingStatus = LoadStatus.LOAD_MORE;
+      });
+  }
+
+  private onLoadMore() {
+    this.getDataList(false);
+  }
+
+  restoreComment(comment: Comment, index: number) {
+
+  }
+
+  reviewComment(comment: Comment, index: number) {
+
+  }
+
+  removeComment(comment: Comment, index: number) {
+
+    const dialogRef = this.dialog.open(CommentRemoveDialogComponent, {
+      minWidth: '360px'
+    });
+
+    dialogRef.afterClosed()
+      .pipe(
+        filter(event => {
+          return event;
+        }),
+        switchMap(reason => {
+          const tempComment: Comment = JSON.parse(JSON.stringify(comment));
+          tempComment.status = -1;
+          tempComment.deleteReason = reason;
+          return this.blogService.updateComment(tempComment);
+        })
+      )
+      .subscribe(
+        res => this.comments.splice(index, 1),
+        error => SnackBar.open(this.snackBar, error));
+  }
+
+  replyComment(comment: Comment, index: number) {
+
+  }
+
+  onSearch(keyword: string) {
+    this.searchText = keyword;
+    this.getDataList(true);
+  }
+
+  onChangeType(event: MatButtonToggleChange) {
+    this.type = event.value;
+    this.getDataList(true);
+  }
 }
+
+@Component({
+  selector: 'app-comment-remove-dialog',
+  templateUrl: './comment-remove-dialog.component.html',
+  styleUrls: ['./comment-remove-dialog.component.css']
+})
+export class CommentRemoveDialogComponent implements OnInit {
+  selectReason: string;
+  otherReason: string;
+  reasons: string[] = ['Winter', 'Spring', 'Summer', '其他'];
+
+  constructor(public snackBar: MatSnackBar, public dialogRef: MatDialogRef<CommentRemoveDialogComponent>) {
+  }
+
+  ngOnInit(): void {
+  }
+
+  closeDialog() {
+    if (!this.selectReason) {
+      SnackBar.open(this.snackBar, '请选择一种原因');
+      return;
+    }
+    if (this.selectReason === '其他' && !this.otherReason) {
+      SnackBar.open(this.snackBar, '请输入原因');
+      return;
+    }
+
+    if (this.selectReason === '其他') {
+      this.dialogRef.close(this.otherReason);
+    } else {
+      this.dialogRef.close(this.selectReason);
+    }
+
+  }
+
+
+}
+

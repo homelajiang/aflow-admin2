@@ -163,12 +163,15 @@ export class BlogService {
   }
 
   updateComment(comment: Comment): Observable<Comment> {
-    return this.http.post<Comment>(`api/v1/comment/${comment.id}`, comment, this.defaultHttpOptions);
+    return this.http.post<Comment>(`api/v1/comment/${comment.id}`, {
+      delete_reason: comment.deleteReason,
+      status: comment.status
+    }, this.defaultHttpOptions);
   }
 
-  getComments(page: number, pageSize: number, type: string, keyword: string, postId: string): Observable<PageModel<Comment>> {
+  getComments(page: number, type: string, keyword: string, postId: string): Observable<PageModel<Comment>> {
     let params: HttpParams = new HttpParams()
-      .set('pageSize', pageSize.toString())
+      .set('pageSize', '20')
       .set('pageNum', page.toString());
 
     if (keyword && keyword.trim()) {

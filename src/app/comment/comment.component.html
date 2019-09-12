@@ -2,56 +2,53 @@
 
   <span fxFlex="1 1 auto"></span>
 
-  <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-    <mat-button-toggle style="font-size: 14px;line-height: 36px;" value="bold">待审核</mat-button-toggle>
-    <mat-button-toggle value="italic">已发布</mat-button-toggle>
-    <mat-button-toggle value="underline">已删除</mat-button-toggle>
+  <mat-button-toggle-group [value]="'100'" (change)="onChangeType($event)" name="fontStyle" aria-label="Font Style">
+    <mat-button-toggle value="100">全部</mat-button-toggle>
+    <mat-button-toggle value="1">待审核</mat-button-toggle>
+    <mat-button-toggle value="0">已发布</mat-button-toggle>
+    <mat-button-toggle value="-1">已删除</mat-button-toggle>
   </mat-button-toggle-group>
 
-  <div>
-    <input style="border: 2px solid #fd4c5d;padding: 0 10px;height: 34px;border-right: none;border-radius: 3px 0 0 3px">
-    <button
-      style="height: 38px;width:70px;color: white;
-      background-color: #fd4c5d;vertical-align: top;
-      border: none;border-radius: 0 3px 3px 0">
-      搜索
-    </button>
-  </div>
+  <app-search-bar (search)="onSearch($event)"></app-search-bar>
 
 </div>
 
 <div fxLayout="row wrap">
 
-  <div fxLayout="row" class="example-card" fxFlex="50" *ngFor="let temp of [1,2,3,4,5,6,7]">
+  <div fxLayout="row" class="example-card" fxFlex="50" *ngFor="let comment of comments;let index = index">
     <div>
-      <img src="https://via.placeholder.com/40x40.png" style="border-radius: 20px;width: 40px;height: 40px;"/>
+      <img [src]="comment.creator.img?comment.creator.img:'https://via.placeholder.com/40x40.png'"
+           style="border-radius: 20px;width: 40px;height: 40px;"/>
     </div>
 
     <div style="border: 1px solid #d6d6d6;border-radius: 4px;width: 100%;padding: 8px;">
       <div fxLayout="row">
         <div fxLayout="row" fxLayoutAlign="center center">
-          <div style="font-size: 14px;">Angular</div>
-          <div style="font-size: 14px;">3 days ago</div>
+          <div style="font-size: 14px;">{{comment.creator.name}}</div>
+          <div style="font-size: 14px;">{{comment.createDate}}</div>
         </div>
         <div fxFlex="1 1 auto;"></div>
 
-        <button mat-icon-button>
+        <button mat-icon-button (click)="restoreComment(comment,index)">
+          <mat-icon>restore</mat-icon>
+        </button>
+        <button mat-icon-button (click)="reviewComment(comment,index)">
           <mat-icon>done</mat-icon>
         </button>
-        <button mat-icon-button>
+        <button mat-icon-button (click)="removeComment(comment,index)">
           <mat-icon>delete_outline</mat-icon>
         </button>
-        <button mat-icon-button>
+        <button mat-icon-button (click)="replyComment(comment,index)">
           <mat-icon>reply</mat-icon>
         </button>
       </div>
       <div style="font-size: 14px;">
-        学会用 Angular 构建应用，把这些代码用在多种多种不同平台的应用上。
+        {{comment.content}}
       </div>
       <div fxLayout="row">
         <div fxFlex="1 1 auto;"></div>
         <span style="font-size: 12px;">
-   —— 《钢铁是怎样练成的》
+   —— 《{{comment.post.title}}}》
 </span>
       </div>
     </div>
@@ -59,3 +56,5 @@
   </div>
 
 </div>
+
+<app-load-more (onLoadMore)="onLoadMore()" [status]="loadingStatus"></app-load-more>

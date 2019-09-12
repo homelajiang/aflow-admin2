@@ -77,6 +77,7 @@ export class Comment {
   status: number;
   content: string;
   creator: Creator;
+  // @JsonProperty('create_date')
   createDate: string;
   post: Post;
   deleteDate: string;

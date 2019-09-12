@@ -26,7 +26,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MediaComponent} from './media/media.component';
 import {MediaItemComponent} from './media/media-item/media-item.component';
 import {MarkdownComponent} from './markdown/markdown.component';
-import {CommentComponent} from './comment/comment.component';
+import {CommentComponent, CommentRemoveDialogComponent} from './comment/comment.component';
 import {CreateTagDialogComponent, TagComponent} from './tag/tag.component';
 import {Code404Component} from './error/code404/code404.component';
 import {httpInterceptorProviders} from './http-interceptor';
@@ -37,8 +37,6 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTabsModule} from '@angular/material/tabs';
 import {PostInsertImageComponent} from './post/post-insert-image/post-insert-image.component';
-import {Subscription} from 'rxjs';
-import * as prettyBytes from 'pretty-bytes';
 import {SearchBarComponent} from './component/search-bar/search-bar.component';
 import {MediaListComponent} from './media/media-list/media-list.component';
 import {MediaInfoComponent} from './media/media-info/media-info.component';
@@ -80,6 +78,7 @@ import {ConfirmDialogComponent} from './component/confirm-dialog/confirm-dialog.
     ImageCropComponent,
     ImageCropDialogComponent,
     ConfirmDialogComponent,
+    CommentRemoveDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -116,7 +115,7 @@ import {ConfirmDialogComponent} from './component/confirm-dialog/confirm-dialog.
     ImageCropperModule
   ],
   entryComponents: [MediaInfoComponent, CreateTagDialogComponent,
-    ImageCropDialogComponent, ConfirmDialogComponent],
+    ImageCropDialogComponent, ConfirmDialogComponent, CommentRemoveDialogComponent],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })

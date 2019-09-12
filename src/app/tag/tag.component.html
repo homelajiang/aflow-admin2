@@ -2,7 +2,7 @@
 
   <button mat-flat-button color="primary" (click)="createTag()">
     <mat-icon>add</mat-icon>
-    New Tag
+    {{categoriesRouter ? 'New Categories' : 'New Tag'}}
   </button>
 
   <span fxFlex="1 1 auto"></span>
@@ -13,26 +13,35 @@
 
 <div fxLayout="row wrap">
 
-  <mat-card class="example-card" fxFlex="33.3" *ngFor="let tag of tags;let index = index">
-    <mat-card-content>
-      <img [src]="tag.image?tag.image:'https://via.placeholder.com/50x50.png'"
+  <mat-card class="example-card" fxFlex="33.3" *ngFor="let data of dataList;let index = index">
+    <mat-card-content *ngIf="!categoriesRouter">
+      <img [src]="data.image?data.image:'https://via.placeholder.com/50x50.png'"
            style="border-radius: 10px;width: 50px;height: 50px;"/>
       <div>
-        {{tag.name}}
+        {{data.name}}
       </div>
       <p>
-        {{tag.description}}
+        {{data.description}}
       </p>
     </mat-card-content>
+
+    <mat-card-content fxLayout="column" fxLayoutAlign="start center" *ngIf="categoriesRouter">
+
+      <img [src]="data.image?data.image:'https://via.placeholder.com/60x60.png'"
+           style="border-radius: 30px;width: 60px;height: 60px;"/>
+      <h3>{{data.name}} </h3>
+    </mat-card-content>
+
+
     <button mat-icon-button style="position: absolute;
     top: 5px;
-    right: 5px;" (click)="deleteTag(tag,index)">
+    right: 5px;" (click)="deleteTag(data,index)">
       <mat-icon>close</mat-icon>
     </button>
 
     <button mat-icon-button style="position: absolute;
     top: 5px;
-    right: 50px;" (click)="editTag(tag,index)">
+    right: 50px;" (click)="editTag(data,index)">
       <mat-icon style="font-size: 20px;">edit</mat-icon>
     </button>
 

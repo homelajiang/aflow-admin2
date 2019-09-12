@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>{{newTag ? '新建标签' : '编辑标签'}}</h1>
+<h1 mat-dialog-title>{{getDialogTitle()}}</h1>
 <mat-dialog-content>
 
   <div (click)="changeCover()">
@@ -8,10 +8,10 @@
 
   <div class="example-form">
     <mat-form-field class="example-full-width">
-      <input [(ngModel)]="tag.name" matInput placeholder="Tag name" required>
+      <input [(ngModel)]="tag.name" matInput [placeholder]="isCategories?'Categories name':'Tag name'" required>
     </mat-form-field>
 
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="example-full-width" *ngIf="!isCategories">
       <input [(ngModel)]="tag.description" matInput placeholder="Tag description">
     </mat-form-field>
   </div>

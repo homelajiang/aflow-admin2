@@ -47,7 +47,7 @@ export class Tag {
 
 export class Categories {
   id: string;
-  name = '未分类';
+  name: string;
   alias: string;
   image: string;
   description: string;

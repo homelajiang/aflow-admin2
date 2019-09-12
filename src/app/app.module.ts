@@ -27,8 +27,7 @@ import {MediaComponent} from './media/media.component';
 import {MediaItemComponent} from './media/media-item/media-item.component';
 import {MarkdownComponent} from './markdown/markdown.component';
 import {CommentComponent} from './comment/comment.component';
-import {TagComponent} from './tag/tag.component';
-import {CategoriesComponent} from './categories/categories.component';
+import {CreateTagDialogComponent, TagComponent} from './tag/tag.component';
 import {Code404Component} from './error/code404/code404.component';
 import {httpInterceptorProviders} from './http-interceptor';
 import {HttpClientModule} from '@angular/common/http';
@@ -47,10 +46,10 @@ import {PostComponent} from './post/post.component';
 import {LoadingComponent} from './component/loading/loading.component';
 import {LoadMoreComponent} from './component/load-more/load-more.component';
 import {UploadButtonComponent} from './component/upload-button/upload-button.component';
-import {CreateTagComponent} from './tag/create-tag/create-tag.component';
 import {ImageCropComponent} from './component/image-crop/image-crop.component';
 import {ImageCropperModule} from 'ngx-img-cropper';
 import {ImageCropDialogComponent} from './component/image-crop-dialog/image-crop-dialog.component';
+import {ConfirmDialogComponent} from './component/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +66,6 @@ import {ImageCropDialogComponent} from './component/image-crop-dialog/image-crop
     MarkdownComponent,
     CommentComponent,
     TagComponent,
-    CategoriesComponent,
     Code404Component,
     MediaUploadComponent,
     PostInsertImageComponent,
@@ -78,9 +76,10 @@ import {ImageCropDialogComponent} from './component/image-crop-dialog/image-crop
     LoadingComponent,
     LoadMoreComponent,
     UploadButtonComponent,
-    CreateTagComponent,
+    CreateTagDialogComponent,
     ImageCropComponent,
     ImageCropDialogComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -116,7 +115,8 @@ import {ImageCropDialogComponent} from './component/image-crop-dialog/image-crop
     MatProgressSpinnerModule,
     ImageCropperModule
   ],
-  entryComponents: [MediaInfoComponent, CreateTagComponent, ImageCropDialogComponent],
+  entryComponents: [MediaInfoComponent, CreateTagDialogComponent,
+    ImageCropDialogComponent, ConfirmDialogComponent],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })

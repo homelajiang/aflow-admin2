@@ -116,9 +116,9 @@ export class BlogService {
     return this.http.post<Categories>(`api/v1/categories/${categories.id}`, categories, this.defaultHttpOptions);
   }
 
-  getCategories(page: number, pageSize: number, keyword?: string): Observable<PageModel<Categories>> {
+  getCategories(page: number, keyword?: string): Observable<PageModel<Categories>> {
     let params: HttpParams = new HttpParams()
-      .set('pageSize', pageSize.toString())
+      .set('pageSize', '10')
       .set('pageNum', page.toString());
     if (keyword && keyword.trim()) {
       params = params.set('key', keyword.trim());

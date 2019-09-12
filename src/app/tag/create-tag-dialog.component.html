@@ -1,14 +1,14 @@
-<h1 mat-dialog-title>New Tag</h1>
+<h1 mat-dialog-title>{{newTag ? '新建标签' : '编辑标签'}}</h1>
 <mat-dialog-content>
 
   <div (click)="changeCover()">
-    <img [src]="tag.cover?tag.cover:'https://via.placeholder.com/50x50.png'"
+    <img [src]="tag.image?tag.image:'https://via.placeholder.com/50x50.png'"
          style="border-radius: 10px;width: 50px;height: 50px;"/>
   </div>
 
   <div class="example-form">
     <mat-form-field class="example-full-width">
-      <input [(ngModel)]="tag.title" matInput placeholder="Tag name" required>
+      <input [(ngModel)]="tag.name" matInput placeholder="Tag name" required>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
@@ -20,6 +20,6 @@
 
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button cdkFocusInitial [mat-dialog-close]="tag">Insert</button>
+  <button mat-button cdkFocusInitial (click)="createTag()">OK</button>
 </mat-dialog-actions>
 

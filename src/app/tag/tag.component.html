@@ -7,39 +7,35 @@
 
   <span fxFlex="1 1 auto"></span>
 
-  <app-search-bar></app-search-bar>
+  <app-search-bar (search)="onSearch($event)"></app-search-bar>
 
 </div>
 
 <div fxLayout="row wrap">
 
-  <mat-card class="example-card" fxFlex="33.3">
+  <mat-card class="example-card" fxFlex="33.3" *ngFor="let tag of tags;let index = index">
     <mat-card-content>
-      <img src="https://via.placeholder.com/50x50.png" style="border-radius: 10px;width: 50px;height: 50px;"/>
+      <img [src]="tag.image?tag.image:'https://via.placeholder.com/50x50.png'"
+           style="border-radius: 10px;width: 50px;height: 50px;"/>
       <div>
-        Angular
+        {{tag.name}}
       </div>
       <p>
-        学会用 Angular 构建应用，把这些代码用在多种多种不同平台的应用上。
-      </p>
-    </mat-card-content>
-  </mat-card>
-
-  <mat-card class="example-card" fxFlex="33.3" *ngFor="let tag of tags" (click)="editTag(tag)">
-    <mat-card-content>
-      <img src="https://via.placeholder.com/50x50.png" style="border-radius: 10px;width: 50px;height: 50px;"/>
-      <div>
-        Angular
-      </div>
-      <p>
-        学会用 Angular 构建应用，把这些代码用在多种多种不同平台的应用上。
+        {{tag.description}}
       </p>
     </mat-card-content>
     <button mat-icon-button style="position: absolute;
     top: 5px;
-    right: 5px;" (click)="deleteTag(tag)">
+    right: 5px;" (click)="deleteTag(tag,index)">
       <mat-icon>close</mat-icon>
     </button>
+
+    <button mat-icon-button style="position: absolute;
+    top: 5px;
+    right: 50px;" (click)="editTag(tag,index)">
+      <mat-icon style="font-size: 20px;">edit</mat-icon>
+    </button>
+
   </mat-card>
 
 </div>

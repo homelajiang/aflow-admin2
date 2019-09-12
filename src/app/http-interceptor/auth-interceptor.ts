@@ -22,7 +22,8 @@ export class AuthInterceptor implements HttpInterceptor {
             errorMessage = err.error.message;
           } else {
             // server-side error
-            errorMessage = err.message;
+            errorMessage = err.error.message;
+            // errorMessage = err.message;
             if (err.status === 401) {
               this.router.navigateByUrl(`/login`);
               this.blogService.logout();

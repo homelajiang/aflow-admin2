@@ -5,7 +5,7 @@ export class Decoder {
     const mime = arr[0].match(/:(.*?);/)[1];
     const temp = mime.split('/');
     if (temp.length === 2) {
-      filename += temp[1];
+      filename += `.${temp[1]}`;
     }
     const bstr = atob(arr[1]);
     let n = bstr.length;

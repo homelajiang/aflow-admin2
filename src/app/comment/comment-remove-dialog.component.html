@@ -7,10 +7,10 @@
 </mat-radio-group>
 
 <mat-form-field style="margin-top:10px;width: 100%;" *ngIf="selectReason==='其他'">
-  <input matInput placeholder="Input reason" [(ngModel)]="otherReason">
+  <input matInput placeholder="Input reason" [(ngModel)]="otherReason" required>
 </mat-form-field>
 
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button cdkFocusInitial (click)="closeDialog()">Insert</button>
+  <button mat-button cdkFocusInitial (click)="closeDialog()" color="warn">Inject</button>
 </mat-dialog-actions>

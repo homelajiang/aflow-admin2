@@ -13,7 +13,7 @@ export class PostListComponent implements OnInit {
   private searchText: string;
   private loadingStatus: number;
   private page = 1;
-  private type = '100';
+  private type = '1';
   private posts: Array<Post> = [];
 
   constructor(private blogService: BlogService, private snackBar: MatSnackBar) {

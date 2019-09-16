@@ -1,5 +1,5 @@
 <div fxLayout="row wrap">
-  <app-post-item fxFlex="20" *ngFor="let post of posts" [post]="post"></app-post-item>
+  <app-post-item fxFlex="25" *ngFor="let post of posts" [post]="post"></app-post-item>
 </div>
 
 <app-load-more [status]="loadingStatus" (onLoadMore)="onLoadMore()"></app-load-more>

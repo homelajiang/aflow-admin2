@@ -1,32 +1,38 @@
 <mat-card class="example-card">
+  <img mat-card-image
+       src="https://material-components.github.io/material-components-web-catalog/static/media/photos/3x2/2.jpg"/>
+  <div>
+    <div style="font-size: 20px;line-height: 32px;margin: 0;">{{post.title}}</div>
+    <div style="font-size: 14px;line-height: 22px;margin: 0;color: rgba(0, 0, 0, 0.54);">{{'3天前'}}</div>
+  </div>
 
-  <img mat-card-image src="https://via.placeholder.com/240x160.png" alt="Photo of a Shiba Inu">
-
-  <mat-card-title style="font-size: 20px;">
-    {{post.title}}
-  </mat-card-title>
-
-  <mat-card-content>
+  <div style="margin-top: 16px;margin-bottom: 8px;font-size: 14px;color: rgba(0, 0, 0, 0.54);font-weight: 400;">
     {{post.description}}
-  </mat-card-content>
-  <mat-card-actions fxLayout="row">
-<!--    <div fxLayout="row" fxLayoutAlign="start center">-->
-<!--      <mat-icon>home</mat-icon>-->
-<!--      <span>9,345</span>-->
-<!--    </div>-->
+  </div>
+  <mat-card-actions fxLayout fxLayoutAlign="none center">
+    <div fxFlex="none">
+      <button mat-button>编辑</button>
+      <button mat-button>预览</button>
+    </div>
 
-<!--    <div fxLayout="row" fxLayoutAlign="start center">-->
-<!--      <mat-icon>comment</mat-icon>-->
-<!--      <span>1,000</span>-->
-<!--    </div>-->
+    <span fxFlex="grow"></span>
 
-<!--    <div fxFlex="1 1 auto"></div>-->
+    <div fxFlex="none">
+      <button mat-icon-button matTooltip="置顶" matTooltipPosition="above">
+        <mat-icon>star_border</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="分享" matTooltipPosition="above">
+        <mat-icon style="font-size: 22px;">share</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="更多" matTooltipPosition="above" [matMenuTriggerFor]="postMenu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </div>
 
-<!--    <div fxFlex="">-->
-<!--      {{post.createDate}}-->
-<!--    </div>-->
+    <mat-menu #postMenu="matMenu">
+      <button mat-menu-item>恢复</button>
+      <button mat-menu-item>永久删除</button>
+    </mat-menu>
 
-      <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
   </mat-card-actions>
 </mat-card>

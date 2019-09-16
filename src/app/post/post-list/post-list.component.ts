@@ -3,6 +3,7 @@ import {LoadStatus, PageModel, Post} from '../../entry';
 import {BlogService} from '../../blog/blog.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatButtonToggleChange} from '@angular/material/button-toggle';
+import {SnackBar} from "../../utils/snack-bar";
 
 @Component({
   selector: 'app-post-list',
@@ -39,6 +40,9 @@ export class PostListComponent implements OnInit {
 
         postPage.hasNextPage ? this.loadingStatus = LoadStatus.LOAD_MORE :
           this.loadingStatus = LoadStatus.NO_MORE;
+      }, error => {
+        SnackBar.open(this.snackBar, error);
+        this.loadingStatus = LoadStatus.LOAD_MORE;
       });
   }
 

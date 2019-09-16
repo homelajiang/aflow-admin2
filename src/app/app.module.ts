@@ -48,6 +48,7 @@ import {ImageCropComponent} from './component/image-crop/image-crop.component';
 import {ImageCropperModule} from 'ngx-img-cropper';
 import {ImageCropDialogComponent} from './component/image-crop-dialog/image-crop-dialog.component';
 import {ConfirmDialogComponent} from './component/confirm-dialog/confirm-dialog.component';
+import {MatMenuModule} from "@angular/material/menu";
 
 @NgModule({
   declarations: [
@@ -112,7 +113,8 @@ import {ConfirmDialogComponent} from './component/confirm-dialog/confirm-dialog.
     MatSnackBarModule,
     MatTabsModule,
     MatProgressSpinnerModule,
-    ImageCropperModule
+    ImageCropperModule,
+    MatMenuModule
   ],
   entryComponents: [MediaInfoComponent, CreateTagDialogComponent,
     ImageCropDialogComponent, ConfirmDialogComponent, CommentRemoveDialogComponent],

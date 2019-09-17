@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {LoadStatus, PageModel, Post} from '../../entry';
-import {BlogService} from '../../blog/blog.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {MatButtonToggleChange} from '@angular/material/button-toggle';
-import {SnackBar} from "../../utils/snack-bar";
+import { Component, OnInit } from '@angular/core';
+import { LoadStatus, PageModel, Post } from '../../entry';
+import { BlogService } from '../../blog/blog.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatButtonToggleChange } from '@angular/material/button-toggle';
+import { SnackBar } from "../../utils/snack-bar";
 
 @Component({
   selector: 'app-post-list',
@@ -44,6 +44,10 @@ export class PostListComponent implements OnInit {
         SnackBar.open(this.snackBar, error);
         this.loadingStatus = LoadStatus.LOAD_MORE;
       });
+  }
+
+  removePost(index) {
+    this.posts.splice(index, 1);
   }
 
   changeType(typeChange: MatButtonToggleChange) {

@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpEventType, HttpHeaders, HttpParams, HttpRequest} from '@angular/common/http';
-import {Router} from '@angular/router';
-import {Observable, of} from 'rxjs';
-import {Comment, Auth, Categories, Media, PageModel, Tag, Post, FileUploadModel} from '../entry';
-import {catchError, last, map, tap} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse, HttpEventType, HttpHeaders, HttpParams, HttpRequest } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { Comment, Auth, Categories, Media, PageModel, Tag, Post, FileUploadModel } from '../entry';
+import { catchError, last, map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -47,7 +47,7 @@ export class BlogService {
     const fd = new FormData();
     fd.append('file', file);
 
-    const req = new HttpRequest('POST', 'api/v1/file', fd, {reportProgress: true});
+    const req = new HttpRequest('POST', 'api/v1/file', fd, { reportProgress: true });
 
     return this.http.request(req)
       .pipe(
@@ -59,7 +59,7 @@ export class BlogService {
     const fd = new FormData();
     fd.append('file', file.data);
 
-    const req = new HttpRequest('POST', 'api/v1/file', fd, {reportProgress: true});
+    const req = new HttpRequest('POST', 'api/v1/file', fd, { reportProgress: true });
     file.inProgress = true;
     return this.http.request(req)
       .pipe(
@@ -91,7 +91,7 @@ export class BlogService {
     if (keyword && keyword.trim()) {
       params = params.set('keyword', keyword.trim());
     }
-    return this.http.get<PageModel<Media>>('api/v1/file', {params});
+    return this.http.get<PageModel<Media>>('api/v1/file', { params });
   }
 
   updateMedia(id: string, media: Media): Observable<Media> {
@@ -123,11 +123,11 @@ export class BlogService {
     if (keyword && keyword.trim()) {
       params = params.set('key', keyword.trim());
     }
-    return this.http.get<PageModel<Categories>>(`api/v1/categories`, {params});
+    return this.http.get<PageModel<Categories>>(`api/v1/categories`, { params });
   }
 
   getCategoriesInfo(id: string): Observable<Categories> {
-    return this.http.get <Categories>(`api/v1/categories/${id}`);
+    return this.http.get<Categories>(`api/v1/categories/${id}`);
   }
 
 
@@ -151,7 +151,7 @@ export class BlogService {
     if (keyword && keyword.trim()) {
       params = params.set('key', keyword.trim());
     }
-    return this.http.get<PageModel<Tag>>(`api/v1/tag`, {params});
+    return this.http.get<PageModel<Tag>>(`api/v1/tag`, { params });
   }
 
   getTagInfo(id: string): Observable<Tag> {
@@ -185,7 +185,7 @@ export class BlogService {
     if (type === '0' || type === '1' || type === '-1') {
       params = params.set('type', type.toString());
     }
-    return this.http.get<PageModel<Comment>>('api/v1/comment', {params});
+    return this.http.get<PageModel<Comment>>('api/v1/comment', { params });
   }
 
 
@@ -197,8 +197,8 @@ export class BlogService {
     return this.http.delete(`api/v1/post/${id}`);
   }
 
-  updatePost(post: Post): Observable<Post> {
-    return this.http.post<Post>(`api/v1/post/${post.id}`, post, this.defaultHttpOptions);
+  updatePost(post: any, id: string): Observable<Post> {
+    return this.http.post<Post>(`api/v1/post/${id}`, post, this.defaultHttpOptions);
   }
 
   getPosts(page: number, type: string, keyword?: string): Observable<PageModel<Post>> {
@@ -214,7 +214,7 @@ export class BlogService {
       params = params.set('type', type);
     }
 
-    return this.http.get<PageModel<Post>>(`api/v1/post`, {params});
+    return this.http.get<PageModel<Post>>(`api/v1/post`, { params });
   }
 
   getPostInfo(id: string): Observable<Post> {
@@ -233,7 +233,7 @@ export class BlogService {
     const params: HttpParams = new HttpParams()
       .set('sort_by', sortBy)
       .set('sort_rang', sortRang);
-    return this.http.get(`api/v1/statistics/post`, {params});
+    return this.http.get(`api/v1/statistics/post`, { params });
   }
 
   checkLogin() {

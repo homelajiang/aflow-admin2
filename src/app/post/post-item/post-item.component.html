@@ -11,27 +11,30 @@
   </div>
   <mat-card-actions fxLayout fxLayoutAlign="none center">
     <div fxFlex="none">
-      <button mat-button>编辑</button>
-      <button mat-button>预览</button>
+      <button mat-button (click)="editPost(post)">编辑</button>
+      <button mat-button (click)="previewPost(post)">预览</button>
     </div>
 
     <span fxFlex="grow"></span>
 
     <div fxFlex="none">
-      <button mat-icon-button matTooltip="置顶" matTooltipPosition="above">
-        <mat-icon>star_border</mat-icon>
+      <button mat-icon-button matTooltip="置顶" (click)="switchTop(post)" matTooltipPosition="above">
+        <mat-icon>{{post.stick ? 'favorite' : 'favorite_border'}}</mat-icon>
       </button>
-      <button mat-icon-button matTooltip="分享" matTooltipPosition="above">
+      <button mat-icon-button matTooltip="分享" (click)="sharePost(post)" matTooltipPosition="above">
         <mat-icon style="font-size: 22px;">share</mat-icon>
       </button>
-      <button mat-icon-button matTooltip="更多" matTooltipPosition="above" [matMenuTriggerFor]="postMenu">
+      <button mat-icon-button matTooltip="更多" matTooltipPosition="above"
+              [matMenuTriggerFor]="postMenu">
         <mat-icon>more_vert</mat-icon>
       </button>
     </div>
 
     <mat-menu #postMenu="matMenu">
-      <button mat-menu-item>恢复</button>
-      <button mat-menu-item>永久删除</button>
+      <button mat-menu-item *ngIf="post.status!==0" (click)="updatePost(post,0)">设为草稿</button>
+      <button mat-menu-item *ngIf="post.status===0" (click)="updatePost(post,1)">发布</button>
+      <button mat-menu-item *ngIf="post.status!==-1" (click)="updatePost(post,-1)">删除</button>
+      <button mat-menu-item *ngIf="post.status===-1" (click)="removePost(post)" style="color: red;">永久删除</button>
     </mat-menu>
 
   </mat-card-actions>

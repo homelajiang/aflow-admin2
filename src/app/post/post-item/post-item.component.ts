@@ -17,4 +17,25 @@ export class PostItemComponent implements OnInit {
   ngOnInit() {
   }
 
+  editPost(post: Post) {
+  }
+
+  previewPost(post: Post) {
+  }
+
+  // top  or cancel top the post
+  switchTop(post: Post) {
+  }
+
+  sharePost(post: Post) {
+
+  }
+
+  updatePost(post: Post, status: number) {
+
+  }
+
+  removePost(post: Post) {
+
+  }
 }

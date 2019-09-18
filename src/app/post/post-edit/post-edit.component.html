@@ -7,18 +7,16 @@
           margin-top: 0;
           box-sizing: border-box;
           -webkit-box-sizing: border-box;
-          -moz-box-sizing: border-box;" matInput
-           placeholder="Please Input Title">
+          -moz-box-sizing: border-box;" matInput [(ngModel)]="post.title" placeholder="Please Input Title">
 
     <div style="height: calc(100% - 50px);">
-      <app-markdown #markdownComponent (changed)="onChanged($event)" [options]="mdOptions"></app-markdown>
+      <app-markdown #markdownComponent (change)="onChanged($event)" [options]="mdOptions"></app-markdown>
     </div>
 
   </div>
 
 
-  <div style="width: 300px;background: azure;height: 100%;overflow-y: auto;overflow-x: hidden;"
-       fxFlex="nogrow">
+  <div style="width: 300px;background: azure;height: 100%;overflow-y: auto;overflow-x: hidden;" fxFlex="nogrow">
     <div>
       POST SETTING
     </div>
@@ -111,23 +109,14 @@
 
     <mat-form-field class="example-chip-list">
       <mat-chip-list #chipList>
-        <mat-chip
-          *ngFor="let fruit of fruits"
-          [selectable]="selectable"
-          [removable]="removable"
+        <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable" [removable]="removable"
           (removed)="remove(fruit)">
           {{fruit}}
           <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
         </mat-chip>
-        <input
-          placeholder="Please Input Tags"
-          #fruitInput
-          [formControl]="fruitCtrl"
-          [matAutocomplete]="auto"
-          [matChipInputFor]="chipList"
-          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-          [matChipInputAddOnBlur]="addOnBlur"
-          (matChipInputTokenEnd)="add($event)">
+        <input placeholder="Please Input Tags" #fruitInput [formControl]="fruitCtrl" [matAutocomplete]="auto"
+          [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
       </mat-chip-list>
       <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
         <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">

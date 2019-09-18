@@ -1,15 +1,17 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {Observable} from 'rxjs';
-import {FormControl} from '@angular/forms';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {MatAutocomplete, MatAutocompleteSelectedEvent, MatChipInputEvent, MatSnackBar} from '@angular/material';
-import {map, startWith} from 'rxjs/operators';
-import {MarkdownComponent, MDOptions} from '../../markdown/markdown.component';
-import {MoeApp} from '../../markdown/moe-app';
-import {MatDialog} from '@angular/material/dialog';
-import {PostInsertImageComponent} from '../post-insert-image/post-insert-image.component';
-import {Media} from '../../entry';
-import {SnackBar} from '../../utils/snack-bar';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Observable } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { MatAutocomplete, MatAutocompleteSelectedEvent, MatChipInputEvent, MatSnackBar } from '@angular/material';
+import { map, startWith } from 'rxjs/operators';
+import { MarkdownComponent } from '../../markdown/markdown.component';
+import { MoeApp } from '../../markdown/moe-app';
+import { MatDialog } from '@angular/material/dialog';
+import { PostInsertImageComponent } from '../post-insert-image/post-insert-image.component';
+import { Media, Post, Categories, Tag } from '../../entry';
+import { SnackBar } from '../../utils/snack-bar';
+import { ActivatedRoute } from '@angular/router';
+import { BlogService } from 'src/app/blog/blog.service';
 
 let that: PostEditComponent;
 
@@ -21,6 +23,10 @@ let that: PostEditComponent;
 })
 export class PostEditComponent implements OnInit {
 
+  post: Post = new Post();
+  categories: Array<Categories>;
+  tags: Array<Tag>;
+
   visible = true;
   selectable = true;
   removable = true;
@@ -31,20 +37,22 @@ export class PostEditComponent implements OnInit {
   fruits: string[] = ['Lemon'];
   allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
 
-  @ViewChild('fruitInput', {static: true})
+  @ViewChild('fruitInput', { static: true })
   fruitInput: ElementRef<HTMLInputElement>;
-  @ViewChild('auto', {static: true})
+  @ViewChild('auto', { static: true })
   matAutocomplete: MatAutocomplete;
 
-  @ViewChild('markdownComponent', {static: true})
+  @ViewChild('markdownComponent', { static: true })
   markdownComponent: MarkdownComponent;
 
   mdOptions;
 
-  constructor(public dialog: MatDialog, private snackBar: MatSnackBar) {
+  constructor(public dialog: MatDialog, private snackBar: MatSnackBar,
+    private routerInfo: ActivatedRoute, private blogService: BlogService,
+    private snackbar: MatSnackBar) {
     that = this;
 
-    this.mdOptions = new MDOptions();
+    this.mdOptions = new Object();
     this.mdOptions.placeholder = 'yuan';
     this.mdOptions.toolbar = ['bold', 'italic', 'heading', '|',
       'quote', 'code', 'unordered-list', 'ordered-list', '|',
@@ -81,6 +89,32 @@ export class PostEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    const postId = this.routerInfo.snapshot.paramMap.get('id');
+    if (postId) {
+      this.getPostInfo(postId);
+    }
+
+    this.getAllCategories();
+    this.getAllTags();
+  }
+
+  private getPostInfo(id: string) {
+    this.blogService.getPostInfo(id)
+      .subscribe(post => {
+        this.post = post;
+        this.markdownComponent.setValue(this.post.content);
+      },
+        err => SnackBar.open(this.snackbar, err));
+  }
+
+  private getAllCategories() {
+    this.blogService.getAllCategories()
+      .subscribe(categoriesPage => this.categories = categoriesPage.list)
+  }
+
+  private getAllTags() {
+    this.blogService.getAllTags()
+      .subscribe(tagsPage => this.tags = tagsPage.list);
   }
 
   onChanged(event) {

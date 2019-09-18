@@ -116,6 +116,13 @@ export class BlogService {
     return this.http.post<Categories>(`api/v1/categories/${categories.id}`, categories, this.defaultHttpOptions);
   }
 
+  getAllCategories(): Observable<PageModel<Categories>> {
+    let params: HttpParams = new HttpParams()
+      .set('pageSize', '10000')
+      .set('pageNum', '1');
+    return this.http.get<PageModel<Categories>>(`api/v1/categories`, { params });
+  }
+
   getCategories(page: number, keyword?: string): Observable<PageModel<Categories>> {
     let params: HttpParams = new HttpParams()
       .set('pageSize', '10')
@@ -141,6 +148,13 @@ export class BlogService {
 
   updateTag(tag: Tag): Observable<Tag> {
     return this.http.post<Tag>(`api/v1/tag/${tag.id}`, tag, this.defaultHttpOptions);
+  }
+
+  getAllTags(): Observable<PageModel<Tag>> {
+    let params: HttpParams = new HttpParams()
+      .set('pageSize', '10000')
+      .set('pageNum', '1');
+    return this.http.get<PageModel<Tag>>(`api/v1/tag`, { params });
   }
 
   getTags(page: number, keyword?: string): Observable<PageModel<Tag>> {

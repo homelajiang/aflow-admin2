@@ -5,6 +5,7 @@ import { SnackBar } from 'src/app/utils/snack-bar';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { ConfirmDialogComponent } from 'src/app/component/confirm-dialog/confirm-dialog.component';
 import { filter, switchMap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-item',
@@ -22,13 +23,14 @@ export class PostItemComponent implements OnInit {
   remove = new EventEmitter();
 
   constructor(public blogServer: BlogService, public snackbar: MatSnackBar,
-    private dialog: MatDialog) {
+    private dialog: MatDialog, private router: Router) {
   }
 
   ngOnInit() {
   }
 
   editPost() {
+    this.router.navigate(['post/edit', this.post.id]);
   }
 
   previewPost() {
@@ -58,7 +60,7 @@ export class PostItemComponent implements OnInit {
       .subscribe((p) => {
         this.remove.emit(this.index);
       }, err => {
-        SnackBar.open(this.snackbar, '置顶失败');
+        SnackBar.open(this.snackbar, '操作失败');
       });
   }
 

@@ -1,12 +1,12 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import CodeMirror from 'codemirror';
 import MoeMark from 'moemark';
-import {MoeditorMathRender} from './moe-math';
+import { MoeditorMathRender } from './moe-math';
 
-import {MoeditorHighlight} from './moe-highlight';
-import {MoeditorUMLRenderer} from './moe-uml';
-import {SVGFixer} from './svgfixer';
-import {MoeApp} from './moe-app';
+import { MoeditorHighlight } from './moe-highlight';
+import { MoeditorUMLRenderer } from './moe-uml';
+import { SVGFixer } from './svgfixer';
+import { MoeApp } from './moe-app';
 
 import 'codemirror/mode/markdown/markdown';
 import 'codemirror/mode/gfm/gfm';
@@ -38,10 +38,10 @@ import 'codemirror/addon/mode/multiplex';
 import 'codemirror/addon/scroll/simplescrollbars';
 import 'codemirror/addon/selection/active-line';
 import 'codemirror/addon/display/placeholder';
-import {MoeScroll} from './moe-scroll';
-import {MoeMode} from './moe-mode';
+import { MoeScroll } from './moe-scroll';
+import { MoeMode } from './moe-mode';
 import * as Toolbar from './moe-toolbar';
-import {MoeToolbar} from './moe-toolbar';
+import { MoeToolbar } from './moe-toolbar';
 
 MoeMark.setOptions({
   math: true,
@@ -60,10 +60,10 @@ MoeMark.setOptions({
 export class MarkdownComponent implements OnInit, AfterViewInit {
 
   // md content change event
-  @Output() changed = new EventEmitter();
+  @Output() change = new EventEmitter();
 
   // md options
-  @Input() options: MDOptions = new MDOptions();
+  @Input() options: any = new Object();
 
   private editor: CodeMirror.EditorFromTextArea;
   private scroller: MoeScroll;
@@ -114,6 +114,13 @@ export class MarkdownComponent implements OnInit, AfterViewInit {
   }
 
   /**
+   * 设置markdown value
+   */
+  setValue(value: string) {
+    this.editor.setValue(value);
+  }
+
+  /**
    * 插入图片
    * @param src 图片路径
    */
@@ -125,21 +132,21 @@ export class MarkdownComponent implements OnInit, AfterViewInit {
   private codeMirrorInit() {
     const textarea = document.querySelector('#editor textarea');
     this.editor = CodeMirror.fromTextArea(textarea, {
-        lineNumbers: false,
-        mode: 'gfm',
-        matchBrackets: true,
-        theme: MoeApp.config['editor-theme'],
-        lineWrapping: true,
-        extraKeys: {},
-        tabSize: 4,
-        // tabSize: moeApp.config.get('tab-size'),
-        indentUnit: 4,
-        // indentUnit: moeApp.config.get('tab-size'),
-        viewportMargin: Infinity,
-        styleActiveLine: true,
-        showCursorWhenSelecting: true,
-        placeholder: this.options.placeholder || textarea.getAttribute('placeholder') || '',
-      }
+      lineNumbers: false,
+      mode: 'gfm',
+      matchBrackets: true,
+      theme: MoeApp.config['editor-theme'],
+      lineWrapping: true,
+      extraKeys: {},
+      tabSize: 4,
+      // tabSize: moeApp.config.get('tab-size'),
+      indentUnit: 4,
+      // indentUnit: moeApp.config.get('tab-size'),
+      viewportMargin: Infinity,
+      styleActiveLine: true,
+      showCursorWhenSelecting: true,
+      placeholder: this.options.placeholder || textarea.getAttribute('placeholder') || '',
+    }
     );
 
     const codeMirror: any = document.querySelector('#editor > .CodeMirror');
@@ -148,18 +155,14 @@ export class MarkdownComponent implements OnInit, AfterViewInit {
     // this.editor.setValue(MoeTest.editorText);
     // codemirror cursor height incorrect , refresh it
 
-    if (this.options.value) {
-      this.editor.setValue(this.options.value);
-    } else {
-      this.editor.setValue('-');
-      this.editor.setValue('');
-    }
+    this.editor.setValue('-');
+    this.editor.setValue('');
 
     this.editor.focus();
 
 
     this.editor.on('change', (editor, obj) => {
-      this.changed.emit(obj);
+      this.change.emit(obj);
       this.updatePre(false);
     });
 
@@ -264,7 +267,7 @@ export class MarkdownComponent implements OnInit, AfterViewInit {
           mathID++;
           const id = 'math-' + mathID;
           res = '<span id="' + id + '"></span>';
-          math[id] = {s: str, display};
+          math[id] = { s: str, display };
           return res;
         }
       }
@@ -341,10 +344,4 @@ export class MarkdownComponent implements OnInit, AfterViewInit {
     this.cursorPos = this.editor.getCursor().line + ':' + this.editor.getCursor().ch;
   }
 
-}
-
-export class MDOptions {
-  value: string;
-  placeholder: string;
-  toolbar: Array<object>;
 }

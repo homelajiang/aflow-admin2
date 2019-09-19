@@ -10,7 +10,7 @@
     {{post.description}}
   </div>
   <mat-card-actions fxLayout fxLayoutAlign="none center">
-    <div fxFlex="none">
+    <div fxFlex="none" *ngIf="post.status!==-1">
       <button mat-button (click)="editPost()">编辑</button>
       <button mat-button (click)="previewPost()">预览</button>
     </div>

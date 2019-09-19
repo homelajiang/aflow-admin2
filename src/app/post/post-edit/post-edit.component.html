@@ -25,23 +25,23 @@
     <div>
       <mat-icon>home</mat-icon>
       <span>状态:</span>
-      <b>草稿</b>
+      <b>{{post.status | postStatus}}</b>
     </div>
 
     <div>
       <mat-icon>home</mat-icon>
       <span>权限:</span>
-      <b>公开</b>
-      <button mat-button color="primary">编辑</button>
+      <b>{{post.open | postOpen}}</b>
+      <button mat-button color="primary" (click)="editMode.open = !editMode.open">{{editMode.open?'收起':'编辑'}}</button>
     </div>
 
-    <mat-radio-group style=" display: inline-flex;flex-direction: column;">
+    <mat-radio-group *ngIf="editMode.open" [(ngModel)]="post.open" style=" display: inline-flex;flex-direction: column;">
       <mat-radio-button value="1" style="margin: 5px;">
-        public
+        公开
       </mat-radio-button>
-      <mat-checkbox>置顶该文章</mat-checkbox>
+      <mat-checkbox [(ngModel)]="post.stick">置顶该文章</mat-checkbox>
       <mat-radio-button value="2" style="margin: 5px;">
-        protect
+        密码保护
       </mat-radio-button>
 
       <mat-form-field>
@@ -49,15 +49,10 @@
       </mat-form-field>
 
       <mat-radio-button value="3" style="margin: 5px;">
-        private
+        私有
       </mat-radio-button>
 
     </mat-radio-group>
-
-    <div>
-      <button mat-stroked-button color="primary">ensure</button>
-      <button mat-stroked-button>cancel</button>
-    </div>
 
     <mat-divider></mat-divider>
 

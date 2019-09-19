@@ -4,10 +4,10 @@
 
     <div>
       <mat-nav-list>
-        <div *ngFor="let link of ['DASHBOARD','POSTS','COMMENTS','STATS','LAYOUT','TEMPLATE','SETTINGS']">
-          <mat-list-item>
-            <mat-icon matListIcon>panorama_fish_eye</mat-icon>
-            <a matLine href="#">{{ link }}</a>
+        <div *ngFor="let menu of mainMenu">
+          <mat-list-item (click)="navClick(menu.router)">
+            <mat-icon matListIcon>{{menu.icon}}</mat-icon>
+            <a matLine>{{ menu.name }}</a>
             <div style="margin-left: 50px;">20</div>
             <!--          <mat-icon style="margin-left: 50px;">-->
             <!--            ghfdkshgkfhsdg-->

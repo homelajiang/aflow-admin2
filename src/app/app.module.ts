@@ -49,6 +49,7 @@ import {ImageCropperModule} from 'ngx-img-cropper';
 import {ImageCropDialogComponent} from './component/image-crop-dialog/image-crop-dialog.component';
 import {ConfirmDialogComponent} from './component/confirm-dialog/confirm-dialog.component';
 import {MatMenuModule} from "@angular/material/menu";
+import { PostStatusPipe, PostOpenPipe } from './blog/blog.pipe';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,8 @@ import {MatMenuModule} from "@angular/material/menu";
     ImageCropDialogComponent,
     ConfirmDialogComponent,
     CommentRemoveDialogComponent,
+    PostStatusPipe,
+    PostOpenPipe,
   ],
   imports: [
     BrowserModule,

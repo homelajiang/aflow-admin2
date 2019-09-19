@@ -1,4 +1,4 @@
-import {Subscription} from 'rxjs';
+import { Subscription } from 'rxjs';
 import * as prettyBytes from 'pretty-bytes';
 
 export interface PageModel<T> {
@@ -141,4 +141,31 @@ export class LoadStatus {
   public static LOAD_MORE = 1;
   public static LOADING = 2;
   public static NO_MORE = 3;
+}
+
+export class MainMenu {
+  name: string;
+  color: string;
+  tips: string;
+  unread: number;
+  icon: string;
+  router: string;
+
+
+
+  public constructor(name: string, icon: string, router: string,
+    color?: string, tips?: string, unread?: number) {
+    this.name = name;
+    this.icon = icon;
+    this.router = router;
+    if (color) {
+      this.color = color;
+    }
+    if (tips) {
+      this.tips = tips;
+    }
+    if (unread) {
+      this.unread = unread;
+    }
+  }
 }

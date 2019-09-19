@@ -27,6 +27,10 @@ export class PostEditComponent implements OnInit {
   categories: Array<Categories>;
   tags: Array<Tag>;
 
+  editMode = {
+    open:false
+  };
+
   visible = true;
   selectable = true;
   removable = true;

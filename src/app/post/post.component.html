@@ -2,11 +2,11 @@
 
   <span fxFlex="1 1 auto"></span>
 
-  <mat-button-toggle-group [value]="'1'" (change)="postListComponent.changeType($event)" name="fontStyle"
+  <mat-button-toggle-group [value]="'published'" (change)="postListComponent.changeType($event)" name="fontStyle"
                            aria-label="Font Style">
-    <mat-button-toggle value="1">已发布</mat-button-toggle>
-    <mat-button-toggle value="0">草稿</mat-button-toggle>
-    <mat-button-toggle value="-1">已删除</mat-button-toggle>
+    <mat-button-toggle value="published">已发布</mat-button-toggle>
+    <mat-button-toggle value="draft">草稿</mat-button-toggle>
+    <mat-button-toggle value="deleted">已删除</mat-button-toggle>
   </mat-button-toggle-group>
 
   <app-search-bar (search)="postListComponent.search($event)"></app-search-bar>

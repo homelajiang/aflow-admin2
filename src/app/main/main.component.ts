@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { MainMenu } from '../entry';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {MainMenu} from '../entry';
 
 @Component({
   selector: 'app-main',
@@ -9,7 +9,8 @@ import { MainMenu } from '../entry';
 })
 export class MainComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+  }
 
   mainMenu: Array<MainMenu> = [];
 
@@ -32,8 +33,8 @@ export class MainComponent implements OnInit {
     menus.push(new MainMenu('DASHBOARD', 'panorama_fish_eye', '/dashboard'));
     menus.push(new MainMenu('POSTS', 'panorama_fish_eye', '/post'));
     menus.push(new MainMenu('COMMENTS', 'panorama_fish_eye', '/comment'));
-    menus.push(new MainMenu('STATS', 'panorama_fish_eye', ''));
-    menus.push(new MainMenu('LAYOUT', 'panorama_fish_eye', ''));
+    menus.push(new MainMenu('CATEGORIES', 'panorama_fish_eye', 'categories'));
+    menus.push(new MainMenu('TAGS', 'panorama_fish_eye', '/tag'));
     menus.push(new MainMenu('TEMPLATE', 'panorama_fish_eye', ''));
     menus.push(new MainMenu('SETTINGS', 'panorama_fish_eye', ''));
 

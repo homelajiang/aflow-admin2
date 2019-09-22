@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { LoadStatus, PageModel, Post } from '../../entry';
-import { BlogService } from '../../blog/blog.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatButtonToggleChange } from '@angular/material/button-toggle';
-import { SnackBar } from "../../utils/snack-bar";
+import {Component, OnInit} from '@angular/core';
+import {LoadStatus, PageModel, Post} from '../../entry';
+import {BlogService} from '../../blog/blog.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatButtonToggleChange} from '@angular/material/button-toggle';
+import {SnackBar} from '../../utils/snack-bar';
 
 @Component({
   selector: 'app-post-list',
@@ -14,7 +14,7 @@ export class PostListComponent implements OnInit {
   private searchText: string;
   private loadingStatus: number;
   private page = 1;
-  private type = '1';
+  private type = 'published';
   private posts: Array<Post> = [];
 
   constructor(private blogService: BlogService, private snackBar: MatSnackBar) {

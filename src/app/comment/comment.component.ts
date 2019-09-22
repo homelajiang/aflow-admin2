@@ -17,7 +17,7 @@ export class CommentComponent implements OnInit {
   private loadingStatus: number;
   private searchText: string;
   private page = 1;
-  private type = '1'; // 0 发布 1 待审核 -1 删除
+  private type = 'review'; // 0 发布 1 待审核 -1 删除
   private postId: string;
 
   comments: Array<Comment> = [];
@@ -56,15 +56,15 @@ export class CommentComponent implements OnInit {
   }
 
   restoreComment(comment: Comment, index: number) {
-    this.updateComment(comment, index, 1);
+    this.updateComment(comment, index, 'review');
   }
 
   reviewComment(comment: Comment, index: number) {
-    this.updateComment(comment, index, 0);
+    this.updateComment(comment, index, 'published');
   }
 
   removeComment(comment: Comment, index: number) {
-    if (comment.status === -1) {
+    if (comment.status === 'deleted') {
       const dialogRef = this.dialog.open(ConfirmDialogComponent, {
         minWidth: '360px',
         data: {
@@ -88,7 +88,7 @@ export class CommentComponent implements OnInit {
         );
     } else {
       const dialogRef = this.dialog.open(CommentRemoveDialogComponent, {
-        minWidth: '360px'
+        minWidth: '360px',
       });
 
       dialogRef.afterClosed()
@@ -98,7 +98,7 @@ export class CommentComponent implements OnInit {
           }),
           switchMap(reason => {
             const tempComment: Comment = JSON.parse(JSON.stringify(comment));
-            tempComment.status = -1;
+            tempComment.status = 'deleted';
             tempComment.deleteReason = reason;
             return this.blogService.updateComment(tempComment);
           })
@@ -119,7 +119,7 @@ export class CommentComponent implements OnInit {
    * @param index the comment index
    * @param status the comment update to status
    */
-  private updateComment(comment: Comment, index: number, status: number) {
+  private updateComment(comment: Comment, index: number, status: string) {
     const tempComment: Comment = JSON.parse(JSON.stringify(comment));
     tempComment.status = status;
     tempComment.deleteDate = '';
@@ -127,11 +127,11 @@ export class CommentComponent implements OnInit {
       .subscribe(res => {
           this.comments.splice(index, 1);
           let message: string;
-          if (status === -1) {
+          if (status === 'deleted') {
             message = '删除成功';
-          } else if (status === 0) {
+          } else if (status === 'published') {
             message = '审核通过';
-          } else if (status === 1) {
+          } else if (status === 'review') {
             message = '恢复成功';
           }
           SnackBar.open(this.snackBar, message);

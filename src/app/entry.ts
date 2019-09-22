@@ -1,4 +1,4 @@
-import { Subscription } from 'rxjs';
+import {Subscription} from 'rxjs';
 import * as prettyBytes from 'pretty-bytes';
 
 export interface PageModel<T> {
@@ -62,22 +62,21 @@ export class Post {
   modifyDate = '';
   publishDate = '';
   cover = null;
-  stick = false;
-  open = 0;
+  top = false;
+  open = 'public';
   password = '';
   openComment = true;
   needReview = false;
-  status = 0;
+  status = 'draft';
   categories = null;
   tags: Tag[] = [];
 }
 
 export class Comment {
   id: string;
-  status: number;
+  status: string;
   content: string;
   creator: Creator;
-  // @JsonProperty('create_date')
   createDate: string;
   post: Post;
   deleteDate: string;
@@ -152,9 +151,8 @@ export class MainMenu {
   router: string;
 
 
-
   public constructor(name: string, icon: string, router: string,
-    color?: string, tips?: string, unread?: number) {
+                     color?: string, tips?: string, unread?: number) {
     this.name = name;
     this.icon = icon;
     this.router = router;

@@ -1,11 +1,11 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { Post } from '../../entry';
-import { BlogService } from 'src/app/blog/blog.service';
-import { SnackBar } from 'src/app/utils/snack-bar';
-import { MatSnackBar, MatDialog } from '@angular/material';
-import { ConfirmDialogComponent } from 'src/app/component/confirm-dialog/confirm-dialog.component';
-import { filter, switchMap } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+import {Post} from '../../entry';
+import {BlogService} from 'src/app/blog/blog.service';
+import {SnackBar} from 'src/app/utils/snack-bar';
+import {MatSnackBar, MatDialog} from '@angular/material';
+import {ConfirmDialogComponent} from 'src/app/component/confirm-dialog/confirm-dialog.component';
+import {filter, switchMap} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-post-item',
@@ -23,7 +23,7 @@ export class PostItemComponent implements OnInit {
   remove = new EventEmitter();
 
   constructor(public blogServer: BlogService, public snackbar: MatSnackBar,
-    private dialog: MatDialog, private router: Router) {
+              private dialog: MatDialog, private router: Router) {
   }
 
   ngOnInit() {
@@ -39,11 +39,11 @@ export class PostItemComponent implements OnInit {
   // top  or cancel top the post
   switchTop() {
     this.blogServer.updatePost(
-      { stick: !this.post.stick },
+      {top: !this.post.top},
       this.post.id
     )
       .subscribe((p) => {
-        this.post.stick = !this.post.stick;
+        this.post.top = !this.post.top;
       }, err => {
         SnackBar.open(this.snackbar, '置顶失败');
       });
@@ -53,9 +53,9 @@ export class PostItemComponent implements OnInit {
 
   }
 
-  updateStatus(status: number) {
+  updateStatus(status: string) {
     this.blogServer.updatePost(
-      { status },
+      {status},
       this.post.id)
       .subscribe((p) => {
         this.remove.emit(this.index);

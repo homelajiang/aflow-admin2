@@ -32,24 +32,26 @@
       <mat-icon>home</mat-icon>
       <span>权限:</span>
       <b>{{post.open | postOpen}}</b>
-      <button mat-button color="primary" (click)="editMode.open = !editMode.open">{{editMode.open?'收起':'编辑'}}</button>
+      <button mat-button color="primary"
+              (click)="editMode.open = !editMode.open">{{editMode.open ? '收起' : '编辑'}}</button>
     </div>
 
-    <mat-radio-group *ngIf="editMode.open" [(ngModel)]="post.open" style=" display: inline-flex;flex-direction: column;">
-      <mat-radio-button value="1" style="margin: 5px;">
+    <mat-radio-group *ngIf="editMode.open" [(ngModel)]="post.open"
+                     style=" display: inline-flex;flex-direction: column;">
+      <mat-radio-button value="public" style="margin: 5px;">
         公开
       </mat-radio-button>
-      <mat-checkbox [(ngModel)]="post.stick">置顶该文章</mat-checkbox>
-      <mat-radio-button value="2" style="margin: 5px;">
+      <mat-checkbox *ngIf="post.open==='public'" [(ngModel)]="post.top">置顶该文章</mat-checkbox>
+      <mat-radio-button value="protect" style="margin: 5px;">
         密码保护
       </mat-radio-button>
 
-      <mat-form-field>
-        <input matInput placeholder="input password">
+      <mat-form-field *ngIf="post.open==='protect'">
+        <input matInput type="number" [(ngModel)]="post.password" placeholder="input password">
       </mat-form-field>
 
-      <mat-radio-button value="3" style="margin: 5px;">
-        私有
+      <mat-radio-button value="private" style="margin: 5px;">
+        私密
       </mat-radio-button>
 
     </mat-radio-group>
@@ -59,72 +61,62 @@
     <div>
       <mat-icon>home</mat-icon>
       <span>评论:</span>
-      <b>草稿</b>
-      <button mat-button color="primary">编辑</button>
+      <b>{{post.openComment ? '允许评论' : '禁止评论'}}</b>
+      <button mat-button color="primary"
+              (click)="editMode.openComment=!editMode.openComment">{{editMode.openComment ? '收起' : '编辑'}}</button>
     </div>
 
-    <mat-radio-group style=" display: inline-flex;flex-direction: column;">
-      <mat-radio-button value="1" style="margin: 5px;">
-        public
+    <mat-radio-group *ngIf="editMode.openComment" [(ngModel)]="post.openComment"
+                     style=" display: inline-flex;flex-direction: column;">
+      <mat-radio-button [value]="true" style="margin: 5px;">
+        允许评论
       </mat-radio-button>
-      <mat-radio-button value="2" style="margin: 5px;">
-        pending
-      </mat-radio-button>
-      <mat-radio-button value="3" style="margin: 5px;">
-        private
+      <mat-checkbox *ngIf="post.openComment" [(ngModel)]="post.needReview">评论需要审核</mat-checkbox>
+      <mat-radio-button [value]="false" style="margin: 5px;">
+        禁止评论
       </mat-radio-button>
     </mat-radio-group>
-
-    <div>
-      <button mat-stroked-button color="primary">ensure</button>
-      <button mat-stroked-button>cancel</button>
-    </div>
 
     <mat-divider></mat-divider>
 
     <div>Categories</div>
 
-    <mat-radio-group style=" display: inline-flex;flex-direction: column;">
-      <mat-radio-button value="1" style="margin: 5px;">
-        public
-      </mat-radio-button>
-      <mat-radio-button value="2" style="margin: 5px;">
-        pending
-      </mat-radio-button>
-      <mat-radio-button value="3" style="margin: 5px;">
-        private
+    <mat-radio-group style=" display: inline-flex;flex-direction: column;" [(ngModel)]="post.categories">
+      <mat-radio-button [value]=c style="margin: 5px;" *ngFor="let c of categories">
+        {{c ? c.name : '未分类'}}
       </mat-radio-button>
     </mat-radio-group>
 
     <div>
-      <button mat-button color="primary"> New Categories</button>
+      <button mat-button color="primary">新建分类</button>
     </div>
 
     <div>Tag</div>
 
     <mat-form-field class="example-chip-list">
-      <mat-chip-list #chipList>
-        <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable" [removable]="removable"
-          (removed)="remove(fruit)">
-          {{fruit}}
-          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      <mat-chip-list #tagList>
+        <mat-chip *ngFor="let tag of post.tags" [removable]="true"
+                  (removed)="removeTag(tag)">
+          {{tag.name}}
+          <mat-icon matChipRemove>cancel</mat-icon>
         </mat-chip>
-        <input placeholder="Please Input Tags" #fruitInput [formControl]="fruitCtrl" [matAutocomplete]="auto"
-          [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-          [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+
+        <input placeholder="Please Input Tags" #tagInput [formControl]="tagCtrl" [matAutocomplete]="auto"
+               [matChipInputFor]="tagList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+               [matChipInputAddOnBlur]="true" (matChipInputTokenEnd)="add($event)">
       </mat-chip-list>
       <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-        <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
-          {{fruit}}
+        <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+          {{tag.name}}
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
 
     <div>Cover</div>
-
-    <img src="https://via.placeholder.com/240x160.png">
-
     <button mat-button color="primary">Select Cover</button>
+
+    <img style="width: 100%;" src="https://via.placeholder.com/240x160.png">
+
 
   </div>
 

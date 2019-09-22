@@ -2,10 +2,10 @@
 
   <span fxFlex="1 1 auto"></span>
 
-  <mat-button-toggle-group [value]="'1'" (change)="onChangeType($event)" name="fontStyle" aria-label="Font Style">
-    <mat-button-toggle value="1">待审核</mat-button-toggle>
-    <mat-button-toggle value="0">已发布</mat-button-toggle>
-    <mat-button-toggle value="-1">已删除</mat-button-toggle>
+  <mat-button-toggle-group [value]="'review'" (change)="onChangeType($event)" name="fontStyle" aria-label="Font Style">
+    <mat-button-toggle value="review">待审核</mat-button-toggle>
+    <mat-button-toggle value="published">已发布</mat-button-toggle>
+    <mat-button-toggle value="deleted">已删除</mat-button-toggle>
   </mat-button-toggle-group>
 
   <app-search-bar (search)="onSearch($event)"></app-search-bar>
@@ -28,19 +28,19 @@
         </div>
         <div fxFlex="1 1 auto;"></div>
 
-        <button mat-icon-button *ngIf="comment.status!==1" (click)="restoreComment(comment,index)" matTooltip="恢复"
+        <button mat-icon-button *ngIf="comment.status!=='published'" (click)="restoreComment(comment,index)" matTooltip="恢复"
                 matTooltipPosition="above">
           <mat-icon>restore</mat-icon>
         </button>
-        <button mat-icon-button *ngIf="comment.status===1" (click)="reviewComment(comment,index)" matTooltip="批准"
+        <button mat-icon-button *ngIf="comment.status==='published'" (click)="reviewComment(comment,index)" matTooltip="批准"
                 matTooltipPosition="above">
           <mat-icon>done</mat-icon>
         </button>
-        <button mat-icon-button (click)="removeComment(comment,index)" [matTooltip]="comment.status===-1?'永久删除':'删除'"
+        <button mat-icon-button (click)="removeComment(comment,index)" [matTooltip]="comment.status==='deleted'?'永久删除':'删除'"
                 matTooltipPosition="above">
           <mat-icon>delete_outline</mat-icon>
         </button>
-        <button mat-icon-button *ngIf="comment.status===0" (click)="replyComment(comment,index)" matTooltip="回复"
+        <button mat-icon-button *ngIf="comment.status==='review'" (click)="replyComment(comment,index)" matTooltip="回复"
                 matTooltipPosition="above">
           <mat-icon>reply</mat-icon>
         </button>
@@ -51,7 +51,7 @@
       <div fxLayout="row">
         <div fxFlex="1 1 auto;"></div>
         <span style="font-size: 12px;">
-   —— 《{{comment.post.title}}}》
+   —— 《{{comment.post.title}}》
 </span>
       </div>
     </div>

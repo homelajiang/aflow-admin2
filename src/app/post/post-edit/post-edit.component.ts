@@ -1,17 +1,17 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
-import { FormControl } from '@angular/forms';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { MatAutocomplete, MatAutocompleteSelectedEvent, MatChipInputEvent, MatSnackBar } from '@angular/material';
-import { map, startWith } from 'rxjs/operators';
-import { MarkdownComponent } from '../../markdown/markdown.component';
-import { MoeApp } from '../../markdown/moe-app';
-import { MatDialog } from '@angular/material/dialog';
-import { PostInsertImageComponent } from '../post-insert-image/post-insert-image.component';
-import { Media, Post, Categories, Tag } from '../../entry';
-import { SnackBar } from '../../utils/snack-bar';
-import { ActivatedRoute } from '@angular/router';
-import { BlogService } from 'src/app/blog/blog.service';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Observable} from 'rxjs';
+import {FormControl} from '@angular/forms';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {MatAutocomplete, MatAutocompleteSelectedEvent, MatChipInputEvent, MatSnackBar} from '@angular/material';
+import {map, startWith} from 'rxjs/operators';
+import {MarkdownComponent} from '../../markdown/markdown.component';
+import {MoeApp} from '../../markdown/moe-app';
+import {MatDialog} from '@angular/material/dialog';
+import {PostInsertImageComponent} from '../post-insert-image/post-insert-image.component';
+import {Media, Post, Categories, Tag} from '../../entry';
+import {SnackBar} from '../../utils/snack-bar';
+import {ActivatedRoute} from '@angular/router';
+import {BlogService} from 'src/app/blog/blog.service';
 
 let that: PostEditComponent;
 
@@ -24,36 +24,31 @@ let that: PostEditComponent;
 export class PostEditComponent implements OnInit {
 
   post: Post = new Post();
-  categories: Array<Categories>;
-  tags: Array<Tag>;
+  categories: Array<Categories> = [null];
+  tags: Array<Tag> = [];
 
   editMode = {
-    open:false
+    open: false,
+    openComment: false
   };
 
-  visible = true;
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  fruitCtrl = new FormControl();
-  filteredFruits: Observable<string[]>;
-  fruits: string[] = ['Lemon'];
-  allFruits: string[] = ['Apple', 'Lemon', 'Lime', 'Orange', 'Strawberry'];
+  tagCtrl = new FormControl();
+  filteredTags: Observable<Tag[]>;
 
-  @ViewChild('fruitInput', { static: true })
-  fruitInput: ElementRef<HTMLInputElement>;
-  @ViewChild('auto', { static: true })
+  @ViewChild('tagInput', {static: true})
+  tagInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto', {static: true})
   matAutocomplete: MatAutocomplete;
 
-  @ViewChild('markdownComponent', { static: true })
+  @ViewChild('markdownComponent', {static: true})
   markdownComponent: MarkdownComponent;
 
   mdOptions;
 
   constructor(public dialog: MatDialog, private snackBar: MatSnackBar,
-    private routerInfo: ActivatedRoute, private blogService: BlogService,
-    private snackbar: MatSnackBar) {
+              private routerInfo: ActivatedRoute, private blogService: BlogService,
+              private snackbar: MatSnackBar) {
     that = this;
 
     this.mdOptions = new Object();
@@ -87,9 +82,11 @@ export class PostEditComponent implements OnInit {
       'edit', 'preview', 'side-by-side', '|',
       'fullscreen', 'guide'];
 
-    this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
+    this.filteredTags = this.tagCtrl.valueChanges.pipe(
       startWith(null),
-      map((fruit: string | null) => fruit ? this._filter(fruit) : this.allFruits.slice()));
+      map((tag: string | null) => {
+       return tag ? this._filter(tag) : this.tags.slice();
+      }));
   }
 
   ngOnInit() {
@@ -105,15 +102,15 @@ export class PostEditComponent implements OnInit {
   private getPostInfo(id: string) {
     this.blogService.getPostInfo(id)
       .subscribe(post => {
-        this.post = post;
-        this.markdownComponent.setValue(this.post.content);
-      },
+          this.post = post;
+          this.markdownComponent.setValue(this.post.content);
+        },
         err => SnackBar.open(this.snackbar, err));
   }
 
   private getAllCategories() {
     this.blogService.getAllCategories()
-      .subscribe(categoriesPage => this.categories = categoriesPage.list)
+      .subscribe(categoriesPage => this.categories = this.categories.concat(categoriesPage.list));
   }
 
   private getAllTags() {
@@ -133,38 +130,37 @@ export class PostEditComponent implements OnInit {
       const input = event.input;
       const value = event.value;
 
-      // Add our fruit
-      if ((value || '').trim()) {
-        this.fruits.push(value.trim());
-      }
+      // // Add our fruit
+      // if ((value || '').trim()) {
+      //   this.post.tags.push(value);
+      // }
 
       // Reset the input value
       if (input) {
         input.value = '';
       }
 
-      this.fruitCtrl.setValue(null);
+      this.tagCtrl.setValue(null);
     }
   }
 
-  remove(fruit: string): void {
-    const index = this.fruits.indexOf(fruit);
+  removeTag(tag: Tag): void {
+    const index = this.tags.indexOf(tag);
 
     if (index >= 0) {
-      this.fruits.splice(index, 1);
+      this.post.tags.splice(index, 1);
     }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.fruits.push(event.option.viewValue);
-    this.fruitInput.nativeElement.value = '';
-    this.fruitCtrl.setValue(null);
+    // this.post.tags.push(event.option.value);
+    this.tagInput.nativeElement.value = '';
+    this.tagCtrl.setValue(null);
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.allFruits.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
+  private _filter(tag: string): Tag[] {
+    const filterValue = tag.toLowerCase();
+    return this.tags.filter(t => t.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
 }

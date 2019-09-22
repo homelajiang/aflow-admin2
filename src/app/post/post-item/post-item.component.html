@@ -19,7 +19,7 @@
 
     <div fxFlex="none">
       <button mat-icon-button matTooltip="置顶" (click)="switchTop()" matTooltipPosition="above">
-        <mat-icon>{{post.stick ? 'favorite' : 'favorite_border'}}</mat-icon>
+        <mat-icon>{{post.top ? 'favorite' : 'favorite_border'}}</mat-icon>
       </button>
       <button mat-icon-button matTooltip="分享" (click)="sharePost()" matTooltipPosition="above">
         <mat-icon style="font-size: 22px;">share</mat-icon>
@@ -31,10 +31,10 @@
     </div>
 
     <mat-menu #postMenu="matMenu">
-      <button mat-menu-item *ngIf="post.status!==0" (click)="updateStatus(0)">设为草稿</button>
-      <button mat-menu-item *ngIf="post.status===0" (click)="updateStatus(1)">发布</button>
-      <button mat-menu-item *ngIf="post.status!==-1" (click)="updateStatus(-1)">删除</button>
-      <button mat-menu-item *ngIf="post.status===-1" (click)="removePost()" style="color: red;">永久删除</button>
+      <button mat-menu-item *ngIf="post.status!=='draft'" (click)="updateStatus('draft')">设为草稿</button>
+      <button mat-menu-item *ngIf="post.status==='draft'" (click)="updateStatus('published')">发布</button>
+      <button mat-menu-item *ngIf="post.status!=='deleted'" (click)="updateStatus('deleted')">删除</button>
+      <button mat-menu-item *ngIf="post.status==='deleted'" (click)="removePost()" style="color: red;">永久删除</button>
     </mat-menu>
 
   </mat-card-actions>

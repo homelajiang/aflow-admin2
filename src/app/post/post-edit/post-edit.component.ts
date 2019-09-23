@@ -86,11 +86,22 @@ export class PostEditComponent implements OnInit {
   }
 
   savePost() {
-    let temp;
+    // 整理tag
+
     if (this.post.id) {
-      temp = this.blogService.createPost(this.post);
+      this.blogService.updatePost(this.post, this.post.id)
+        .subscribe(res => {
+          console.log(res);
+        }, err => {
+          SnackBar.open(this.snackbar, err);
+        });
     } else {
-      temp = this.blogService.updatePost(this.post, this.post.id);
+      this.blogService.createPost(this.post)
+        .subscribe(res => {
+          console.log(res);
+        }, err => {
+          SnackBar.open(this.snackbar, err);
+        });
     }
   }
 

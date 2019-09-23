@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Select image</h1>
+
+<mat-dialog-content>
+
+  <app-media selectMode="true" selectMultiple="false" (selectMedia)="mediaSelect($event)"></app-media>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button cdkFocusInitial (click)="closeDialog()">Ok</button>
+</mat-dialog-actions>

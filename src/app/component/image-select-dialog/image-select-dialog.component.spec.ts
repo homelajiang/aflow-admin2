@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MediaListComponent } from './media-list.component';
+import { ImageSelectDialogComponent } from './image-select-dialog.component';
 
-describe('MediaListComponent', () => {
-  let component: MediaListComponent;
-  let fixture: ComponentFixture<MediaListComponent>;
+describe('ImageSelectDialogComponent', () => {
+  let component: ImageSelectDialogComponent;
+  let fixture: ComponentFixture<ImageSelectDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MediaListComponent ]
+      declarations: [ ImageSelectDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MediaListComponent);
+    fixture = TestBed.createComponent(ImageSelectDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -9,7 +9,6 @@ import {TagComponent} from './tag/tag.component';
 import {Code404Component} from './error/code404/code404.component';
 import {AuthGuard} from './auth/auth.guard';
 import {MediaUploadComponent} from './media/media-upload/media-upload.component';
-import {PostInsertImageComponent} from './post/post-insert-image/post-insert-image.component';
 import {PostComponent} from './post/post.component';
 import {ImageCropComponent} from './component/image-crop/image-crop.component';
 
@@ -27,7 +26,6 @@ const router: Routes = [
       {path: 'tag', component: TagComponent},
       {path: 'media', component: MediaComponent},
       {path: 'file', component: MediaUploadComponent},
-      {path: 'file/dialog', component: PostInsertImageComponent},
       {path: 'categories', component: TagComponent},
       {path: 'crop', component: ImageCropComponent},
     ]

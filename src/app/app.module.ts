@@ -36,9 +36,7 @@ import {ClipboardModule} from 'ngx-clipboard';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTabsModule} from '@angular/material/tabs';
-import {PostInsertImageComponent} from './post/post-insert-image/post-insert-image.component';
 import {SearchBarComponent} from './component/search-bar/search-bar.component';
-import {MediaListComponent} from './media/media-list/media-list.component';
 import {MediaInfoComponent} from './media/media-info/media-info.component';
 import {PostComponent} from './post/post.component';
 import {LoadingComponent} from './component/loading/loading.component';
@@ -48,8 +46,9 @@ import {ImageCropComponent} from './component/image-crop/image-crop.component';
 import {ImageCropperModule} from 'ngx-img-cropper';
 import {ImageCropDialogComponent} from './component/image-crop-dialog/image-crop-dialog.component';
 import {ConfirmDialogComponent} from './component/confirm-dialog/confirm-dialog.component';
-import {MatMenuModule} from "@angular/material/menu";
-import { PostStatusPipe, PostOpenPipe } from './blog/blog.pipe';
+import {MatMenuModule} from '@angular/material/menu';
+import {PostStatusPipe, PostOpenPipe} from './blog/blog.pipe';
+import {ImageSelectDialogComponent} from './component/image-select-dialog/image-select-dialog.component';
 
 @NgModule({
   declarations: [
@@ -68,9 +67,7 @@ import { PostStatusPipe, PostOpenPipe } from './blog/blog.pipe';
     TagComponent,
     Code404Component,
     MediaUploadComponent,
-    PostInsertImageComponent,
     SearchBarComponent,
-    MediaListComponent,
     MediaInfoComponent,
     PostComponent,
     LoadingComponent,
@@ -83,6 +80,7 @@ import { PostStatusPipe, PostOpenPipe } from './blog/blog.pipe';
     CommentRemoveDialogComponent,
     PostStatusPipe,
     PostOpenPipe,
+    ImageSelectDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -119,7 +117,7 @@ import { PostStatusPipe, PostOpenPipe } from './blog/blog.pipe';
     ImageCropperModule,
     MatMenuModule
   ],
-  entryComponents: [MediaInfoComponent, CreateTagDialogComponent,
+  entryComponents: [MediaInfoComponent, CreateTagDialogComponent, ImageSelectDialogComponent,
     ImageCropDialogComponent, ConfirmDialogComponent, CommentRemoveDialogComponent],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

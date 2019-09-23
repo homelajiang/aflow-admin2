@@ -10,25 +10,25 @@
           -moz-box-sizing: border-box;" matInput [(ngModel)]="post.title" placeholder="Please Input Title">
 
     <div style="height: calc(100% - 50px);">
-      <app-markdown #markdownComponent (change)="onChanged($event)" [options]="mdOptions"></app-markdown>
+      <app-markdown #markdownComponent (change)="onMdChanged($event)" [options]="mdOptions"></app-markdown>
     </div>
 
   </div>
 
 
-  <div style="width: 300px;background: azure;height: 100%;overflow-y: auto;overflow-x: hidden;" fxFlex="nogrow">
+  <div style="width: 360px;background: azure;height: 100%;overflow-y: auto;overflow-x: hidden;" fxFlex="nogrow">
     <div>
-      POST SETTING
+      文章设置
     </div>
     <mat-divider></mat-divider>
 
-    <div>
+    <div fxLayout="row" fxLayoutAlign="start center">
       <mat-icon>home</mat-icon>
       <span>状态:</span>
       <b>{{post.status | postStatus}}</b>
     </div>
 
-    <div>
+    <div fxLayout="row" fxLayoutAlign="start center">
       <mat-icon>home</mat-icon>
       <span>权限:</span>
       <b>{{post.open | postOpen}}</b>
@@ -58,7 +58,7 @@
 
     <mat-divider></mat-divider>
 
-    <div>
+    <div fxLayout="row" fxLayoutAlign="start center">
       <mat-icon>home</mat-icon>
       <span>评论:</span>
       <b>{{post.openComment ? '允许评论' : '禁止评论'}}</b>
@@ -79,7 +79,7 @@
 
     <mat-divider></mat-divider>
 
-    <div>Categories</div>
+    <div>分类</div>
 
     <mat-radio-group style=" display: inline-flex;flex-direction: column;" [(ngModel)]="post.categories">
       <mat-radio-button [value]=c style="margin: 5px;" *ngFor="let c of categories">
@@ -91,31 +91,35 @@
       <button mat-button color="primary">新建分类</button>
     </div>
 
-    <div>Tag</div>
+    <div>标签</div>
 
     <mat-form-field class="example-chip-list">
       <mat-chip-list #tagList>
-        <mat-chip *ngFor="let tag of post.tags" [removable]="true"
+        <mat-chip *ngFor="let tag of selectTags" [removable]="true"
                   (removed)="removeTag(tag)">
-          {{tag.name}}
+          {{tag}}
           <mat-icon matChipRemove>cancel</mat-icon>
         </mat-chip>
 
         <input placeholder="Please Input Tags" #tagInput [formControl]="tagCtrl" [matAutocomplete]="auto"
                [matChipInputFor]="tagList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-               [matChipInputAddOnBlur]="true" (matChipInputTokenEnd)="add($event)">
+               [matChipInputAddOnBlur]="true" (matChipInputTokenEnd)="tagAdd($event)">
       </mat-chip-list>
-      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="tagSelected($event)">
         <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
-          {{tag.name}}
+          {{tag}}
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
 
-    <div>Cover</div>
-    <button mat-button color="primary">Select Cover</button>
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <div fxFlex="none">封面</div>
+      <span fxFlex="grow"></span>
+      <button fxFlex="none" mat-button color="primary" (click)="selectCover()">选择封面</button>
+    </div>
 
-    <img style="width: 100%;" src="https://via.placeholder.com/240x160.png">
+
+    <img style="width: 100%;" src="{{post.cover}}">
 
 
   </div>

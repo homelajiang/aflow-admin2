@@ -1,6 +1,0 @@
-<div fxLayout="row wrap">
-  <app-media-item fxFlex="16.66" *ngFor="let media of medias" [media]="media"
-                  (click)="onMediaClick(media)"></app-media-item>
-</div>
-
-<app-load-more [status]="loadingStatus" (onLoadMore)="onLoadMore()"></app-load-more>

@@ -1,7 +1,12 @@
 <div fxLayout="row" style="padding: 20px 0;">
-  <app-upload-button (uploadResult)="mediaListComponent.addMedia($event)"></app-upload-button>
+  <app-upload-button (uploadResult)="addMedia($event)"></app-upload-button>
   <span fxFlex="1 1 auto"></span>
-  <app-search-bar (search)="mediaListComponent.searchByWord($event)"></app-search-bar>
+  <app-search-bar (search)="searchByWord($event)"></app-search-bar>
 </div>
 
-<app-media-list #mediaListComponent></app-media-list>
+<div fxLayout="row wrap">
+  <app-media-item fxFlex="16.66" *ngFor="let media of medias" [media]="media"
+                  (click)="onMediaClick(media)"></app-media-item>
+</div>
+
+<app-load-more [status]="loadingStatus" (onLoadMore)="onLoadMore()"></app-load-more>

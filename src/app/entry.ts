@@ -36,15 +36,6 @@ export class Profile {
   role: number;
 }
 
-export class Tag {
-  id: string;
-  name: string;
-  alias: string;
-  image: string;
-  description: string;
-  color: string;
-}
-
 export class Categories {
   id: string;
   name: string;
@@ -54,22 +45,22 @@ export class Categories {
 }
 
 export class Post {
-  id = '';
-  title = '';
-  description = '';
-  content = '';
-  createDate = '';
-  modifyDate = '';
-  publishDate = '';
-  cover = null;
-  top = false;
+  id;
+  title;
+  description;
+  content;
+  createDate;
+  modifyDate;
+  publishDate;
+  cover;
+  top;
   open = 'public';
-  password = '';
+  password;
   openComment = true;
   needReview = false;
   status = 'draft';
-  categories = null;
-  tags: Tag[] = [];
+  categories: Categories;
+  tags: string[] = [];
 }
 
 export class Comment {

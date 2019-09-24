@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Categories, LoadStatus, Media, PageModel, Tag} from '../entry';
+import {Categories, LoadStatus, Media, PageModel} from '../entry';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {BlogService} from '../blog/blog.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -13,10 +13,10 @@ import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-tag',
-  templateUrl: './tag.component.html',
-  styleUrls: ['./tag.component.css']
+  templateUrl: './categories.component.html',
+  styleUrls: ['./categories.component.css']
 })
-export class TagComponent implements OnInit {
+export class CategoriesComponent implements OnInit {
 
   private loadingStatus: number;
   private searchText: string;
@@ -28,13 +28,9 @@ export class TagComponent implements OnInit {
 
   dataList;
 
-  // is categories page?
-  categoriesRouter: boolean;
-
   constructor(private dialog: MatDialog, private blogService: BlogService,
               private snackBar: MatSnackBar, private router: Router) {
-    this.categoriesRouter = (router.url === '/categories');
-    this.dataList = this.categoriesRouter ? new Array<Categories>() : new Array<Tag>();
+    this.dataList = new Array<Categories>();
   }
 
   ngOnInit() {
@@ -47,7 +43,7 @@ export class TagComponent implements OnInit {
       this.page = 1;
     }
 
-    this.getDataObservable()
+    this.blogService.getCategories(this.page, this.searchText)
       .subscribe((tagPage: PageModel<any>) => {
         this.page++;
         if (refresh) {
@@ -64,17 +60,12 @@ export class TagComponent implements OnInit {
       });
   }
 
-  getDataObservable(): Observable<PageModel<any>> {
-    return this.categoriesRouter ? this.blogService.getCategories(this.page, this.searchText) :
-      this.blogService.getTags(this.page, this.searchText);
-  }
-
-  deleteTag(tag: any, index: number) {
+  deleteCategories(categories: any, index: number) {
     const deleteDialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '300px',
       data: {
         title: '提示',
-        content: this.categoriesRouter ? '是否删除该分类？' : '是否删除该标签？',
+        content: '是否删除该分类？',
         color: 'warn'
       }
     });
@@ -82,63 +73,42 @@ export class TagComponent implements OnInit {
       .pipe(
         filter(remove => remove),
         switchMap(() => {
-          if (this.categoriesRouter) {
-            return this.blogService.removeCategories(tag.id);
-          } else {
-            return this.blogService.removeTag(tag.id);
-          }
+          return this.blogService.removeCategories(categories.id);
         })
       )
       .subscribe(() => {
         SnackBar.open(this.snackBar, '删除成功');
         this.dataList.splice(index, 1);
-        // this.tags.splice(this.tags.findIndex(item => item.id === tag.id), 1);
+        // this.tags.splice(this.tags.findIndex(item => item.id === categories.id), 1);
       }, error => {
         SnackBar.open(this.snackBar, error);
       });
   }
 
-  editTag(tag: any, index: number) {
-    let data;
-    let createTagDialogRef;
-    // copy the tag
-    if (this.categoriesRouter) {
-      data = new Categories();
-    } else {
-      data = new Tag();
-      data.color = tag.color;
-    }
-
-    data.id = tag.id;
-    data.name = tag.name;
-    data.description = tag.description;
-    data.image = tag.image;
-    data.alias = tag.alias;
-    createTagDialogRef = this.dialog.open(CreateTagDialogComponent, {
-      data: {data, categories: this.categoriesRouter}
+  editCategories(categories: any, index: number) {
+    const data = JSON.parse(JSON.stringify(categories));
+    const createTagDialogRef = this.dialog.open(CreateCategoriesDialogComponent, {
+      data: {data}
     });
-
     this.saveData(createTagDialogRef, false, index);
   }
 
-  createTag() {
-    const createTagDialogRef = this.dialog.open(CreateTagDialogComponent, {
-      data: {categories: this.categoriesRouter}
-    });
+  createCategories() {
+    const createTagDialogRef = this.dialog.open(CreateCategoriesDialogComponent, {});
     this.saveData(createTagDialogRef, true);
   }
 
-  private saveData(dialogRef: MatDialogRef<CreateTagDialogComponent, any>, isCreate: boolean, index?: number) {
-    let tempTag: any;
+  private saveData(dialogRef: MatDialogRef<CreateCategoriesDialogComponent, any>, isCreate: boolean, index?: number) {
+    let categories: Categories;
     dialogRef.afterClosed()
       .pipe(
         filter(event => {
           return event;
         }),
-        switchMap((tag: any) => {
-          tempTag = tag;
-          if (tag.image && tag.image.startsWith('data:')) {
-            const file: File = Decoder.dataURLtoFile(tag.image, `tag_${tag.name}`);
+        switchMap((temp: Categories) => {
+          categories = temp;
+          if (temp.image && temp.image.startsWith('data:')) {
+            const file: File = Decoder.dataURLtoFile(temp.image, `tag_${temp.name}`);
             return this.blogService.uploadFile(file);
           } else {
             return of(0);
@@ -146,21 +116,12 @@ export class TagComponent implements OnInit {
         }),
         switchMap(res => {
           if (typeof res === 'object') {
-            tempTag.image = res.body.path;
+            categories.image = res.body.path;
           }
-
-          if (this.categoriesRouter) {
-            if (isCreate) {
-              return this.blogService.createCategories(tempTag);
-            } else {
-              return this.blogService.updateCategories(tempTag);
-            }
+          if (isCreate) {
+            return this.blogService.createCategories(categories);
           } else {
-            if (isCreate) {
-              return this.blogService.createTag(tempTag);
-            } else {
-              return this.blogService.updateTag(tempTag);
-            }
+            return this.blogService.updateCategories(categories);
           }
         })
       )
@@ -186,61 +147,48 @@ export class TagComponent implements OnInit {
 }
 
 @Component({
-  selector: 'app-create-tag-dialog',
-  templateUrl: './create-tag-dialog.component.html',
-  styleUrls: ['./create-tag-dialog.component.css']
+  selector: 'app-create-categories-dialog',
+  templateUrl: './create-categories-dialog.component.html',
+  styleUrls: ['./create-categories-dialog.component.css']
 })
-export class CreateTagDialogComponent implements OnInit {
+export class CreateCategoriesDialogComponent implements OnInit {
 
-  tag: any;
-  newTag: boolean;
+  categories: any;
+  newCategories: boolean;
   isCategories: boolean;
 
   constructor(public snackBar: MatSnackBar, public dialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any,
-              public dialogRef: MatDialogRef<CreateTagDialogComponent>) {
+              public dialogRef: MatDialogRef<CreateCategoriesDialogComponent>) {
 
     if (this.data.data) {
-      this.tag = this.data.data;
-      this.newTag = false;
+      this.categories = this.data.data;
+      this.newCategories = false;
     } else {
-      this.newTag = true;
-      this.tag = this.data.categories ? new Categories() : new Tag();
+      this.newCategories = true;
+      this.categories = new Categories();
     }
-    this.isCategories = this.data.categories;
   }
 
   ngOnInit() {
   }
 
   createTag() {
-    if (!this.tag.name) {
-      SnackBar.open(this.snackBar, this.isCategories ? '分类名称必须填写' : '标签名称必须填写');
+    if (!this.categories.name) {
+      SnackBar.open(this.snackBar, '分类名称必须填写');
       return;
     }
-    this.dialogRef.close(this.tag);
+    this.dialogRef.close(this.categories);
   }
 
   changeCover() {
     const cropImageDialogRef = this.dialog.open(ImageCropDialogComponent);
     cropImageDialogRef.afterClosed()
       .subscribe((res) => {
-        this.tag.image = res;
+        this.categories.image = res;
       });
   }
 
   getDialogTitle() {
-    if (this.newTag) {
-      if (this.isCategories) {
-        return '新建分类';
-      } else {
-        return '新建标签';
-      }
-    } else {
-      if (this.isCategories) {
-        return '编辑分类';
-      } else {
-        return '编辑标签';
-      }
-    }
+    return this.newCategories ? '新建分类' : '编辑分类';
   }
 }

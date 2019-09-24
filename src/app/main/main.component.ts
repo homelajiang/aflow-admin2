@@ -32,10 +32,9 @@ export class MainComponent implements OnInit {
 
     menus.push(new MainMenu('DASHBOARD', 'panorama_fish_eye', '/dashboard'));
     menus.push(new MainMenu('POSTS', 'panorama_fish_eye', '/post'));
-    menus.push(new MainMenu('COMMENTS', 'panorama_fish_eye', '/comment'));
-    menus.push(new MainMenu('CATEGORIES', 'panorama_fish_eye', 'categories'));
-    menus.push(new MainMenu('TAGS', 'panorama_fish_eye', '/tag'));
     menus.push(new MainMenu('MEDIAS', 'panorama_fish_eye', '/media'));
+    menus.push(new MainMenu('CATEGORIES', 'panorama_fish_eye', 'categories'));
+    menus.push(new MainMenu('COMMENTS', 'panorama_fish_eye', '/comment'));
     menus.push(new MainMenu('TEMPLATE', 'panorama_fish_eye', ''));
     menus.push(new MainMenu('SETTINGS', 'panorama_fish_eye', ''));
 

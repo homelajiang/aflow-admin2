@@ -27,7 +27,7 @@ import {MediaComponent} from './media/media.component';
 import {MediaItemComponent} from './media/media-item/media-item.component';
 import {MarkdownComponent} from './markdown/markdown.component';
 import {CommentComponent, CommentRemoveDialogComponent} from './comment/comment.component';
-import {CreateTagDialogComponent, TagComponent} from './tag/tag.component';
+import {CreateCategoriesDialogComponent, CategoriesComponent} from './categories/categories.component';
 import {Code404Component} from './error/code404/code404.component';
 import {httpInterceptorProviders} from './http-interceptor';
 import {HttpClientModule} from '@angular/common/http';
@@ -64,7 +64,7 @@ import {ImageSelectDialogComponent} from './component/image-select-dialog/image-
     MediaItemComponent,
     MarkdownComponent,
     CommentComponent,
-    TagComponent,
+    CategoriesComponent,
     Code404Component,
     MediaUploadComponent,
     SearchBarComponent,
@@ -73,7 +73,7 @@ import {ImageSelectDialogComponent} from './component/image-select-dialog/image-
     LoadingComponent,
     LoadMoreComponent,
     UploadButtonComponent,
-    CreateTagDialogComponent,
+    CreateCategoriesDialogComponent,
     ImageCropComponent,
     ImageCropDialogComponent,
     ConfirmDialogComponent,
@@ -117,7 +117,7 @@ import {ImageSelectDialogComponent} from './component/image-select-dialog/image-
     ImageCropperModule,
     MatMenuModule
   ],
-  entryComponents: [MediaInfoComponent, CreateTagDialogComponent, ImageSelectDialogComponent,
+  entryComponents: [MediaInfoComponent, CreateCategoriesDialogComponent, ImageSelectDialogComponent,
     ImageCropDialogComponent, ConfirmDialogComponent, CommentRemoveDialogComponent],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

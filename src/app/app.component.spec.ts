@@ -22,7 +22,7 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('aflow-admin2');
   });
 
-  it('should render title in a h1 tag', () => {
+  it('should render title in a h1 categories', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;

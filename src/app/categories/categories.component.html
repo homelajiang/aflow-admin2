@@ -1,6 +1,6 @@
 <div fxLayout="row" fxLayoutAlign="none center" style="padding: 20px 0;margin-top: 50px;">
 
-  <button mat-flat-button color="primary" (click)="createTag()">
+  <button mat-flat-button color="primary" (click)="createCategories()">
     <mat-icon>add</mat-icon>
     {{categoriesRouter ? 'New Categories' : 'New Tag'}}
   </button>
@@ -35,13 +35,13 @@
 
     <button mat-icon-button style="position: absolute;
     top: 5px;
-    right: 5px;" (click)="deleteTag(data,index)">
+    right: 5px;" (click)="deleteCategories(data,index)">
       <mat-icon>close</mat-icon>
     </button>
 
     <button mat-icon-button style="position: absolute;
     top: 5px;
-    right: 50px;" (click)="editTag(data,index)">
+    right: 50px;" (click)="editCategories(data,index)">
       <mat-icon style="font-size: 20px;">edit</mat-icon>
     </button>
 

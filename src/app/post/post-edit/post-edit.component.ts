@@ -6,7 +6,7 @@ import {MatAutocomplete, MatAutocompleteSelectedEvent, MatChipInputEvent, MatSna
 import {map, startWith} from 'rxjs/operators';
 import {MarkdownComponent} from '../../markdown/markdown.component';
 import {MatDialog} from '@angular/material/dialog';
-import {Media, Post, Categories, Tag} from '../../entry';
+import {Media, Post, Categories} from '../../entry';
 import {SnackBar} from '../../utils/snack-bar';
 import {ActivatedRoute} from '@angular/router';
 import {BlogService} from 'src/app/blog/blog.service';
@@ -32,7 +32,6 @@ export class PostEditComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   tagCtrl = new FormControl();
   filteredTags: Observable<string[]>;
-  selectTags: string[] = []; // 选中的tag名称
   allTags: string[] = []; // 所有的tag名称
 
   @ViewChild('tagInput', {static: true})
@@ -86,23 +85,27 @@ export class PostEditComponent implements OnInit {
   }
 
   savePost() {
-    // 整理tag
+    const temp = JSON.parse(JSON.stringify(this.post));
+    // 整理categories
+    temp.categories = this.post.categories ? this.post.categories.id : '';
+    console.log(temp);
 
-    if (this.post.id) {
-      this.blogService.updatePost(this.post, this.post.id)
-        .subscribe(res => {
-          console.log(res);
-        }, err => {
-          SnackBar.open(this.snackbar, err);
-        });
-    } else {
-      this.blogService.createPost(this.post)
-        .subscribe(res => {
-          console.log(res);
-        }, err => {
-          SnackBar.open(this.snackbar, err);
-        });
-    }
+    // if (this.post.id) {
+    //   this.blogService.updatePost(temp, this.post.id)
+    //     .subscribe(res => {
+    //       console.log(res);
+    //     }, err => {
+    //       SnackBar.open(this.snackbar, err);
+    //     });
+    // } else {
+    //   this.blogService.createPost(temp)
+    //     .subscribe(res => {
+    //       console.log(res);
+    //       this.post = res;
+    //     }, err => {
+    //       SnackBar.open(this.snackbar, err);
+    //     });
+    // }
   }
 
   private selectCover() {
@@ -138,9 +141,7 @@ export class PostEditComponent implements OnInit {
   private getAllTags() {
     this.blogService.getAllTags()
       .subscribe(tagsPage => {
-        tagsPage.list.forEach(tag => {
-          this.allTags.push(tag.name);
-        });
+        this.allTags = tagsPage.list;
       });
   }
 
@@ -159,14 +160,15 @@ export class PostEditComponent implements OnInit {
       // // Add our fruit
       if ((value || '').trim()) {
         let repeat = false;
-        for (const tag of this.selectTags) {
+        for (const tag of this.post.tags) {
           if (tag.toLocaleLowerCase() === value.trim().toLocaleLowerCase()) {
             repeat = true;
             break;
           }
         }
         if (!repeat) {
-          this.selectTags.push(value.trim());
+          this.post.tags.push(value.trim());
+          // todo 添加tag对象
         }
       }
 
@@ -180,24 +182,25 @@ export class PostEditComponent implements OnInit {
   }
 
   removeTag(tag: string): void {
-    const index = this.selectTags.indexOf(tag);
+    const index = this.post.tags.indexOf(tag);
 
     if (index >= 0) {
-      this.selectTags.splice(index, 1);
+      this.post.tags.splice(index, 1);
     }
   }
 
   tagSelected(event: MatAutocompleteSelectedEvent): void {
 
     let repeat = false;
-    for (const tag of this.selectTags) {
+    for (const tag of this.post.tags) {
       if (tag.toLocaleLowerCase() === event.option.viewValue.trim().toLocaleLowerCase()) {
         repeat = true;
         break;
       }
     }
     if (!repeat) {
-      this.selectTags.push(event.option.viewValue.trim());
+      this.post.tags.push(event.option.viewValue.trim());
+      // 选择所有tag中的数据
     }
 
     this.tagInput.nativeElement.value = '';

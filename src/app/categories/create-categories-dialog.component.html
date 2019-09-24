@@ -2,17 +2,17 @@
 <mat-dialog-content>
 
   <div (click)="changeCover()">
-    <img [src]="tag.image?tag.image:'https://via.placeholder.com/50x50.png'"
+    <img [src]="categories.image?categories.image:'https://via.placeholder.com/50x50.png'"
          style="border-radius: 10px;width: 50px;height: 50px;"/>
   </div>
 
   <div class="example-form">
     <mat-form-field class="example-full-width">
-      <input [(ngModel)]="tag.name" matInput [placeholder]="isCategories?'Categories name':'Tag name'" required>
+      <input [(ngModel)]="categories.name" matInput [placeholder]="isCategories?'Categories name':'Tag name'" required>
     </mat-form-field>
 
     <mat-form-field class="example-full-width" *ngIf="!isCategories">
-      <input [(ngModel)]="tag.description" matInput placeholder="Tag description">
+      <input [(ngModel)]="categories.description" matInput placeholder="Tag description">
     </mat-form-field>
   </div>
 

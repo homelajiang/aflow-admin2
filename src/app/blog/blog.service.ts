@@ -193,16 +193,16 @@ export class BlogService {
   }
 
 
-  createPost(post: Post): Observable<Post> {
-    return this.http.post<Post>(`api/v1/post`, post, this.defaultHttpOptions);
+  createPost(post: Post): Observable<any> {
+    return this.http.post<any>(`api/v1/post`, post, this.defaultHttpOptions);
   }
 
   removePost(id: string): Observable<{}> {
     return this.http.delete(`api/v1/post/${id}`);
   }
 
-  updatePost(post: any, id: string): Observable<Post> {
-    return this.http.post<Post>(`api/v1/post/${id}`, post, this.defaultHttpOptions);
+  updatePost(post: any, id: string): Observable<{}> {
+    return this.http.post<{}>(`api/v1/post/${id}`, post, this.defaultHttpOptions);
   }
 
   getPosts(page: number, type: string, keyword?: string): Observable<PageModel<Post>> {

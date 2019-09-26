@@ -46,7 +46,7 @@ export class Categories {
 
 export class Post {
   id;
-  title;
+  title = '未命名文章';
   description;
   content;
   createDate;
@@ -59,7 +59,7 @@ export class Post {
   openComment = true;
   needReview = false;
   status = 'draft';
-  categories: Categories;
+  categories: Categories = null;
   tags: string[] = [];
 }
 

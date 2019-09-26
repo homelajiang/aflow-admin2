@@ -90,22 +90,23 @@ export class PostEditComponent implements OnInit {
     temp.categories = this.post.categories ? this.post.categories.id : '';
     console.log(temp);
 
-    // if (this.post.id) {
-    //   this.blogService.updatePost(temp, this.post.id)
-    //     .subscribe(res => {
-    //       console.log(res);
-    //     }, err => {
-    //       SnackBar.open(this.snackbar, err);
-    //     });
-    // } else {
-    //   this.blogService.createPost(temp)
-    //     .subscribe(res => {
-    //       console.log(res);
-    //       this.post = res;
-    //     }, err => {
-    //       SnackBar.open(this.snackbar, err);
-    //     });
-    // }
+    if (this.post.id) {
+      this.blogService.updatePost(temp, this.post.id)
+        .subscribe(res => {
+          SnackBar.open(this.snackBar, '已保存');
+        }, err => {
+          SnackBar.open(this.snackbar, err);
+        });
+    } else {
+      this.blogService.createPost(temp)
+        .subscribe(res => {
+          SnackBar.open(this.snackBar, '已创建');
+          console.log(res);
+          this.post.id = res.id;
+        }, err => {
+          SnackBar.open(this.snackbar, err);
+        });
+    }
   }
 
   private selectCover() {

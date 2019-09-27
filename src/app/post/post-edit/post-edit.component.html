@@ -47,7 +47,7 @@
       </mat-radio-button>
 
       <mat-form-field *ngIf="post.open==='protect'">
-        <input matInput type="number" [(ngModel)]="post.password" placeholder="input password">
+        <input matInput type="text" [(ngModel)]="post.password" placeholder="input password">
       </mat-form-field>
 
       <mat-radio-button value="private" style="margin: 5px;">

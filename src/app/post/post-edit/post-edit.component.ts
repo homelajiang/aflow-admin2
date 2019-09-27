@@ -88,7 +88,9 @@ export class PostEditComponent implements OnInit {
     const temp = JSON.parse(JSON.stringify(this.post));
     // 整理categories
     temp.categories = this.post.categories ? this.post.categories.id : '';
-    console.log(temp);
+
+    // 添加文章内容
+    temp.content = this.markdownComponent.getValue();
 
     if (this.post.id) {
       this.blogService.updatePost(temp, this.post.id)

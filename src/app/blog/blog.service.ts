@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpEventType, HttpHeaders, HttpParams, HttpRequest} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Observable, of} from 'rxjs';
-import {Comment, Auth, Categories, Media, PageModel, Post, FileUploadModel} from '../entry';
+import {Comment, Auth, Categories, Media, PageModel, Post, FileUploadModel, MediaStorage} from '../entry';
 import {catchError, last, map, tap} from 'rxjs/operators';
 
 @Injectable({
@@ -229,14 +229,22 @@ export class BlogService {
     return this.http.get<PageModel<any>>(`api/v1/todos`);
   }
 
-  getStatistics(): Observable<any> {
-    return this.http.get('api/v1/statistics');
+  getStatistics(type: string, limit: number): Observable<any> {
+    const params: HttpParams = new HttpParams()
+      .set('limit', String(limit))
+      .set('type', type);
+    return this.http.get('api/v1/statistics', {params});
   }
 
-  getPostStatistics(sortBy: string, sortRang: string): Observable<any> {
+  getStorageStatistics(): Observable<MediaStorage> {
+    return this.http.get<MediaStorage>(`api/v1/statistics/storage`);
+  }
+
+  getPostStatistics(type: string, rang: string): Observable<any> {
     const params: HttpParams = new HttpParams()
-      .set('sort_by', sortBy)
-      .set('sort_rang', sortRang);
+      .set('type', type)
+      .set('limit', '5')
+      .set('rang', rang);
     return this.http.get(`api/v1/statistics/post`, {params});
   }
 

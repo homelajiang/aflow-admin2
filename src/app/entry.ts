@@ -89,6 +89,18 @@ export class Auth {
   // refresh_token: string;
 }
 
+export class MediaStorage {
+  used: string;
+  total: string;
+  percent: number;
+  count: number;
+  picture: number;
+  music: number;
+  video: number;
+  other: number;
+}
+
+
 export class FileUploadModel {
   /** upload status  0 uploading , -1 upload error , 1 upload success */
   status: number;

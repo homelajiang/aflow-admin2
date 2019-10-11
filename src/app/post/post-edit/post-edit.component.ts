@@ -91,6 +91,7 @@ export class PostEditComponent implements OnInit {
 
     // 添加文章内容
     temp.content = this.markdownComponent.getValue();
+    temp.cover = this.post.cover ? '' : this.post.cover;
 
     if (this.post.id) {
       this.blogService.updatePost(temp, this.post.id)
@@ -171,7 +172,6 @@ export class PostEditComponent implements OnInit {
         }
         if (!repeat) {
           this.post.tags.push(value.trim());
-          // todo 添加tag对象
         }
       }
 

@@ -49,6 +49,7 @@ import {ConfirmDialogComponent} from './component/confirm-dialog/confirm-dialog.
 import {MatMenuModule} from '@angular/material/menu';
 import {PostStatusPipe, PostOpenPipe} from './blog/blog.pipe';
 import {ImageSelectDialogComponent} from './component/image-select-dialog/image-select-dialog.component';
+import {ChartsModule} from "ng2-charts";
 
 @NgModule({
   declarations: [
@@ -115,7 +116,8 @@ import {ImageSelectDialogComponent} from './component/image-select-dialog/image-
     MatTabsModule,
     MatProgressSpinnerModule,
     ImageCropperModule,
-    MatMenuModule
+    MatMenuModule,
+    ChartsModule
   ],
   entryComponents: [MediaInfoComponent, CreateCategoriesDialogComponent, ImageSelectDialogComponent,
     ImageCropDialogComponent, ConfirmDialogComponent, CommentRemoveDialogComponent],

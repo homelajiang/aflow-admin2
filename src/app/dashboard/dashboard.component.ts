@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {BlogService} from '../blog/blog.service';
+import {ChartDataSets} from 'chart.js';
+import {Color, Label} from 'ng2-charts';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,6 +9,22 @@ import {BlogService} from '../blog/blog.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  viewCountData: ChartDataSets[] = [
+    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'}
+  ];
+  viewCountLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  viewCountColors: Color[] = [
+    { // grey
+      backgroundColor: 'rgba(148,159,177,0.2)',
+      borderColor: 'rgba(148,159,177,1)',
+      pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    }
+  ];
+  viewCountType = 'line';
+
   viewCountStatistics;
   postCountStatistics;
   commentCountStatistics;

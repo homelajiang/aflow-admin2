@@ -10,7 +10,12 @@
     </div>
 
     <div style="min-height: 360px;background-color: #eeeeee;">
-
+      <canvas baseChart
+              [datasets]="viewCountData"
+              [labels]="viewCountLabels"
+              [colors]="viewCountColors"
+              [legend]="false"
+              [chartType]="viewCountType"></canvas>
     </div>
 
   </div>
@@ -81,7 +86,7 @@
   </div>
 
   <div fxFlex="50" fxFlex.lt-md="100" fxFlex.gt-md="33.33" style="background-color: bisque">
-    <div  fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
       <div style="display: inline;">Views</div>
       <button mat-button>
         Click me!
@@ -105,9 +110,7 @@
         </button>
       </div>
 
-      <div style="height: 50px;background-color: blue;">
-        <mat-icon></mat-icon>
-      </div>
+      <mat-progress-bar mode="determinate" style="height:38px;" value="70"></mat-progress-bar>
 
       <div fxLayout="row wrap">
         <div fxFlex="50" fxLayout="row" fxLayoutAlign="start center">

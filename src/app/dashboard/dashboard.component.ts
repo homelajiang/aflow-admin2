@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {BlogService} from '../blog/blog.service';
 import {ChartDataSets} from 'chart.js';
 import {Color, Label} from 'ng2-charts';
+import {MediaStorage, Post} from '../entry';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,14 +26,46 @@ export class DashboardComponent implements OnInit {
   ];
   viewCountType = 'line';
 
+  postCountData: ChartDataSets[] = [
+    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'}
+  ];
+  postCountLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  postCountColors: Color[] = [
+    { // grey
+      backgroundColor: 'rgba(148,159,177,0.2)',
+      borderColor: 'rgba(148,159,177,1)',
+      pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    }
+  ];
+  postCountType = 'line';
+
+  commentCountData: ChartDataSets[] = [
+    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'}
+  ];
+  commentCountLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  commentCountColors: Color[] = [
+    { // grey
+      backgroundColor: 'rgba(148,159,177,0.2)',
+      borderColor: 'rgba(148,159,177,1)',
+      pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    }
+  ];
+  commentCountType = 'line';
+
   viewCountStatistics;
   postCountStatistics;
   commentCountStatistics;
-  storageStatistics;
+  storageStatistics: MediaStorage;
 
   todoList = [];
 
-  postList = [];
+  postList: Array<Post> = [];
   postStatisticsType = 'view';
   postStatisticsRang = 'week';
   todoPage = 1;

@@ -75,13 +75,13 @@ export class PostEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    // TODO 2019/10/13 需要处理获取文章信息获取到，但是分类列表还没有获取到的情况
+    this.getAllCategories();
+    this.getAllTags();
     const postId = this.routerInfo.snapshot.paramMap.get('id');
     if (postId) {
       this.getPostInfo(postId);
     }
-
-    this.getAllCategories();
-    this.getAllTags();
   }
 
   savePost() {
@@ -91,7 +91,7 @@ export class PostEditComponent implements OnInit {
 
     // 添加文章内容
     temp.content = this.markdownComponent.getValue();
-    temp.cover = this.post.cover ? '' : this.post.cover;
+    temp.cover = this.post.cover ? this.post.cover : '';
 
     if (this.post.id) {
       this.blogService.updatePost(temp, this.post.id)

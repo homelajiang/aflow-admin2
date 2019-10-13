@@ -61,6 +61,8 @@ export class Post {
   status = 'draft';
   categories: Categories = null;
   tags: string[] = [];
+  views: number; // 浏览数
+  comments: number; // 评论数
 }
 
 export class Comment {

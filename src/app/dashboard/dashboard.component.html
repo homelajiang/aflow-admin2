@@ -65,16 +65,17 @@
     </div>
 
     <div style="min-height: 360px;background-color: #eeeeee;">
-      <div *ngFor="let temp of [1]">
+      <div *ngFor="let post of postList">
 
         <div fxLayout="row">
           <div style="width: 90px;height: 60px;">
-            <img style="max-width: 100%;max-height: 100%;" src="https://via.placeholder.com/90x60.png"/>
+            <img style="max-width: 100%;max-height: 100%;" [src]="post.cover"/>
           </div>
           <div fxFlex="1 1 0%">
-            <div style="word-break: break-word;">Travels:Galapagos Island.Ecuador</div>
+            <div style="word-break: break-word;">{{post.title}}</div>
             <div style="word-break: break-word;">
-              823 views * 97 comments
+              {{post.views + ' views * 97 comments'}}
+
             </div>
           </div>
         </div>
@@ -97,9 +98,30 @@
     <div style="min-height: 360px;background-color: #eeeeee;">
 
       <div fxLayout="row">
-        <div fxFlex="33.33"></div>
-        <div fxFlex="33.33"></div>
-        <div fxFlex="33.33"></div>
+        <div fxFlex="33.33">
+          <canvas baseChart
+                  [datasets]="postCountData"
+                  [labels]="postCountLabels"
+                  [colors]="postCountColors"
+                  [legend]="false"
+                  [chartType]="postCountType"></canvas>
+        </div>
+        <div fxFlex="33.33">
+          <canvas baseChart
+                  [datasets]="commentCountData"
+                  [labels]="commentCountLabels"
+                  [colors]="commentCountColors"
+                  [legend]="false"
+                  [chartType]="commentCountType"></canvas>
+        </div>
+        <div fxFlex="33.33">
+          <canvas baseChart
+                  [datasets]="viewCountData"
+                  [labels]="viewCountLabels"
+                  [colors]="viewCountColors"
+                  [legend]="false"
+                  [chartType]="viewCountType"></canvas>
+        </div>
       </div>
 
       <div fxLayout="row" fxLayoutAlign="space-between center">
@@ -110,24 +132,24 @@
         </button>
       </div>
 
-      <mat-progress-bar mode="determinate" style="height:38px;" value="70"></mat-progress-bar>
+      <mat-progress-bar mode="determinate" style="height:38px;" value="{{storageStatistics.percent}}"></mat-progress-bar>
 
       <div fxLayout="row wrap">
         <div fxFlex="50" fxLayout="row" fxLayoutAlign="start center">
           <mat-icon>image</mat-icon>
-          <span>7,234 Pictures</span>
+          <span>{{storageStatistics.picture}} Pictures</span>
         </div>
         <div fxFlex="50" fxLayout="row" fxLayoutAlign="start center">
           <mat-icon>music_note</mat-icon>
-          <span>74 Musics</span>
+          <span>{{storageStatistics.music}} Musics</span>
         </div>
         <div fxFlex="50" fxLayout="row" fxLayoutAlign="start center">
           <mat-icon>videocam</mat-icon>
-          <span>123 Videos</span>
+          <span>{{storageStatistics.video}} Videos</span>
         </div>
         <div fxFlex="50" fxLayout="row" fxLayoutAlign="start center">
           <mat-icon>attachment</mat-icon>
-          <span>9,345 Other Files</span>
+          <span>{{storageStatistics.other}} Other Files</span>
         </div>
 
       </div>

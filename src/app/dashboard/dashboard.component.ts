@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {BlogService} from '../blog/blog.service';
-import {ChartDataSets} from 'chart.js';
+import {ChartDataSets, ChartOptions} from 'chart.js';
 import {Color, Label} from 'ng2-charts';
 import {MediaStorage, Post} from '../entry';
 
@@ -25,6 +25,30 @@ export class DashboardComponent implements OnInit {
     }
   ];
   viewCountType = 'line';
+  viewCountOptions: ChartOptions = {
+    responsive: true,
+    scales: {
+      xAxes: [{
+        id: 'x-axis-1',
+        position: 'bottom',
+        gridLines: {
+          display: false,
+          color: 'rgba(255,0,0,0.3)',
+        },
+        ticks: {
+          // display: false,
+          // reverse: true,
+          fontColor: 'red',
+        }
+      }],
+      yAxes: [{
+        id: 'y-axis-a',
+        gridLines: {
+          display: false
+        }
+      }],
+    }
+  };
 
   postCountData: ChartDataSets[] = [
     {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'}
@@ -61,7 +85,7 @@ export class DashboardComponent implements OnInit {
   viewCountStatistics;
   postCountStatistics;
   commentCountStatistics;
-  storageStatistics: MediaStorage;
+  storageStatistics: MediaStorage = new MediaStorage();
 
   todoList = [];
 

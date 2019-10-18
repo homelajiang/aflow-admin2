@@ -58,9 +58,9 @@
 
   <div fxFlex="50" fxFlex.lt-md="100" fxFlex.gt-md="33" style="background-color: aquamarine;">
     <div fxLayout="row" fxLayoutAlign="space-between center">
-      <div style="display: inline;">Views</div>
-      <button mat-button>
-        Click me!
+      <div style="display: inline;">热门文章</div>
+      <button mat-button [matMenuTriggerFor]="popularPostsMenu">
+        本周
         <mat-icon aria-label="Example icon-button with a heart icon">expand_more</mat-icon>
       </button>
     </div>
@@ -83,6 +83,14 @@
 
       </div>
 
+      <mat-menu #popularPostsMenu="matMenu">
+        <button mat-menu-item (click)="onPostStatisticsRangChange('day')">今天</button>
+        <button mat-menu-item (click)="onPostStatisticsRangChange('three day')">近三天</button>
+        <button mat-menu-item (click)="onPostStatisticsRangChange('week')">本周</button>
+        <button mat-menu-item (click)="onPostStatisticsRangChange('month')">本月</button>
+        <button mat-menu-item (click)="onPostStatisticsRangChange('year')">本年</button>
+      </mat-menu>
+
     </div>
 
   </div>
@@ -104,36 +112,46 @@
                   [datasets]="postCountData"
                   [labels]="postCountLabels"
                   [colors]="postCountColors"
+                  [options]="glanceCountOptions"
                   [legend]="false"
                   [chartType]="postCountType"></canvas>
+          <div>246</div>
+          <div>Posts</div>
         </div>
         <div fxFlex="33.33">
           <canvas baseChart
                   [datasets]="commentCountData"
                   [labels]="commentCountLabels"
+                  [options]="glanceCountOptions"
                   [colors]="commentCountColors"
                   [legend]="false"
                   [chartType]="commentCountType"></canvas>
+          <div>32</div>
+          <div>Pages</div>
         </div>
         <div fxFlex="33.33">
           <canvas baseChart
                   [datasets]="viewCountData"
                   [labels]="viewCountLabels"
+                  [options]="glanceCountOptions"
                   [colors]="viewCountColors"
                   [legend]="false"
                   [chartType]="viewCountType"></canvas>
+          <div>82k</div>
+          <div>Comments</div>
         </div>
       </div>
 
       <div fxLayout="row" fxLayoutAlign="space-between center">
-        <div style="display: inline;">Storage Space</div>
+        <div style="display: inline;">存储空间</div>
         <button mat-button>
           Click me!
           <mat-icon aria-label="Example icon-button with a heart icon">expand_more</mat-icon>
         </button>
       </div>
 
-      <mat-progress-bar mode="determinate" style="height:38px;" value="{{storageStatistics.percent}}"></mat-progress-bar>
+      <mat-progress-bar mode="determinate" style="height:38px;"
+                        value="{{storageStatistics.percent}}"></mat-progress-bar>
 
       <div fxLayout="row wrap">
         <div fxFlex="50" fxLayout="row" fxLayoutAlign="start center">

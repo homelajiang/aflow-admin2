@@ -50,6 +50,23 @@ export class DashboardComponent implements OnInit {
     }
   };
 
+  glanceCountOptions: ChartOptions = {
+    responsive: true,
+    scales: {
+      xAxes: [{
+        id: 'x-axis-1',
+        ticks: {
+          display: false,
+        }
+      }],
+      yAxes: [{
+        id: 'y-axis-a',
+        ticks: {
+          display: false,
+        }
+      }],
+    }
+  };
   postCountData: ChartDataSets[] = [
     {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'}
   ];
@@ -109,7 +126,7 @@ export class DashboardComponent implements OnInit {
 
   getStatisticsCount(type: string) {
     if ('post' === type || 'comment' === type) {
-      this.blogService.getStatistics(type, 5)
+      this.blogService.getStatistics(type, 7)
         .subscribe(res => {
           if ('post' === type) {
             this.postCountStatistics = res;
@@ -118,11 +135,16 @@ export class DashboardComponent implements OnInit {
           }
         });
     } else {
-      this.blogService.getStatistics('view', 20)
+      this.blogService.getStatistics('view', 30)
         .subscribe(res => {
           this.viewCountStatistics = res;
         });
     }
+  }
+
+  onPostStatisticsRangChange(rang: string) {
+    this.postStatisticsRang = rang;
+    this.getPostStatistics(this.postStatisticsType, this.postStatisticsRang);
   }
 
   getPostStatistics(type: string, rang: string) {

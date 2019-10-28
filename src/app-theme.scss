@@ -9,8 +9,46 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$candy-app-primary: mat-palette($mat-indigo);
-$candy-app-accent:  mat-palette($mat-pink, A200, A100, A400);
+
+/* For use in src/lib/core/theming/_palette.scss */
+// define a real custom palette (using http://
+//https://codeday.me/bug/20180822/223844.html
+/* For use in src/lib/core/theming/_palette.scss */
+$md-primary-palette: (
+  50 : #ffeaec,
+  100 : #fec9ce,
+  200 : #fea6ae,
+  300 : #fe828e,
+  400 : #fd6775,
+  500 : #fd4c5d,
+  600 : #fd4555,
+  700 : #fc3c4b,
+  800 : #fc3341,
+  900 : #fc2430,
+  A100 : #ffffff,
+  A200 : #ffffff,
+  A400 : #ffcfd1,
+  A700 : #ffb5b9,
+  contrast: (
+    50 : #ffffff,
+    100 : #ffffff,
+    200 : #ffffff,
+    300 : #ffffff,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #ffffff,
+    A200 : #ffffff,
+    A400 : #ffffff,
+    A700 : #ffffff,
+  )
+);
+
+$candy-app-primary: mat-palette($md-primary-palette);
+$candy-app-accent:  mat-palette($md-primary-palette);
 
 // The warn palette is optional (defaults to red).
 $candy-app-warn:    mat-palette($mat-red);

@@ -11,7 +11,8 @@
 @import "assets/moe/simplemde.css";
 
 body {
-  margin: 0
+  margin: 0;
+  /*background-color: rgb(248,248,248) ;*/
 }
 
 .mat-button-toggle-appearance-standard div.mat-button-toggle-label-content{

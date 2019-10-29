@@ -1,15 +1,16 @@
 <div fxLayout="row wrap">
 
   <div fxFlex="50" fxFlex.lt-md="100" fxFlex.gt-md="33.33">
+
     <div fxLayout="row" fxLayoutAlign="space-between center">
-      <div style="display: inline;">访问量</div>
+      <div style="display: inline;font-weight: bolder;color: rgba(0,0,0,0.5);margin-left: 20px;">访问量</div>
       <button mat-button color="primary">
         本月
         <mat-icon aria-label="Example icon-button with a heart icon">expand_more</mat-icon>
       </button>
     </div>
 
-    <div style="min-height: 360px;">
+    <div style="min-height: 360px;padding:20px;">
       <canvas baseChart
               [datasets]="viewCountData"
               [labels]="viewCountLabels"

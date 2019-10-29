@@ -30,15 +30,18 @@ export class DashboardComponent implements OnInit {
     scales: {
       xAxes: [{
         id: 'x-axis-1',
+        display: true,
         position: 'bottom',
         gridLines: {
           display: false,
-          color: 'rgba(255,0,0,0.3)',
+          // color: 'rgba(255,0,0,0.3)',
         },
         ticks: {
+          mirror: true,
+          beginAtZero: true
           // display: false,
           // reverse: true,
-          fontColor: 'red',
+          // fontColor: 'red',
         }
       }],
       yAxes: [{

@@ -50,6 +50,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {PostStatusPipe, PostOpenPipe} from './blog/blog.pipe';
 import {ImageSelectDialogComponent} from './component/image-select-dialog/image-select-dialog.component';
 import {ChartsModule} from "ng2-charts";
+import {MatRippleModule} from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -117,7 +118,8 @@ import {ChartsModule} from "ng2-charts";
     MatProgressSpinnerModule,
     ImageCropperModule,
     MatMenuModule,
-    ChartsModule
+    ChartsModule,
+    MatRippleModule
   ],
   entryComponents: [MediaInfoComponent, CreateCategoriesDialogComponent, ImageSelectDialogComponent,
     ImageCropDialogComponent, ConfirmDialogComponent, CommentRemoveDialogComponent],

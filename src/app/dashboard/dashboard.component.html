@@ -2,15 +2,15 @@
 
   <div fxFlex="50" fxFlex.lt-md="100" fxFlex.gt-md="33.33">
 
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-      <div style="display: inline;font-weight: bolder;color: rgba(0,0,0,0.5);margin-left: 20px;">访问量</div>
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="card-bar">
+      <h2>访问量</h2>
       <button mat-button color="primary">
         本月
         <mat-icon aria-label="Example icon-button with a heart icon">expand_more</mat-icon>
       </button>
     </div>
 
-    <div style="min-height: 360px;padding:20px;">
+    <div class="card-content" style="padding: 20px;">
       <canvas baseChart
               [datasets]="viewCountData"
               [labels]="viewCountLabels"
@@ -23,34 +23,31 @@
   </div>
 
   <div fxFlex="50" fxFlex.lt-md="100" fxFlex.gt-md="33.33">
-
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-      <div style="display: inline;">Views</div>
-      <button mat-button color="primary">
-        Click me!
-        <mat-icon aria-label="Example icon-button with a heart icon">expand_more</mat-icon>
-      </button>
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="card-bar">
+      <h2>动态</h2>
     </div>
 
-    <div style="min-height: 360px;">
+    <div class="card-content">
 
-      <div *ngFor="let temp of [1,2,3,4,5,6,7]">
-        <div fxLayout="row">
-          <div>
-            <div>Tue</div>
-            <div>16:00</div>
-          </div>
-
-          <div>
-            <mat-icon aria-label="Example icon-button with a heart icon">panorama_fish_eye</mat-icon>
-          </div>
-
-          <div fxFlex="1 1 0%">
-            <div style="word-break: break-word;">Travels:Galapagos Island.Ecuador</div>
-            <div style="word-break: break-word;">4 new comments</div>
-          </div>
+      <div fxLayout="row" matRipple class="timeline" *ngFor="let temp of [1,2,3]">
+        <div class="timeline-time" fxLayout="column" fxLayoutAlign="start end">
+          <div>Tue</div>
+          <div style="margin-top: 5px;">16:00</div>
+        </div>
+        <div>
+          <!--          <mat-divider [vertical]="true" style="    height: 100%;-->
+          <!--    position: absolute;-->
+          <!--    top: 0;-->
+          <!--    margin-left: 22px;-->
+          <!--    border-right-color: red;"></mat-divider>-->
+          <mat-icon class="timeline-icon" aria-label="Example icon-button with a heart icon">panorama_fish_eye
+          </mat-icon>
         </div>
 
+        <div fxFlex="1 1 0%">
+          <div class="timeline-content">Travels:Galapagos Island.Ecuador</div>
+          <div class="timeline-source">4 new comments</div>
+        </div>
       </div>
 
     </div>
@@ -58,30 +55,25 @@
   </div>
 
   <div fxFlex="50" fxFlex.lt-md="100" fxFlex.gt-md="33">
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-      <div style="display: inline;">热门文章</div>
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="card-bar">
+      <h2>热门文章</h2>
       <button mat-button color="primary" [matMenuTriggerFor]="popularPostsMenu">
         本周
         <mat-icon aria-label="Example icon-button with a heart icon">expand_more</mat-icon>
       </button>
     </div>
 
-    <div style="min-height: 360px;">
-      <div *ngFor="let post of postList">
-
-        <div fxLayout="row">
-          <div style="width: 90px;height: 60px;">
-            <img style="max-width: 100%;max-height: 100%;" [src]="post.cover"/>
-          </div>
-          <div fxFlex="1 1 0%">
-            <div style="word-break: break-word;">{{post.title}}</div>
-            <div style="word-break: break-word;">
-              {{post.views + ' views * 97 comments'}}
-
-            </div>
+    <div class="card-content">
+      <div fxLayout="row" class="post-item" matRipple *ngFor="let post of postList">
+        <div fxFlex="none" style="width: 81px;height: 54px;background-color: rgba(0,0,0,0.1);">
+          <img style="max-width: 100%;max-height: 100%;" [src]="post.cover"/>
+        </div>
+        <div class="post-item-content">
+          <div class="post-item-title">{{post.title}}</div>
+          <div class="post-item-info">
+            {{post.views + ' 阅读 &nbsp;‧&nbsp; 1 评论'}}
           </div>
         </div>
-
       </div>
 
       <mat-menu #popularPostsMenu="matMenu">
@@ -97,18 +89,14 @@
   </div>
 
   <div fxFlex="50" fxFlex.lt-md="100" fxFlex.gt-md="33.33">
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-      <div style="display: inline;">Views</div>
-      <button mat-button color="primary">
-        Click me!
-        <mat-icon aria-label="Example icon-button with a heart icon">expand_more</mat-icon>
-      </button>
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="card-bar">
+      <h2>信息预览</h2>
     </div>
 
-    <div style="min-height: 360px;">
+    <div class="card-content">
 
-      <div fxLayout="row">
-        <div fxFlex="33.33">
+      <div fxLayout="row" fxLayoutGap="20px" style="padding: 0 20px 0 14px">
+        <div fxFlex="33.33" class="glance-chart">
           <canvas baseChart
                   [datasets]="postCountData"
                   [labels]="postCountLabels"
@@ -116,10 +104,10 @@
                   [options]="glanceCountOptions"
                   [legend]="false"
                   [chartType]="postCountType"></canvas>
-          <div>246</div>
-          <div>Posts</div>
+          <h2>246</h2>
+          <span>Posts</span>
         </div>
-        <div fxFlex="33.33">
+        <div fxFlex="33.33" class="glance-chart">
           <canvas baseChart
                   [datasets]="commentCountData"
                   [labels]="commentCountLabels"
@@ -127,10 +115,10 @@
                   [colors]="commentCountColors"
                   [legend]="false"
                   [chartType]="commentCountType"></canvas>
-          <div>32</div>
-          <div>Pages</div>
+          <h2>32</h2>
+          <span>Pages</span>
         </div>
-        <div fxFlex="33.33">
+        <div fxFlex="33.33" class="glance-chart">
           <canvas baseChart
                   [datasets]="viewCountData"
                   [labels]="viewCountLabels"
@@ -138,42 +126,39 @@
                   [colors]="viewCountColors"
                   [legend]="false"
                   [chartType]="viewCountType"></canvas>
-          <div>82k</div>
-          <div>Comments</div>
+          <h2>82k</h2>
+          <span>Comments</span>
         </div>
       </div>
 
-      <div fxLayout="row" fxLayoutAlign="space-between center">
-        <div style="display: inline;">存储空间</div>
-        <button mat-button>
-          Click me!
-          <mat-icon aria-label="Example icon-button with a heart icon">expand_more</mat-icon>
-        </button>
+      <div fxLayout="row" fxLayoutAlign="space-between center" class="card-bar">
+        <h2>存储空间</h2>
       </div>
 
-      <mat-progress-bar mode="determinate" style="height:38px;"
-                        value="{{storageStatistics.percent}}"></mat-progress-bar>
+      <div>
+        <mat-progress-bar class="storage-progress" mode="determinate"
+                          value="{{storageStatistics.percent}}"></mat-progress-bar>
 
-      <div fxLayout="row wrap">
-        <div fxFlex="50" fxLayout="row" fxLayoutAlign="start center">
-          <mat-icon>image</mat-icon>
-          <span>{{storageStatistics.picture}} Pictures</span>
-        </div>
-        <div fxFlex="50" fxLayout="row" fxLayoutAlign="start center">
-          <mat-icon>music_note</mat-icon>
-          <span>{{storageStatistics.music}} Musics</span>
-        </div>
-        <div fxFlex="50" fxLayout="row" fxLayoutAlign="start center">
-          <mat-icon>videocam</mat-icon>
-          <span>{{storageStatistics.video}} Videos</span>
-        </div>
-        <div fxFlex="50" fxLayout="row" fxLayoutAlign="start center">
-          <mat-icon>attachment</mat-icon>
-          <span>{{storageStatistics.other}} Other Files</span>
-        </div>
+        <div fxLayout="row wrap">
+          <div fxFlex="50" fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon>image</mat-icon>
+            <span>{{storageStatistics.picture}} Pictures</span>
+          </div>
+          <div fxFlex="50" fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon>music_note</mat-icon>
+            <span>{{storageStatistics.music}} Musics</span>
+          </div>
+          <div fxFlex="50" fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon>videocam</mat-icon>
+            <span>{{storageStatistics.video}} Videos</span>
+          </div>
+          <div fxFlex="50" fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon>attachment</mat-icon>
+            <span>{{storageStatistics.other}} Other Files</span>
+          </div>
 
+        </div>
       </div>
-
 
     </div>
 

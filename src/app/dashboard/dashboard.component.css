@@ -1,0 +1,99 @@
+.card-bar {
+  height: 36px;
+}
+
+.card-bar h2 {
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.5);
+  margin: 0 0 0 20px;
+  font-size: 16px;
+}
+
+.card-bar button {
+  padding: 0 10px;
+
+}
+
+.card-content {
+  min-height: 360px;
+}
+
+.timeline {
+  padding: 10px 20px;
+}
+
+.timeline-time {
+}
+
+.timeline-time div {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.timeline-icon {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0 15px;
+  width: 14px;
+  height: 14px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.timeline-content {
+  font-size: 16px;
+  word-break: break-word;
+}
+
+.timeline-source {
+  margin-top: 5px;
+  word-break: break-word;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 14px;
+}
+
+.post-item {
+  padding: 10px 20px;
+}
+
+.post-item-content {
+  min-width: 0;
+  margin-left: 10px;
+}
+
+.post-item-title {
+  /*word-break: break-word;*/
+  white-space: nowrap;
+  overflow: hidden;
+  margin-top: 3px;
+  text-overflow: ellipsis;
+}
+
+.post-item-info {
+  word-break: break-word;
+  margin-top: 8px;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 14px;
+}
+
+.glance-chart {
+
+}
+
+.glance-chart h2 {
+  font-weight: normal;
+  margin: 0;
+  padding-left: 10px;
+}
+
+.glance-chart span {
+  font-size: 14px;
+  padding-left: 10px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.storage-progress {
+  height: 36px;
+  margin: 0 20px;
+  width: auto;
+}
+

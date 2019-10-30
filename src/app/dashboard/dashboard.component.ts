@@ -27,18 +27,19 @@ export class DashboardComponent implements OnInit {
   viewCountType = 'line';
   viewCountOptions: ChartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     scales: {
       xAxes: [{
-        id: 'x-axis-1',
-        display: true,
-        position: 'bottom',
+        id: 'x-axis-a',
+        display: false,
+        // position: 'bottom',
         gridLines: {
           display: false,
           // color: 'rgba(255,0,0,0.3)',
         },
         ticks: {
           mirror: true,
-          beginAtZero: true
+          // beginAtZero: true
           // display: false,
           // reverse: true,
           // fontColor: 'red',
@@ -46,8 +47,15 @@ export class DashboardComponent implements OnInit {
       }],
       yAxes: [{
         id: 'y-axis-a',
+        display: false,
         gridLines: {
           display: false
+        },
+        ticks: {
+          beginAtZero: true,
+          stepSize: 100,
+          // padding: -5,
+          mirror: true
         }
       }],
     }
@@ -55,15 +63,22 @@ export class DashboardComponent implements OnInit {
 
   glanceCountOptions: ChartOptions = {
     responsive: true,
+    // maintainAspectRatio: false,
     scales: {
       xAxes: [{
         id: 'x-axis-1',
+        gridLines: {
+          display: false
+        },
         ticks: {
           display: false,
         }
       }],
       yAxes: [{
         id: 'y-axis-a',
+        gridLines: {
+          display: false
+        },
         ticks: {
           display: false,
         }

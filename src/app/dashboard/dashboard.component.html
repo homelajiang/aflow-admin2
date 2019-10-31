@@ -54,7 +54,7 @@
 
   </div>
 
-  <div fxFlex="50" fxFlex.lt-md="100" fxFlex.gt-md="33">
+  <div fxFlex="50" fxFlex.lt-md="100" fxFlex.gt-md="33.33">
     <div fxLayout="row" fxLayoutAlign="space-between center" class="card-bar">
       <h2>热门文章</h2>
       <button mat-button color="primary" [matMenuTriggerFor]="popularPostsMenu">
@@ -95,7 +95,7 @@
 
     <div class="card-content">
 
-      <div fxLayout="row" fxLayoutGap="20px" style="padding: 0 20px 0 14px">
+      <div fxLayout="row" fxLayoutGap="20px" class="glance-chart-area">
         <div fxFlex="33.33" class="glance-chart">
           <canvas baseChart
                   [datasets]="postCountData"
@@ -105,7 +105,7 @@
                   [legend]="false"
                   [chartType]="postCountType"></canvas>
           <h2>246</h2>
-          <span>Posts</span>
+          <span>文章</span>
         </div>
         <div fxFlex="33.33" class="glance-chart">
           <canvas baseChart
@@ -116,7 +116,7 @@
                   [legend]="false"
                   [chartType]="commentCountType"></canvas>
           <h2>32</h2>
-          <span>Pages</span>
+          <span>页面</span>
         </div>
         <div fxFlex="33.33" class="glance-chart">
           <canvas baseChart
@@ -127,7 +127,7 @@
                   [legend]="false"
                   [chartType]="viewCountType"></canvas>
           <h2>82k</h2>
-          <span>Comments</span>
+          <span>评论</span>
         </div>
       </div>
 
@@ -139,20 +139,20 @@
         <mat-progress-bar class="storage-progress" mode="determinate"
                           value="{{storageStatistics.percent}}"></mat-progress-bar>
 
-        <div fxLayout="row wrap">
-          <div fxFlex="50" fxLayout="row" fxLayoutAlign="start center">
+        <div fxLayout="row wrap" style="padding: 0 10px;">
+          <div fxFlex="50" fxLayout="row" fxLayoutAlign="start center" class="storage-item">
             <mat-icon>image</mat-icon>
             <span>{{storageStatistics.picture}} Pictures</span>
           </div>
-          <div fxFlex="50" fxLayout="row" fxLayoutAlign="start center">
+          <div fxFlex="50" fxLayout="row" fxLayoutAlign="start center" class="storage-item">
             <mat-icon>music_note</mat-icon>
             <span>{{storageStatistics.music}} Musics</span>
           </div>
-          <div fxFlex="50" fxLayout="row" fxLayoutAlign="start center">
+          <div fxFlex="50" fxLayout="row" fxLayoutAlign="start center" class="storage-item">
             <mat-icon>videocam</mat-icon>
             <span>{{storageStatistics.video}} Videos</span>
           </div>
-          <div fxFlex="50" fxLayout="row" fxLayoutAlign="start center">
+          <div fxFlex="50" fxLayout="row" fxLayoutAlign="start center" class="storage-item">
             <mat-icon>attachment</mat-icon>
             <span>{{storageStatistics.other}} Other Files</span>
           </div>

@@ -74,7 +74,9 @@
   color: rgba(0, 0, 0, 0.5);
   font-size: 14px;
 }
-
+.glance-chart-area{
+  padding: 20px 20px 20px 14px;
+}
 .glance-chart {
 
 }
@@ -86,14 +88,19 @@
 }
 
 .glance-chart span {
-  font-size: 14px;
+  font-size: 12px;
   padding-left: 10px;
   color: rgba(0, 0, 0, 0.5);
 }
 
 .storage-progress {
   height: 36px;
-  margin: 0 20px;
+  margin: 20px;
   width: auto;
 }
+
+.storage-item{
+  padding:5px 10px;
+}
+
 

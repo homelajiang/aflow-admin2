@@ -1,3 +1,12 @@
+
+.dashboard-card {
+  padding: 20px;
+  /*border-bottom:  #e2e2e2 1px solid;*/
+  /*border-top: #e2e2e2 1px solid;*/
+  /*margin-top: -1px;*/
+  /*border-right:  #e2e2e2 1px solid;*/
+}
+
 .card-bar {
   height: 36px;
 }
@@ -5,7 +14,7 @@
 .card-bar h2 {
   font-weight: bold;
   color: rgba(0, 0, 0, 0.5);
-  margin: 0 0 0 20px;
+  margin: 0;
   font-size: 16px;
 }
 
@@ -15,11 +24,15 @@
 }
 
 .card-content {
-  min-height: 360px;
+  min-height: 300px;
 }
 
 .timeline {
-  padding: 10px 20px;
+  padding: 10px 0;
+}
+
+.timeline :hover{
+  cursor:pointer;
 }
 
 .timeline-time {
@@ -52,7 +65,8 @@
 }
 
 .post-item {
-  padding: 10px 20px;
+  padding: 10px 0;
+  cursor: pointer;
 }
 
 .post-item-content {
@@ -74,9 +88,12 @@
   color: rgba(0, 0, 0, 0.5);
   font-size: 14px;
 }
-.glance-chart-area{
-  padding: 20px 20px 20px 14px;
+
+.glance-chart-area {
+  padding: 15px 0;
+
 }
+
 .glance-chart {
 
 }
@@ -95,12 +112,15 @@
 
 .storage-progress {
   height: 36px;
-  margin: 20px;
+  margin: 10px 0;
   width: auto;
 }
 
-.storage-item{
-  padding:5px 10px;
+.storage-item {
+  padding: 5px 0;
 }
 
+.storage-item span{
+  margin-left: 10px;
+}
 

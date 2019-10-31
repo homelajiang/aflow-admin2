@@ -1,6 +1,6 @@
 <div fxLayout="row wrap">
 
-  <div fxFlex="50" fxFlex.lt-md="100" fxFlex.gt-md="33.33">
+  <div class="dashboard-card" fxFlex="50" fxFlex.lt-md="100" fxFlex.gt-md="33.33">
 
     <div fxLayout="row" fxLayoutAlign="space-between center" class="card-bar">
       <h2>访问量</h2>
@@ -10,7 +10,7 @@
       </button>
     </div>
 
-    <div class="card-content" style="padding: 20px;">
+    <div class="card-content">
       <canvas baseChart
               [datasets]="viewCountData"
               [labels]="viewCountLabels"
@@ -22,7 +22,7 @@
 
   </div>
 
-  <div fxFlex="50" fxFlex.lt-md="100" fxFlex.gt-md="33.33">
+  <div class="dashboard-card" fxFlex="50" fxFlex.lt-md="100" fxFlex.gt-md="33.33">
     <div fxLayout="row" fxLayoutAlign="space-between center" class="card-bar">
       <h2>动态</h2>
     </div>
@@ -35,11 +35,6 @@
           <div style="margin-top: 5px;">16:00</div>
         </div>
         <div>
-          <!--          <mat-divider [vertical]="true" style="    height: 100%;-->
-          <!--    position: absolute;-->
-          <!--    top: 0;-->
-          <!--    margin-left: 22px;-->
-          <!--    border-right-color: red;"></mat-divider>-->
           <mat-icon class="timeline-icon" aria-label="Example icon-button with a heart icon">panorama_fish_eye
           </mat-icon>
         </div>
@@ -54,7 +49,7 @@
 
   </div>
 
-  <div fxFlex="50" fxFlex.lt-md="100" fxFlex.gt-md="33.33">
+  <div class="dashboard-card" fxFlex="50" fxFlex.lt-md="100" fxFlex.gt-md="33.33">
     <div fxLayout="row" fxLayoutAlign="space-between center" class="card-bar">
       <h2>热门文章</h2>
       <button mat-button color="primary" [matMenuTriggerFor]="popularPostsMenu">
@@ -88,16 +83,16 @@
 
   </div>
 
-  <div fxFlex="50" fxFlex.lt-md="100" fxFlex.gt-md="33.33">
+  <div class="dashboard-card" fxFlex="50" fxFlex.lt-md="100" fxFlex.gt-md="33.33">
     <div fxLayout="row" fxLayoutAlign="space-between center" class="card-bar">
       <h2>信息预览</h2>
     </div>
 
     <div class="card-content">
-
-      <div fxLayout="row" fxLayoutGap="20px" class="glance-chart-area">
+      <!--      fxLayoutGap="20px"-->
+      <div fxLayout="row" class="glance-chart-area">
         <div fxFlex="33.33" class="glance-chart">
-          <canvas baseChart
+          <canvas baseChart height="60" width="100"
                   [datasets]="postCountData"
                   [labels]="postCountLabels"
                   [colors]="postCountColors"
@@ -108,7 +103,7 @@
           <span>文章</span>
         </div>
         <div fxFlex="33.33" class="glance-chart">
-          <canvas baseChart
+          <canvas baseChart height="60" width="100"
                   [datasets]="commentCountData"
                   [labels]="commentCountLabels"
                   [options]="glanceCountOptions"
@@ -119,7 +114,7 @@
           <span>页面</span>
         </div>
         <div fxFlex="33.33" class="glance-chart">
-          <canvas baseChart
+          <canvas baseChart height="60" width="100"
                   [datasets]="viewCountData"
                   [labels]="viewCountLabels"
                   [options]="glanceCountOptions"
@@ -139,22 +134,22 @@
         <mat-progress-bar class="storage-progress" mode="determinate"
                           value="{{storageStatistics.percent}}"></mat-progress-bar>
 
-        <div fxLayout="row wrap" style="padding: 0 10px;">
+        <div fxLayout="row wrap">
           <div fxFlex="50" fxLayout="row" fxLayoutAlign="start center" class="storage-item">
             <mat-icon>image</mat-icon>
-            <span>{{storageStatistics.picture}} Pictures</span>
+            <span>{{storageStatistics.picture}} 图片</span>
           </div>
           <div fxFlex="50" fxLayout="row" fxLayoutAlign="start center" class="storage-item">
             <mat-icon>music_note</mat-icon>
-            <span>{{storageStatistics.music}} Musics</span>
+            <span>{{storageStatistics.music}} 音乐</span>
           </div>
           <div fxFlex="50" fxLayout="row" fxLayoutAlign="start center" class="storage-item">
             <mat-icon>videocam</mat-icon>
-            <span>{{storageStatistics.video}} Videos</span>
+            <span>{{storageStatistics.video}} 视频</span>
           </div>
           <div fxFlex="50" fxLayout="row" fxLayoutAlign="start center" class="storage-item">
             <mat-icon>attachment</mat-icon>
-            <span>{{storageStatistics.other}} Other Files</span>
+            <span>{{storageStatistics.other}} 其他文件</span>
           </div>
 
         </div>

@@ -1,16 +1,20 @@
-<div fxLayout="row" fxLayoutAlign="none center" style="padding: 20px 0;margin-top: 50px;">
+<div style="padding: 0 20px;">
+  <div fxLayout="row" fxLayoutAlign="none center" class="action-bar">
 
-  <span fxFlex="1 1 auto"></span>
+    <span fxFlex="1 1 auto"></span>
 
-  <mat-button-toggle-group [value]="'published'" (change)="postListComponent.changeType($event)" name="fontStyle"
-                           aria-label="Font Style">
-    <mat-button-toggle value="published">已发布</mat-button-toggle>
-    <mat-button-toggle value="draft">草稿</mat-button-toggle>
-    <mat-button-toggle value="deleted">已删除</mat-button-toggle>
-  </mat-button-toggle-group>
+    <mat-button-toggle-group class="action-bar-item" [value]="'published'"
+                             (change)="postListComponent.changeType($event)"
+                             name="fontStyle"
+                             aria-label="Font Style">
+      <mat-button-toggle value="published">已发布</mat-button-toggle>
+      <mat-button-toggle value="draft">草稿</mat-button-toggle>
+      <mat-button-toggle value="deleted">已删除</mat-button-toggle>
+    </mat-button-toggle-group>
 
-  <app-search-bar (search)="postListComponent.search($event)"></app-search-bar>
+    <app-search-bar class="action-bar-item" (search)="postListComponent.search($event)"></app-search-bar>
 
+  </div>
+
+  <app-post-list #postListComponent></app-post-list>
 </div>
-
-<app-post-list #postListComponent></app-post-list>

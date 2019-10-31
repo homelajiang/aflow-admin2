@@ -1,0 +1,23 @@
+.search-bar {
+
+}
+
+.search-bar input {
+  border: 2px solid #fd4c5d;
+  padding: 0 10px;
+  height: 34px;
+  border-right: none;
+  border-radius: 3px 0 0 3px;
+  outline: none;
+}
+
+.search-bar button {
+  height: 38px;
+  width: 70px;
+  color: white;
+  outline: none;
+  background-color: #fd4c5d;
+  vertical-align: top;
+  border: none;
+  border-radius: 0 3px 3px 0;
+}

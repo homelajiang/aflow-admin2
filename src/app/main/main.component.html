@@ -3,62 +3,55 @@
     <mat-toolbar color="primary">My Blog</mat-toolbar>
     <!--    <div style="height: 64px;"></div>-->
 
-    <div fxLayout="column" fxLayoutAlign="space-between center" style="height: calc(100% - 64px)">
+    <div fxLayout="column" fxLayoutAlign="space-between center" style="height: calc(100% - 64px);">
       <mat-nav-list>
-        <div *ngFor="let menu of mainMenu">
-          <mat-list-item (click)="navClick(menu.router)">
-            <mat-icon matListIcon>{{menu.icon}}</mat-icon>
+        <div *ngFor="let menu of mainMenu" (click)="navClick(menu.router)" >
+          <mat-list-item style="width: 240px;">
+            <mat-icon class="menu-icon" matListIcon>{{menu.icon}}</mat-icon>
             <a matLine>{{ menu.name }}</a>
-            <div style="margin-left: 50px;">20</div>
+<!--            <span style="margin: 0 20px 0 30px;">20</span>-->
             <!--          <mat-icon style="margin-left: 50px;">-->
             <!--            ghfdkshgkfhsdg-->
             <!--          </mat-icon>-->
           </mat-list-item>
-          <mat-divider style="margin-left: 30px;margin-right: 30px;"></mat-divider>
+<!--          <mat-divider class="menu-divider"></mat-divider>-->
         </div>
       </mat-nav-list>
 
-      <mat-nav-list style="width: 100%">
+      <mat-nav-list class="login-out-item">
         <mat-list-item>
-          <mat-icon matListIcon>panorama_fish_eye</mat-icon>
-          <a matLine href="#">LOG OUT</a>
+          <mat-icon class="menu-icon" matListIcon>power_settings_new</mat-icon>
+          <a matLine>LOG OUT</a>
         </mat-list-item>
       </mat-nav-list>
     </div>
 
   </mat-sidenav>
   <mat-sidenav-content id="sidenav-content">
-    <mat-toolbar>
+    <mat-toolbar style="background: #fafafa;">
 
       <span>DASHBOARD</span>
       <span class="toolbar-spacer"></span>
 
-      <button mat-icon-button>
-        <mat-icon matBadge="8" aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+      <button mat-icon-button class="toolbar-icon">
+        <mat-icon aria-label="Example icon-button with a heart icon">search</mat-icon>
       </button>
 
-      <button mat-icon-button>
-        <mat-icon matBadge="8" aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+      <button mat-icon-button class="toolbar-icon">
+        <mat-icon aria-label="Example icon-button with a heart icon">notifications_none</mat-icon>
       </button>
 
-      <button mat-flat-button color="primary" (click)="newPost()">
-        <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
-        NEW　POST
+      <button mat-flat-button color="primary" (click)="newPost()" class="toolbar-icon-text-button">
+        <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
+        <span>写文章</span>
       </button>
 
-      <button mat-icon-button>
+      <button mat-icon-button class="toolbar-avatar">
         <div mat-card-avatar class="example-header-image mat-card-avatar"></div>
       </button>
 
 
     </mat-toolbar>
     <router-outlet></router-outlet>
-
-    <!--    <div fxLayout="row wrap">-->
-    <!--      <div fxFlex="50" fxFlex.lt-sm="100" fxFlex.gt-md="33.33" style="background-color: brown;height: 100px;"></div>-->
-    <!--      <div fxFlex="50" fxFlex.lt-sm="100" fxFlex.gt-md="33.33" style="background-color: blue;height: 100px"></div>-->
-    <!--      <div fxFlex="50" fxFlex.lt-sm="100" fxFlex.gt-md="33.33" style="background-color: yellow;height: 100px"></div>-->
-    <!--    </div>-->
-
   </mat-sidenav-content>
 </mat-sidenav-container>

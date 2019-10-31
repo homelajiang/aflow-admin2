@@ -63,12 +63,11 @@ export class DashboardComponent implements OnInit {
 
   glanceCountOptions: ChartOptions = {
     responsive: true,
-    // maintainAspectRatio: false,
     scales: {
       xAxes: [{
         id: 'x-axis-1',
         gridLines: {
-          display: false
+          // display: false
         },
         ticks: {
           display: false,
@@ -77,10 +76,11 @@ export class DashboardComponent implements OnInit {
       yAxes: [{
         id: 'y-axis-a',
         gridLines: {
-          display: false
+          // display: false
         },
         ticks: {
           display: false,
+          beginAtZero: true,
         }
       }],
     }

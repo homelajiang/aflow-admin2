@@ -1,0 +1,11 @@
+.post-cover {
+  height: 0;
+  padding-bottom: 66.67%;
+  background-color: rgba(0, 0, 0, 0.12);
+  background-size: cover;
+  background-position: center;
+}
+
+.mat-card-actions .mat-button, .mat-card-actions .mat-raised-button {
+  margin: 0;
+}

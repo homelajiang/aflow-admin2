@@ -60,8 +60,8 @@
 
     <div class="card-content">
       <div fxLayout="row" class="post-item" matRipple *ngFor="let post of postList">
-        <div fxFlex="none" style="width: 81px;height: 54px;background-color: rgba(0,0,0,0.1);">
-          <img style="max-width: 100%;max-height: 100%;" [src]="post.cover"/>
+        <div fxFlex="none">
+          <img class="post-cover" [src]="post.cover"/>
         </div>
         <div class="post-item-content">
           <div class="post-item-title">{{post.title}}</div>

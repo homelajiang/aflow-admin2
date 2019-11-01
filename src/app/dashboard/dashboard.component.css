@@ -64,6 +64,13 @@
   font-size: 14px;
 }
 
+.post-cover{
+  height: 54px;
+  width: 81px;
+  object-fit: cover;
+  background-color: rgba(0,0,0,0.1);
+}
+
 .post-item {
   padding: 10px 0;
   cursor: pointer;

@@ -1,12 +1,8 @@
 <mat-card>
   <img mat-card-image class="post-cover" [ngStyle]="{'background-image': 'url(' + post.cover + ')'}"/>
-  <div>
-    <div style="font-size: 20px;line-height: 32px;margin: 0;">{{post.title}}</div>
-    <div style="font-size: 14px;line-height: 22px;margin: 0;color: rgba(0, 0, 0, 0.54);">{{'3天前'}}</div>
-  </div>
-
-  <div style="margin-top: 16px;margin-bottom: 8px;font-size: 14px;color: rgba(0, 0, 0, 0.54);font-weight: 400;">
-    {{post.description}}
+  <div class="post-info">
+    <h2>{{post.title}}</h2>
+    <span>{{'3天前'}}</span>
   </div>
   <mat-card-actions fxLayout="row wrap" fxLayoutAlign="space-between center">
     <div fxFlex="none">

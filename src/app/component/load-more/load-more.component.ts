@@ -8,7 +8,6 @@ import {LoadStatus} from '../../entry';
 })
 export class LoadMoreComponent implements OnInit {
 
-
   @Output()
   onLoadMore = new EventEmitter<any>();
 

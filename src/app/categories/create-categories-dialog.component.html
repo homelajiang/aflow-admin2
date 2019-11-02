@@ -1,25 +1,22 @@
 <h1 mat-dialog-title>{{getDialogTitle()}}</h1>
 <mat-dialog-content>
 
-  <div (click)="changeCover()">
-    <img [src]="categories.image?categories.image:'https://via.placeholder.com/50x50.png'"
-         style="border-radius: 10px;width: 50px;height: 50px;"/>
+  <div (click)="changeCover()" class="categories-cover" [ngStyle]="{'background-image': 'url(' + categories.image + ')'}">
   </div>
 
-  <div class="example-form">
+  <div class="categories-input-form">
     <mat-form-field class="example-full-width">
-      <input [(ngModel)]="categories.name" matInput [placeholder]="isCategories?'Categories name':'Tag name'" required>
+      <input [(ngModel)]="categories.name" matInput placeholder="请输入分类名称" required>
     </mat-form-field>
-
-    <mat-form-field class="example-full-width" *ngIf="!isCategories">
-      <input [(ngModel)]="categories.description" matInput placeholder="Tag description">
-    </mat-form-field>
+<!--    <mat-form-field class="example-full-width">-->
+<!--      <input [(ngModel)]="categories.description" matInput placeholder="请输入分类描述">-->
+<!--    </mat-form-field>-->
   </div>
 
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button cdkFocusInitial (click)="createTag()">OK</button>
+  <button mat-button mat-dialog-close>取消</button>
+  <button mat-button cdkFocusInitial (click)="createTag()">确定</button>
 </mat-dialog-actions>
 

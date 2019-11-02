@@ -1,52 +1,43 @@
-<div fxLayout="row" fxLayoutAlign="none center" style="padding: 20px 0;margin-top: 50px;">
+<div class="main-content">
+  <div fxLayout="row" fxLayoutAlign="none center" class="action-bar">
 
-  <button mat-flat-button color="primary" (click)="createCategories()">
-    <mat-icon>add</mat-icon>
-    {{categoriesRouter ? 'New Categories' : 'New Tag'}}
-  </button>
+    <button mat-flat-button color="primary" class="icon-text-button" (click)="createCategories()">
+      <mat-icon>add</mat-icon>
+      新建分类
+    </button>
 
-  <span fxFlex="1 1 auto"></span>
+    <span fxFlex="1 1 auto"></span>
 
-  <app-search-bar (search)="onSearch($event)"></app-search-bar>
+    <app-search-bar class="action-bar-item" (search)="onSearch($event)"></app-search-bar>
 
-</div>
+  </div>
 
-<div fxLayout="row wrap">
+  <div fxLayout="row wrap">
+    <div *ngFor="let data of dataList;let index = index"
+         style="padding: 20px;"
+         fxFlex.lt-sm="100"
+         fxFlex.lt-md="50" fxFlex.gt-md="25" fxFlex.gt-lg="20" fxFlex="33.33">
+      <mat-card>
+        <mat-card-content fxLayout="column" fxLayoutAlign="start center">
+          <img [src]="data.image?data.image:'https://via.placeholder.com/60x60.png'"
+               style="border-radius: 30px;width: 60px;height: 60px;"/>
+          <h3>{{data.name}} </h3>
+        </mat-card-content>
 
-  <mat-card class="example-card" fxFlex="33.3" *ngFor="let data of dataList;let index = index">
-    <mat-card-content *ngIf="!categoriesRouter">
-      <img [src]="data.image?data.image:'https://via.placeholder.com/50x50.png'"
-           style="border-radius: 10px;width: 50px;height: 50px;"/>
-      <div>
-        {{data.name}}
-      </div>
-      <p>
-        {{data.description}}
-      </p>
-    </mat-card-content>
-
-    <mat-card-content fxLayout="column" fxLayoutAlign="start center" *ngIf="categoriesRouter">
-
-      <img [src]="data.image?data.image:'https://via.placeholder.com/60x60.png'"
-           style="border-radius: 30px;width: 60px;height: 60px;"/>
-      <h3>{{data.name}} </h3>
-    </mat-card-content>
-
-
-    <button mat-icon-button style="position: absolute;
+        <button mat-icon-button style="position: absolute;
     top: 5px;
     right: 5px;" (click)="deleteCategories(data,index)">
-      <mat-icon>close</mat-icon>
-    </button>
+          <mat-icon>close</mat-icon>
+        </button>
 
-    <button mat-icon-button style="position: absolute;
+        <button mat-icon-button style="position: absolute;
     top: 5px;
     right: 50px;" (click)="editCategories(data,index)">
-      <mat-icon style="font-size: 20px;">edit</mat-icon>
-    </button>
+          <mat-icon style="font-size: 20px;">edit</mat-icon>
+        </button>
+      </mat-card>
+    </div>
 
-  </mat-card>
-
+  </div>
+  <app-load-more [status]="loadingStatus" (onLoadMore)="onLoadMore()"></app-load-more>
 </div>
-
-<app-load-more [status]="loadingStatus" (onLoadMore)="onLoadMore()"></app-load-more>

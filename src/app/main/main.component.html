@@ -5,16 +5,16 @@
 
     <div fxLayout="column" fxLayoutAlign="space-between center" style="height: calc(100% - 64px);">
       <mat-nav-list>
-        <div *ngFor="let menu of mainMenu" (click)="navClick(menu.router)" >
+        <div *ngFor="let menu of mainMenu" (click)="navClick(menu.router)">
           <mat-list-item style="width: 240px;">
             <mat-icon class="menu-icon" matListIcon>{{menu.icon}}</mat-icon>
             <a matLine>{{ menu.name }}</a>
-<!--            <span style="margin: 0 20px 0 30px;">20</span>-->
+            <!--            <span style="margin: 0 20px 0 30px;">20</span>-->
             <!--          <mat-icon style="margin-left: 50px;">-->
             <!--            ghfdkshgkfhsdg-->
             <!--          </mat-icon>-->
           </mat-list-item>
-<!--          <mat-divider class="menu-divider"></mat-divider>-->
+          <!--          <mat-divider class="menu-divider"></mat-divider>-->
         </div>
       </mat-nav-list>
 

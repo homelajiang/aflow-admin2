@@ -1,10 +1,19 @@
-.example-form {
+.categories-input-form {
   min-width: 360px;
   max-width: 500px;
   width: 100%;
   margin-top: 20px;
 }
 
-.example-full-width {
+.categories-input-form mat-form-field {
   width: 100%;
+}
+
+.categories-cover {
+  width: 64px;
+  height: 64px;
+  background-color: rgba(0, 0, 0, 0.12);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }

@@ -155,12 +155,11 @@ export class CreateCategoriesDialogComponent implements OnInit {
 
   categories: any;
   newCategories: boolean;
-  isCategories: boolean;
 
   constructor(public snackBar: MatSnackBar, public dialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any,
               public dialogRef: MatDialogRef<CreateCategoriesDialogComponent>) {
 
-    if (this.data.data) {
+    if (this.data && this.data.data) {
       this.categories = this.data.data;
       this.newCategories = false;
     } else {

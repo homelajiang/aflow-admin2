@@ -1,6 +1,6 @@
-<button mat-flat-button color="primary" (click)="file_input.click()">
+<button mat-flat-button color="primary" class="icon-text-button" (click)="file_input.click()">
   <mat-icon>cloud_upload</mat-icon>
-  Upload File
+  上传文件
 </button>
 
 <input type="file" #file_input id="file_input" style="display: none" (change)="onChange(file_input.files)">

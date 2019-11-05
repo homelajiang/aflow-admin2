@@ -1,12 +1,19 @@
-<div fxLayout="row" style="padding: 20px 0;">
-  <app-upload-button (uploadResult)="addMedia($event)"></app-upload-button>
-  <span fxFlex="1 1 auto"></span>
-  <app-search-bar (search)="searchByWord($event)"></app-search-bar>
-</div>
+<div class="main-content">
+  <div fxLayout="row" class="action-bar">
+    <app-upload-button fxLayout="row" fxLayoutAlign="start center"
+                       (uploadResult)="addMedia($event)"></app-upload-button>
+    <span fxFlex="1 1 auto"></span>
+    <app-search-bar (search)="searchByWord($event)"></app-search-bar>
+  </div>
 
-<div fxLayout="row wrap">
-  <app-media-item fxFlex="16.66" *ngFor="let media of medias" [media]="media"
-                  (click)="onMediaClick(media)"></app-media-item>
-</div>
+  <div fxLayout="row wrap">
+    <div *ngFor="let media of medias"
+         style="padding: 20px;"
+         fxFlex.lt-sm="100"
+         fxFlex.lt-md="50" fxFlex.gt-md="20" fxFlex.gt-lg="20" fxFlex="33.33">
+      <app-media-item [media]="media" (click)="onMediaClick(media)"></app-media-item>
+    </div>
+  </div>
 
-<app-load-more [status]="loadingStatus" (onLoadMore)="onLoadMore()"></app-load-more>
+  <app-load-more [status]="loadingStatus" (onLoadMore)="onLoadMore()"></app-load-more>
+</div>

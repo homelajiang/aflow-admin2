@@ -19,20 +19,17 @@
          fxFlex.lt-md="50" fxFlex.gt-md="25" fxFlex.gt-lg="20" fxFlex="33.33">
       <mat-card>
         <mat-card-content fxLayout="column" fxLayoutAlign="start center">
-          <img [src]="data.image?data.image:'https://via.placeholder.com/60x60.png'"
-               style="border-radius: 30px;width: 60px;height: 60px;"/>
+          <div class="categories-icon" [ngStyle]="{'background-image': 'url(' + data.image + ')'}"></div>
           <h3>{{data.name}} </h3>
         </mat-card-content>
 
-        <button mat-icon-button style="position: absolute;
-    top: 5px;
-    right: 5px;" (click)="deleteCategories(data,index)">
+        <button mat-icon-button style="position: absolute;top: 5px;right: 5px;"
+                (click)="deleteCategories(data,index)">
           <mat-icon>close</mat-icon>
         </button>
 
-        <button mat-icon-button style="position: absolute;
-    top: 5px;
-    right: 50px;" (click)="editCategories(data,index)">
+        <button mat-icon-button style="position: absolute;top: 5px;right: 50px;"
+                (click)="editCategories(data,index)">
           <mat-icon style="font-size: 20px;">edit</mat-icon>
         </button>
       </mat-card>

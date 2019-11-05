@@ -1,5 +1,5 @@
 <div class="main-content">
-  <div fxLayout="row" class="action-bar">
+  <div fxLayout="row wrap" class="action-bar">
 
     <span fxFlex="1 1 auto"></span>
 
@@ -19,48 +19,46 @@
     <div fxLayout="row" style="padding: 20px;"
          fxFlex.lt-md="100" fxFlex.md="50" fxFlex.gt-md="33.33"
          *ngFor="let comment of comments;let index = index">
-      <div style="margin-right: 15px;">
-        <img [src]="comment.creator.img?comment.creator.img:'https://via.placeholder.com/40x40.png'"
-             style="border-radius: 20px;width: 40px;height: 40px;"/>
+      <div>
+        <div class="comment-avatar" [ngStyle]="{'background-image': 'url(' + comment.creator.img + ')'}"></div>
       </div>
 
-      <div style="border: 1px solid #d6d6d6;border-radius: 4px;width: 100%;padding: 8px;">
-        <div fxLayout="row">
-          <div fxLayout="row" fxLayoutAlign="center center">
-            <div style="font-size: 14px;">{{comment.creator.name}}</div>
-            <div style="font-size: 14px;">{{comment.createDate}}</div>
+      <div class="comment-area" fxLayout="column">
+        <div fxLayout="row" fxLayoutAlign="center center" class="comment-title">
+          <span class="comment-creator">{{comment.creator.name}}</span>
+          <span class="comment-date">{{comment.createDate | relativeDate}}</span>
+          <span fxFlex="1 1 auto;"></span>
+          <div>
+            <button mat-icon-button class="small-icon-button" *ngIf="comment.status==='deleted'"
+                    (click)="restoreComment(comment,index)"
+                    matTooltip="恢复"
+                    matTooltipPosition="above">
+              <mat-icon>restore</mat-icon>
+            </button>
+            <button mat-icon-button class="small-icon-button" *ngIf="comment.status==='review'" (click)="reviewComment(comment,index)"
+                    matTooltip="批准"
+                    matTooltipPosition="above">
+              <mat-icon>done</mat-icon>
+            </button>
+            <button mat-icon-button class="small-icon-button" (click)="removeComment(comment,index)"
+                    [matTooltip]="comment.status==='deleted'?'永久删除':'删除'"
+                    matTooltipPosition="above">
+              <mat-icon>delete_outline</mat-icon>
+            </button>
+            <button mat-icon-button class="small-icon-button" *ngIf="comment.status!=='deleted'" (click)="replyComment(comment,index)"
+                    matTooltip="回复"
+                    matTooltipPosition="above">
+              <mat-icon>reply</mat-icon>
+            </button>
           </div>
-          <div fxFlex="1 1 auto;"></div>
-
-          <button mat-icon-button *ngIf="comment.status!=='published'" (click)="restoreComment(comment,index)"
-                  matTooltip="恢复"
-                  matTooltipPosition="above">
-            <mat-icon>restore</mat-icon>
-          </button>
-          <button mat-icon-button *ngIf="comment.status==='published'" (click)="reviewComment(comment,index)"
-                  matTooltip="批准"
-                  matTooltipPosition="above">
-            <mat-icon>done</mat-icon>
-          </button>
-          <button mat-icon-button (click)="removeComment(comment,index)"
-                  [matTooltip]="comment.status==='deleted'?'永久删除':'删除'"
-                  matTooltipPosition="above">
-            <mat-icon>delete_outline</mat-icon>
-          </button>
-          <button mat-icon-button *ngIf="comment.status==='review'" (click)="replyComment(comment,index)"
-                  matTooltip="回复"
-                  matTooltipPosition="above">
-            <mat-icon>reply</mat-icon>
-          </button>
         </div>
-        <div style="font-size: 14px;">
+        <div class="comment-content">
           {{comment.content}}
         </div>
+        <div fxFlex="1 1 auto;"></div>
         <div fxLayout="row">
           <div fxFlex="1 1 auto;"></div>
-          <span style="font-size: 12px;">
-   —— 《{{comment.post.title}}》
-</span>
+          <span class="comment-source">—— 《{{comment.post.title}}》</span>
         </div>
       </div>
 

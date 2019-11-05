@@ -47,10 +47,10 @@ import {ImageCropperModule} from 'ngx-img-cropper';
 import {ImageCropDialogComponent} from './component/image-crop-dialog/image-crop-dialog.component';
 import {ConfirmDialogComponent} from './component/confirm-dialog/confirm-dialog.component';
 import {MatMenuModule} from '@angular/material/menu';
-import {PostStatusPipe, PostOpenPipe} from './blog/blog.pipe';
+import {PostStatusPipe, PostOpenPipe, RelativeDatePipe} from './blog/blog.pipe';
 import {ImageSelectDialogComponent} from './component/image-select-dialog/image-select-dialog.component';
-import {ChartsModule} from "ng2-charts";
-import {MatRippleModule} from "@angular/material/core";
+import {ChartsModule} from 'ng2-charts';
+import {MatRippleModule} from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -83,6 +83,7 @@ import {MatRippleModule} from "@angular/material/core";
     PostStatusPipe,
     PostOpenPipe,
     ImageSelectDialogComponent,
+    RelativeDatePipe,
   ],
   imports: [
     BrowserModule,

@@ -31,8 +31,8 @@
   padding: 10px 0;
 }
 
-.timeline :hover{
-  cursor:pointer;
+.timeline :hover {
+  cursor: pointer;
 }
 
 .timeline-time {
@@ -64,11 +64,12 @@
   font-size: 14px;
 }
 
-.post-cover{
+.post-cover {
   height: 54px;
   width: 81px;
   object-fit: cover;
-  background-color: rgba(0,0,0,0.1);
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .post-item {
@@ -127,7 +128,7 @@
   padding: 5px 0;
 }
 
-.storage-item span{
+.storage-item span {
   margin-left: 10px;
 }
 

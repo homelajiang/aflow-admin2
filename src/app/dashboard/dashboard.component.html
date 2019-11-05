@@ -60,7 +60,7 @@
 
     <div class="card-content">
       <div fxLayout="row" class="post-item" matRipple *ngFor="let post of postList">
-        <div fxFlex="none">
+        <div fxFlex="none" fxLayout="row" fxLayoutAlign="row center">
           <img class="post-cover" [src]="post.cover"/>
         </div>
         <div class="post-item-content">

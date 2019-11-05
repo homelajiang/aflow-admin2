@@ -1,4 +1,6 @@
 import {Pipe, PipeTransform} from '@angular/core';
+import * as moment from 'moment';
+moment.locale('zh-cn');
 
 @Pipe({name: 'postStatus'})
 export class PostStatusPipe implements PipeTransform {
@@ -27,5 +29,17 @@ export class PostOpenPipe implements PipeTransform {
         return '私密';
     }
     return '未知的状态';
+  }
+}
+
+@Pipe({name: 'relativeDate'})
+export class RelativeDatePipe implements PipeTransform {
+  transform(timeString: string, ...args: string[]): any {
+    if (args && args[0]) {
+      return moment(timeString, args[0]).fromNow();
+    } else {
+      // 2019-11-05 16:28:11
+      return moment(timeString, 'YYYY-MM-DD HH:mm:ss').fromNow();
+    }
   }
 }

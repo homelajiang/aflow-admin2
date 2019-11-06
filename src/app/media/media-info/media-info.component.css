@@ -1,0 +1,10 @@
+.media-info-bg {
+  position: fixed;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: #1e1e1e;
+  opacity: 0.85;
+  z-index: -1;
+}

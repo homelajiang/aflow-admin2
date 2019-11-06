@@ -69,3 +69,8 @@ body {
 .small-icon-button span mat-icon {
   font-size: 22px;
 }
+
+.transparent-dialog .mat-dialog-container {
+  background: transparent;
+  padding: 0;
+}

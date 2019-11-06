@@ -95,9 +95,10 @@ export class MediaComponent implements OnInit {
 
   private showMediaDialog(media: Media) {
     const dialogRef = this.dialog.open(MediaInfoComponent, {
-      width: 'calc(100vw - 60px)',
       maxWidth: '100vw',
-      height: 'calc(100vh - 60px)',
+      width: '100vw',
+      height: '100vh',
+      panelClass: 'transparent-dialog',
       data: {media}
     });
     dialogRef.afterClosed().subscribe(result => {

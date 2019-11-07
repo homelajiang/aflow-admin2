@@ -7,11 +7,11 @@
   </div>
 
   <div fxLayout="row wrap">
-    <div *ngFor="let media of medias"
+    <div *ngFor="let media of medias,let index=index"
          style="padding: 20px;"
          fxFlex.lt-sm="100"
          fxFlex.lt-md="50" fxFlex.gt-md="20" fxFlex.gt-lg="20" fxFlex="33.33">
-      <app-media-item [media]="media" (click)="onMediaClick(media)"></app-media-item>
+      <app-media-item [media]="media" (click)="onMediaClick(media,index)"></app-media-item>
     </div>
   </div>
 

@@ -4,6 +4,7 @@ import {MatDialog, MatSnackBar} from '@angular/material';
 import {BlogService} from '../blog/blog.service';
 import {SnackBar} from '../utils/snack-bar';
 import {MediaInfoComponent} from './media-info/media-info.component';
+import {filter} from "rxjs/operators";
 
 @Component({
   selector: 'app-media',
@@ -65,7 +66,7 @@ export class MediaComponent implements OnInit {
   }
 
 
-  private onMediaClick(media) {
+  private onMediaClick(media, index) {
     if (this.selectMode) {
       if (this.selectMultiple) {
         media.selected = !media.selected;
@@ -89,11 +90,11 @@ export class MediaComponent implements OnInit {
         }
       }
     } else {
-      this.showMediaDialog(media);
+      this.showMediaDialog(media, index);
     }
   }
 
-  private showMediaDialog(media: Media) {
+  private showMediaDialog(media: Media, index) {
     const dialogRef = this.dialog.open(MediaInfoComponent, {
       maxWidth: '100vw',
       width: '100vw',
@@ -101,9 +102,13 @@ export class MediaComponent implements OnInit {
       panelClass: 'transparent-dialog',
       data: {media}
     });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('Dialog result: ${result}');
-    });
+    dialogRef.afterClosed()
+      .pipe(
+        filter(res => res)
+      )
+      .subscribe(res => {
+        this.medias[index] = res;
+      });
   }
 
   private onLoadMore() {

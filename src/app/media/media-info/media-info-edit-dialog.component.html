@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>编辑</h2>
+<mat-dialog-content>
+  <mat-form-field style="width: 100%;">
+    <input matInput [(ngModel)]="media.name" placeholder="名称" required>
+  </mat-form-field>
+
+  <mat-form-field style="width: 100%;">
+    <textarea matInput cdkTextareaAutosize
+              cdkAutosizeMinRows="1"
+              cdkAutosizeMaxRows="10"
+              [(ngModel)]="media.description"
+              placeholder="添加说明"></textarea>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="closeDialog()">取消</button>
+  <button mat-button color="primary" (click)="submitEdit()" cdkFocusInitial>确定</button>
+</mat-dialog-actions>

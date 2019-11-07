@@ -37,7 +37,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTabsModule} from '@angular/material/tabs';
 import {SearchBarComponent} from './component/search-bar/search-bar.component';
-import {MediaInfoComponent} from './media/media-info/media-info.component';
+import {MediaInfoComponent, MediaInfoEditDialogComponent} from './media/media-info/media-info.component';
 import {PostComponent} from './post/post.component';
 import {LoadingComponent} from './component/loading/loading.component';
 import {LoadMoreComponent} from './component/load-more/load-more.component';
@@ -71,6 +71,7 @@ import {MatRippleModule} from '@angular/material/core';
     MediaUploadComponent,
     SearchBarComponent,
     MediaInfoComponent,
+    MediaInfoEditDialogComponent,
     PostComponent,
     LoadingComponent,
     LoadMoreComponent,
@@ -122,7 +123,7 @@ import {MatRippleModule} from '@angular/material/core';
     ChartsModule,
     MatRippleModule
   ],
-  entryComponents: [MediaInfoComponent, CreateCategoriesDialogComponent, ImageSelectDialogComponent,
+  entryComponents: [MediaInfoComponent, MediaInfoEditDialogComponent, CreateCategoriesDialogComponent, ImageSelectDialogComponent,
     ImageCropDialogComponent, ConfirmDialogComponent, CommentRemoveDialogComponent],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

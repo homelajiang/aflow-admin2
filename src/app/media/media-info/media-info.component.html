@@ -2,29 +2,40 @@
 
 <div fxLayout="column" style="height: 100%;">
   <div style="height: 40px;" fxFlex="none" fxLayout="row wrap" fxLayoutAlign="none center">
-    <span>title</span>
+    <div style="padding: 0 10px;color: #ccc;font-size: 13px;">
+      <span style="">1</span>
+      /
+      <span style="color: #ccc;font-size: 13px;">7</span>
+    </div>
     <span fxFlex="auto"></span>
+    <button mat-icon-button (click)="onEditMediaInfo(media)"
+            style="background: rgba(30,30,30,.6);border-radius: unset;">
+      <mat-icon style="color: #ccc;font-size: 20px;">edit</mat-icon>
+    </button>
     <button mat-icon-button style="background: rgba(30,30,30,.6);border-radius: unset;">
       <mat-icon style="color: #ccc;">delete_forever</mat-icon>
     </button>
-    <button mat-icon-button style="background: rgba(30,30,30,.6);border-radius: unset;">
+    <button mat-icon-button style="background: rgba(30,30,30,.6);border-radius: unset;" ngxClipboard
+            [cbContent]="media.path" (cbOnSuccess)="snackBar.open('复制成功','', {duration: 2000})"
+            (cbOnError)="snackBar.open('复制失败','', {duration: 2000})">
       <mat-icon style="color: #ccc;">link</mat-icon>
     </button>
     <button mat-icon-button style="background: rgba(30,30,30,.6);border-radius: unset;"
-            [mat-dialog-close]="true" cdkFocusInitial>
+            [mat-dialog-close]="media" cdkFocusInitial>
       <mat-icon style="color: #ccc;">close</mat-icon>
     </button>
   </div>
 
   <div fxFlex="auto" style="height: 0;" fxLayout="row" fxLayoutAlign="center center">
-    <img style="max-height: 100%;width: auto;"
+    <img style="max-height: 100%;max-width:100%;"
          src="{{media.path}}">
   </div>
 
   <div fxFlex="none" fxLayout="column" fxLayoutAlign="none center" style="padding: 25px 44px;">
     <h6 style="font-size: 16px;color: rgb(238,238,238);margin: 0 0 8px 0;font-weight: 500;">
-      Aerial photo of person using paddleboard</h6>
-    <span style="font-size: 14px;color: rgb(204,204,204);">Okay, so I wanted to do my own spin on one of my favourite comic book characters... Hellboy!</span>
+      {{media.name}}</h6>
+    <span
+      style="font-size: 14px;color: rgb(204,204,204);">{{media.description ? media.description : '暂无说明'}}</span>
   </div>
 </div>
 

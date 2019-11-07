@@ -1,9 +1,12 @@
 <div class="media-info-bg"></div>
 
 <div fxLayout="column" style="height: 100%;">
-  <div style="height: 40px;" fxLayout="row wrap" fxLayoutAlign="none center">
+  <div style="height: 40px;" fxFlex="none" fxLayout="row wrap" fxLayoutAlign="none center">
     <span>title</span>
     <span fxFlex="auto"></span>
+    <button mat-icon-button style="background: rgba(30,30,30,.6);border-radius: unset;">
+      <mat-icon style="color: #ccc;">delete_forever</mat-icon>
+    </button>
     <button mat-icon-button style="background: rgba(30,30,30,.6);border-radius: unset;">
       <mat-icon style="color: #ccc;">link</mat-icon>
     </button>
@@ -12,16 +15,28 @@
       <mat-icon style="color: #ccc;">close</mat-icon>
     </button>
   </div>
-  <div fxFlex="auto">
-<!--      style="width: 100%;height: 100%;"-->
-    <img
-      src="{{media.path}}">
+
+  <div fxFlex="auto" style="height: 0;" fxLayout="row" fxLayoutAlign="center center">
+    <img style="max-height: 100%;width: auto;"
+         src="{{media.path}}">
   </div>
-  <div fxLayout="column" fxLayoutAlign="none center">
-    <h2>Aerial photo of person using paddleboard</h2>
-    <span>Okay, so I wanted to do my own spin on one of my favourite comic book characters... Hellboy!</span>
+
+  <div fxFlex="none" fxLayout="column" fxLayoutAlign="none center" style="padding: 25px 44px;">
+    <h6 style="font-size: 16px;color: rgb(238,238,238);margin: 0 0 8px 0;font-weight: 500;">
+      Aerial photo of person using paddleboard</h6>
+    <span style="font-size: 14px;color: rgb(204,204,204);">Okay, so I wanted to do my own spin on one of my favourite comic book characters... Hellboy!</span>
   </div>
 </div>
+
+<button mat-icon-button
+        style="background: rgba(30,30,30,.6);border-radius: unset;position: fixed;left: 6px;top: calc(50% - 20px);">
+  <mat-icon style="color: #ccc;">navigate_before</mat-icon>
+</button>
+
+<button mat-icon-button
+        style="background: rgba(30,30,30,.6);border-radius: unset;position: fixed;right: 6px;top: calc(50% - 20px);">
+  <mat-icon style="color: #ccc;">navigate_next</mat-icon>
+</button>
 <!--<div fxLayout="row">-->
 
 <!--  <div fxFlex="75" style="padding: 50px 50px 0;margin-right: 24px;">-->

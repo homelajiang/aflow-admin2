@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {LoadStatus, Media, PageModel} from '../entry';
+import {LoadStatus, Media, MediaWrapper, PageModel} from '../entry';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {BlogService} from '../blog/blog.service';
 import {SnackBar} from '../utils/snack-bar';
 import {MediaInfoComponent} from './media-info/media-info.component';
-import {filter} from "rxjs/operators";
+import {filter} from 'rxjs/operators';
 
 @Component({
   selector: 'app-media',
@@ -34,12 +34,34 @@ export class MediaComponent implements OnInit {
 
   private page = 1;
   private medias: Array<Media> = [];
+  // media总数量
+  private total = 0;
 
   constructor(private  dialog: MatDialog, private  blogService: BlogService, private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
     this.getMedias(true);
+
+    // 监听更新事件
+    this.blogService.updateMediaMessage
+      .subscribe((mediaWrapper: MediaWrapper) => {
+        if (mediaWrapper && mediaWrapper.index >= 0) {
+          this.medias[mediaWrapper.index] = mediaWrapper.media;
+        }
+      });
+
+    // 监听删除事件
+    this.blogService.deleteMediaMessage
+      .subscribe((index: number) => {
+        if (index === -1) {
+          return;
+        }
+        this.medias.splice(index, 1);
+        this.total--;
+      });
+
+    // 监听加载更多成功时间
   }
 
   private getMedias(refresh: boolean) {
@@ -52,6 +74,7 @@ export class MediaComponent implements OnInit {
         this.page++;
         if (refresh) {
           this.medias = mediasPage.list;
+          this.total = mediasPage.count;
         } else {
           this.medias = this.medias.concat(mediasPage.list);
         }
@@ -90,25 +113,26 @@ export class MediaComponent implements OnInit {
         }
       }
     } else {
-      this.showMediaDialog(media, index);
+      this.showMediaDialog(index);
     }
   }
 
-  private showMediaDialog(media: Media, index) {
-    const dialogRef = this.dialog.open(MediaInfoComponent, {
+  private showMediaDialog(index) {
+    // const dialogRef
+    this.dialog.open(MediaInfoComponent, {
       maxWidth: '100vw',
       width: '100vw',
       height: '100vh',
       panelClass: 'transparent-dialog',
-      data: {media}
+      data: {index, medias: this.medias, total: this.total}
     });
-    dialogRef.afterClosed()
-      .pipe(
-        filter(res => res)
-      )
-      .subscribe(res => {
-        this.medias[index] = res;
-      });
+    // dialogRef.afterClosed()
+    //   .pipe(
+    //     filter(res => res)
+    //   )
+    //   .subscribe(res => {
+    //     this.medias[index] = res;
+    //   });
   }
 
   private onLoadMore() {
@@ -131,6 +155,7 @@ export class MediaComponent implements OnInit {
   }
 
   addMedia(media: Media) {
+    this.total++;
     this.medias.unshift(media);
   }
 }

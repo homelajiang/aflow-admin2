@@ -1,14 +1,36 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpEventType, HttpHeaders, HttpParams, HttpRequest} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {Observable, of} from 'rxjs';
-import {Comment, Auth, Categories, Media, PageModel, Post, FileUploadModel, MediaStorage} from '../entry';
+import {BehaviorSubject, Observable, of} from 'rxjs';
+import {
+  Comment,
+  Auth,
+  Categories,
+  Media,
+  PageModel,
+  Post,
+  FileUploadModel,
+  MediaStorage,
+  MediaWrapper
+} from '../entry';
 import {catchError, last, map, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BlogService {
+
+
+  public a = new BehaviorSubject<string>('');
+
+  // 通知删除成功
+  public deleteMediaMessage = new BehaviorSubject<number>(-1);
+
+  // 通知修改成功
+  public updateMediaMessage = new BehaviorSubject<MediaWrapper>(new MediaWrapper());
+
+  // 通知加载更多成功
+  public moreMediaMessage = new BehaviorSubject<PageModel<Media>>(null);
 
   defaultHttpOptions = {
     headers: new HttpHeaders({
@@ -86,7 +108,7 @@ export class BlogService {
 
   getMedias(page: number, keyword?: string): Observable<PageModel<Media>> {
     let params: HttpParams = new HttpParams()
-      .set('pageSize', '20')
+      .set('pageSize', '1')
       .set('pageNum', page.toString());
     if (keyword && keyword.trim()) {
       params = params.set('keyword', keyword.trim());
@@ -101,6 +123,10 @@ export class BlogService {
         description: media.description
       },
       this.defaultHttpOptions);
+  }
+
+  removeMedia(id: string): Observable<any> {
+    return this.http.delete(`api/v1/file/${id}`);
   }
 
 

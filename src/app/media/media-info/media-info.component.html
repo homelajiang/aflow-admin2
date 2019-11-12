@@ -3,16 +3,16 @@
 <div fxLayout="column" style="height: 100%;">
   <div style="height: 40px;" fxFlex="none" fxLayout="row wrap" fxLayoutAlign="none center">
     <div style="padding: 0 10px;color: #ccc;font-size: 13px;">
-      <span style="">1</span>
+      <span style="">{{index + 1}}</span>
       /
-      <span style="color: #ccc;font-size: 13px;">7</span>
+      <span style="color: #ccc;font-size: 13px;">{{total}}</span>
     </div>
     <span fxFlex="auto"></span>
-    <button mat-icon-button (click)="onEditMediaInfo(media)"
+    <button mat-icon-button (click)="onEditMediaInfo()"
             style="background: rgba(30,30,30,.6);border-radius: unset;">
       <mat-icon style="color: #ccc;font-size: 20px;">edit</mat-icon>
     </button>
-    <button mat-icon-button style="background: rgba(30,30,30,.6);border-radius: unset;">
+    <button mat-icon-button (click)="deleteMedia()" style="background: rgba(30,30,30,.6);border-radius: unset;">
       <mat-icon style="color: #ccc;">delete_forever</mat-icon>
     </button>
     <button mat-icon-button style="background: rgba(30,30,30,.6);border-radius: unset;" ngxClipboard
@@ -39,86 +39,19 @@
   </div>
 </div>
 
-<button mat-icon-button
+<button mat-icon-button (click)="toPre()" [disabled]="index===0"
         style="background: rgba(30,30,30,.6);border-radius: unset;position: fixed;left: 6px;top: calc(50% - 20px);">
   <mat-icon style="color: #ccc;">navigate_before</mat-icon>
 </button>
 
-<button mat-icon-button
+<button mat-icon-button (click)="toNext()" [disabled]="index+1>total"
         style="background: rgba(30,30,30,.6);border-radius: unset;position: fixed;right: 6px;top: calc(50% - 20px);">
   <mat-icon style="color: #ccc;">navigate_next</mat-icon>
 </button>
-<!--<div fxLayout="row">-->
 
-<!--  <div fxFlex="75" style="padding: 50px 50px 0;margin-right: 24px;">-->
-<!--&lt;!&ndash;    <img style="width: 100%;"&ndash;&gt;-->
-<!--&lt;!&ndash;         src="{{media.path}}">&ndash;&gt;-->
-<!--  </div>-->
-<!--  <div fxFlex="25">-->
-<!--    <div>-->
-<!--      信息-->
-<!--    </div>-->
+<div fxLayout="row" fxLayoutAlign="center center" style="border-radius: 10px;
+position: fixed;left: calc(50% - 80px);
+top: calc(50% - 80px);height: 160px;width: 160px;">
+  <mat-spinner></mat-spinner>
+</div>
 
-<!--    <div>-->
-<!--      <mat-form-field style=" width: 100%;">-->
-<!--        <textarea matInput cdkTextareaAutosize-->
-<!--                  cdkAutosizeMinRows="1"-->
-<!--                  cdkAutosizeMaxRows="10"-->
-<!--                  placeholder="添加说明"></textarea>-->
-<!--      </mat-form-field>-->
-<!--    </div>-->
-
-<!--    <div>-->
-<!--      详情-->
-<!--    </div>-->
-
-<!--    <div fxLayout="row" fxLayoutAlign="center">-->
-<!--      <mat-icon fxFlexAlign="center">event</mat-icon>-->
-<!--      <div fxFlex="1 1 auto">-->
-<!--        <div style="color: #3c4043;word-wrap: break-word;font-size: 1rem;line-height: 1.5rem;">8月1日-->
-<!--        </div>-->
-<!--        <div style="color: #5f6368;font-size: 14px;">周四，下午14:33</div>-->
-<!--      </div>-->
-
-<!--      <button mat-icon-button>-->
-<!--        <mat-icon>file_copy</mat-icon>-->
-<!--      </button>-->
-<!--    </div>-->
-
-<!--    <div fxLayout="row" fxLayoutAlign="center">-->
-<!--      <mat-icon fxFlexAlign="center">event</mat-icon>-->
-<!--      <div fxFlex="1 1 auto">-->
-<!--        <div style="color: #3c4043;word-wrap: break-word;font-size: 1rem;line-height: 1.5rem;">8月1日-->
-<!--        </div>-->
-<!--        <div style="color: #5f6368;font-size: 14px;">周四，下午14:33</div>-->
-<!--      </div>-->
-
-<!--      <button mat-icon-button>-->
-<!--        <mat-icon>file_copy</mat-icon>-->
-<!--      </button>-->
-<!--    </div>-->
-
-
-<!--    <div fxLayout="row" fxLayoutAlign="center">-->
-<!--      <mat-icon fxFlexAlign="center">event</mat-icon>-->
-<!--      <div fxFlex="1 1 auto" style="font-size: 14px;">-->
-<!--        http://www.baidu.com-->
-<!--      </div>-->
-
-<!--      <button mat-icon-button>-->
-<!--        <mat-icon>file_copy</mat-icon>-->
-<!--      </button>-->
-<!--    </div>-->
-
-
-<!--    <button mat-stroked-button color="warn" style="width: 100%;">删除</button>-->
-
-
-<!--  </div>-->
-
-
-<!--  <button mat-icon-button mat-dialog-close style="position: relative;left: 20px;bottom: 20px;">-->
-<!--    <mat-icon>close</mat-icon>-->
-<!--  </button>-->
-
-<!--</div>-->

@@ -147,6 +147,15 @@ export class LoadStatus {
   public static NO_MORE = 3;
 }
 
+export class MediaWrapper {
+  index = -1;
+  media: Media;
+
+  constructor() {
+  }
+
+}
+
 export class MainMenu {
   name: string;
   color: string;

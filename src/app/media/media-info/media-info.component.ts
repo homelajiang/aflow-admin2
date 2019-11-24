@@ -15,17 +15,14 @@ import {ConfirmDialogComponent} from '../../component/confirm-dialog/confirm-dia
 })
 export class MediaInfoComponent implements OnInit {
   private media: Media;
-  private medias: Array<Media> = [];
+  private readonly medias: Array<Media> = [];
   private index: number;
-  private total: number;
-  private loadingStatus: number;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialog: MatDialog,
               private blogService: BlogService, private snackBar: MatSnackBar) {
     this.index = data.index;
     this.medias = data.medias;
     this.media = this.medias[this.index];
-    this.total = data.total;
   }
 
   ngOnInit() {
@@ -70,8 +67,6 @@ export class MediaInfoComponent implements OnInit {
       .subscribe((res) => {
         SnackBar.open(this.snackBar, '删除成功');
         this.blogService.deleteMediaMessage.next(this.index);
-        // this.medias.splice(this.index, 1);
-        this.total--;
         this.index = this.index === 0 ? 0 : this.index - 1;
         this.media = this.medias[this.index];
       }, error => SnackBar.open(this.snackBar, error));
@@ -85,7 +80,7 @@ export class MediaInfoComponent implements OnInit {
   }
 
   private toNext() {
-    if (this.index + 1 < this.total) {
+    if (this.index + 1 < this.medias.length) {
       this.index++;
       this.media = this.medias[this.index];
     }

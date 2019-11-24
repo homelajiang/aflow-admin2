@@ -30,7 +30,7 @@
 }
 
 .editor-toolbar {
-  border: 1px solid #ddd;
+  /*border: 1px solid #ddd;*/
   position: relative;
   opacity: .6;
   -webkit-user-select: none;
@@ -40,10 +40,11 @@
   user-select: none;
   padding: 0 10px;
   border-top: 1px solid #bbb;
-  border-left: 1px solid #bbb;
-  border-right: 1px solid #bbb;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
+  border-bottom: 1px solid #bbb;
+  /*border-left: 1px solid #bbb;*/
+  /*border-right: 1px solid #bbb;*/
+  /*border-top-left-radius: 4px;*/
+  /*border-top-right-radius: 4px;*/
 }
 
 .editor-toolbar:after,

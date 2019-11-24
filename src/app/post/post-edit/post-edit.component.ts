@@ -12,9 +12,6 @@ import {ActivatedRoute} from '@angular/router';
 import {BlogService} from 'src/app/blog/blog.service';
 import {ImageSelectDialogComponent} from '../../component/image-select-dialog/image-select-dialog.component';
 
-let that: PostEditComponent;
-
-
 @Component({
   selector: 'app-post-edit',
   templateUrl: './post-edit.component.html',
@@ -47,18 +44,16 @@ export class PostEditComponent implements OnInit {
   constructor(public dialog: MatDialog, private snackBar: MatSnackBar,
               private routerInfo: ActivatedRoute, private blogService: BlogService,
               private snackbar: MatSnackBar) {
-    that = this;
-
     this.mdOptions = new Object();
     this.mdOptions.placeholder = 'yuan';
     this.mdOptions.toolbar = ['bold', 'italic', 'heading', '|',
       'quote', 'code', 'unordered-list', 'ordered-list', '|',
       'link', {
         name: 'image',
-        action: function customFunction(editor) {
-          that.selectImage()
+        action: editor => {
+          this.selectImage()
             .subscribe(result => {
-              that.markdownComponent.insertImage(result[0].path);
+              this.markdownComponent.insertImage(result[0].path);
             });
         },
         className: 'fas fa-image',
@@ -120,7 +115,7 @@ export class PostEditComponent implements OnInit {
   }
 
   private selectImage(): Observable<Array<Media>> {
-    const dialogRef = that.dialog.open(ImageSelectDialogComponent, {
+    const dialogRef = this.dialog.open(ImageSelectDialogComponent, {
       width: '80vw',
       maxWidth: '100vw',
       height: '80vh'

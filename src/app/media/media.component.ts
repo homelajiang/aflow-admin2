@@ -4,7 +4,6 @@ import {MatDialog, MatSnackBar} from '@angular/material';
 import {BlogService} from '../blog/blog.service';
 import {SnackBar} from '../utils/snack-bar';
 import {MediaInfoComponent} from './media-info/media-info.component';
-import {filter} from 'rxjs/operators';
 
 @Component({
   selector: 'app-media',
@@ -34,8 +33,6 @@ export class MediaComponent implements OnInit {
 
   private page = 1;
   private medias: Array<Media> = [];
-  // media总数量
-  private total = 0;
 
   constructor(private  dialog: MatDialog, private  blogService: BlogService, private snackBar: MatSnackBar) {
   }
@@ -58,7 +55,6 @@ export class MediaComponent implements OnInit {
           return;
         }
         this.medias.splice(index, 1);
-        this.total--;
       });
 
     // 监听加载更多成功时间
@@ -74,7 +70,6 @@ export class MediaComponent implements OnInit {
         this.page++;
         if (refresh) {
           this.medias = mediasPage.list;
-          this.total = mediasPage.count;
         } else {
           this.medias = this.medias.concat(mediasPage.list);
         }
@@ -124,7 +119,7 @@ export class MediaComponent implements OnInit {
       width: '100vw',
       height: '100vh',
       panelClass: 'transparent-dialog',
-      data: {index, medias: this.medias, total: this.total}
+      data: {index, medias: this.medias}
     });
     // dialogRef.afterClosed()
     //   .pipe(
@@ -155,7 +150,6 @@ export class MediaComponent implements OnInit {
   }
 
   addMedia(media: Media) {
-    this.total++;
     this.medias.unshift(media);
   }
 }

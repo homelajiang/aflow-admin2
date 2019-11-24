@@ -95,7 +95,7 @@ export class MarkdownComponent implements OnInit, AfterViewInit {
     MoeApp.moeMd = this;
 
     // 使布局不可滚动
-    document.querySelector('#sidenav-content').setAttribute('style', 'overflow-y: hidden');
+    // document.querySelector('#sidenav-content').setAttribute('style', 'overflow-y: hidden');
 
     this.codeMirrorInit();
     this.scroller = new MoeScroll();

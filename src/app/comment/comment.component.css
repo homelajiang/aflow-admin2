@@ -21,18 +21,19 @@
 }
 
 .comment-creator {
-  font-size: 14px;
+  font-size: 16px;
   margin-right: 10px;
   font-weight: bold;
 }
 
 .comment-date {
-  font-size: 14px;
+  font-size: 12px;
+  margin-top: 5px;
   color: rgba(0, 0, 0, 0.5);
 }
 
 .comment-content {
-  font-size: 14px;
+  font-size: 16px;
   margin: 5px 0;
 }
 

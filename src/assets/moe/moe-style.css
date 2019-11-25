@@ -375,7 +375,7 @@ html[lang="zh_CN"] #md-main[settings-editor-font="default"] #editor * {
   padding-bottom: 30px;
   padding-left: 45px;
   padding-right: 40px;
-  font-size: 14px !important;
+  font-size: 16px !important;
   transition: all 500ms ease-in-out;
   -webkit-user-select: initial;
 }
@@ -458,7 +458,7 @@ html[lang="zh_CN"] #md-main[settings-editor-font="default"] #editor * {
 }
 
 .CodeMirror {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .CodeMirror-cursors {

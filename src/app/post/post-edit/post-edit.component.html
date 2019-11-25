@@ -19,19 +19,23 @@
   </div>
 
 
-  <div style="width: 400px;height: 100%;overflow-y: auto;overflow-x: hidden;padding-left: 20px;padding-right: 20px;"
-       fxFlex="nogrow">
+  <div
+    style="width: 400px;height: 100%;overflow-y: auto;overflow-x: hidden;padding-left: 20px;padding-right: 20px;padding-top: 24px;"
+    fxFlex="nogrow">
 
     <div fxLayout="row" fxLayoutAlign="center center" style="font-size: 20px;
     font-weight: bold;padding: 20px;">
       <mat-icon>tune</mat-icon>
-      <span style="margin-left: 5px;">文章设置</span>
+      <span fxFlex="none" style="margin-left: 5px;">文章设置</span>
     </div>
 
     <div fxLayout="row" fxLayoutAlign="start center" class="icon-setting">
       <mat-icon>poll</mat-icon>
       <span>状态:</span>
       <b>{{post.status | postStatus}}</b>
+      <button fxFlex="none" mat-button color="primary" (click)="savePost()">{{"保存"}}</button>
+      <i style="font-size: 12px;padding-left: 20px;">一分钟前</i>
+
     </div>
 
     <div fxLayout="row" fxLayoutAlign="start center" class="icon-setting">
@@ -81,6 +85,13 @@
       </mat-radio-button>
     </mat-radio-group>
 
+    <div fxLayout="row" fxLayoutAlign="start end" style="margin-bottom: 30px;margin-top: 10px;">
+      <button fxFlex="none" mat-flat-button color="primary" (click)="savePost()">{{"发布"}}</button>
+      <button fxFlex="none" mat-stroked-button color="primary" (click)="savePost()"
+              style="margin-left: 20px;">{{"预览"}}</button>
+      <!--      <button fxFlex="none" mat-button color="primary" (click)="savePost()">{{"预览"}}</button>-->
+    </div>
+
     <div class="text-setting">分类</div>
 
     <mat-radio-group style=" display: inline-flex;flex-direction: column;" [(ngModel)]="post.categories">
@@ -89,7 +100,7 @@
       </mat-radio-button>
     </mat-radio-group>
 
-    <div style="margin-top: 5px;">
+    <div style="margin-top: 5px;padding-left: 14px;">
       <button mat-button color="primary">新建分类</button>
     </div>
 
@@ -122,8 +133,6 @@
 
 
     <img style="width: 100%;" src="{{post.cover}}">
-
-    <button mat-flat-button color="primary" (click)="savePost()" style="width: 100%;">{{post.id ? '保存' : '创建'}}</button>
 
   </div>
 

@@ -46,7 +46,7 @@ export class Categories {
 
 export class Post {
   id;
-  title = '未命名文章';
+  title = '';
   description;
   content;
   createDate;

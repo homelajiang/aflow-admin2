@@ -1,51 +1,46 @@
 <div class="media-info-bg"></div>
 
-<div fxLayout="column" style="height: 100%;">
-  <div style="height: 40px;" fxFlex="none" fxLayout="row wrap" fxLayoutAlign="none center">
-    <div style="padding: 0 10px;color: #ccc;font-size: 13px;">
-      <span style="">{{index + 1}}</span>
+<div fxLayout="column" class="media-info-area">
+  <div class="media-info-bar" fxFlex="none" fxLayout="row wrap" fxLayoutAlign="none center">
+    <div class="media-index">
+      <span>{{index + 1}}</span>
       /
-      <span style="color: #ccc;font-size: 13px;">{{medias.length}}</span>
+      <span>{{medias.length}}</span>
     </div>
     <span fxFlex="auto"></span>
-    <button mat-icon-button (click)="onEditMediaInfo()"
-            style="background: rgba(30,30,30,.6);border-radius: unset;">
-      <mat-icon style="color: #ccc;font-size: 20px;">edit</mat-icon>
+    <button mat-icon-button (click)="onEditMediaInfo()" class="action-button small-icon">
+      <mat-icon>edit</mat-icon>
     </button>
-    <button mat-icon-button (click)="deleteMedia()" style="background: rgba(30,30,30,.6);border-radius: unset;">
-      <mat-icon style="color: #ccc;">delete_forever</mat-icon>
+    <button mat-icon-button (click)="deleteMedia()" class="action-button small-icon">
+      <mat-icon>delete_forever</mat-icon>
     </button>
-    <button mat-icon-button style="background: rgba(30,30,30,.6);border-radius: unset;" ngxClipboard
+    <button mat-icon-button class="action-button small-icon" ngxClipboard
             [cbContent]="media.path" (cbOnSuccess)="snackBar.open('复制成功','', {duration: 2000})"
             (cbOnError)="snackBar.open('复制失败','', {duration: 2000})">
-      <mat-icon style="color: #ccc;">link</mat-icon>
+      <mat-icon>link</mat-icon>
     </button>
-    <button mat-icon-button style="background: rgba(30,30,30,.6);border-radius: unset;"
+    <button mat-icon-button class="action-button small-icon"
             [mat-dialog-close]="media" cdkFocusInitial>
-      <mat-icon style="color: #ccc;">close</mat-icon>
+      <mat-icon>close</mat-icon>
     </button>
   </div>
 
-  <div fxFlex="auto" style="height: 0;" fxLayout="row" fxLayoutAlign="center center">
-    <img style="max-height: 100%;max-width:100%;"
-         src="{{media.path}}">
+  <div fxFlex="auto" class="display-area" fxLayout="row" fxLayoutAlign="center center">
+    <img src="{{media.path}}">
   </div>
 
-  <div fxFlex="none" fxLayout="column" fxLayoutAlign="none center" style="padding: 25px 44px;">
-    <h6 style="font-size: 16px;color: rgb(238,238,238);margin: 0 0 8px 0;font-weight: 500;">
+  <div fxFlex="none" fxLayout="column" fxLayoutAlign="none center" class="media-info">
+    <h6>
       {{media.name}}</h6>
-    <span
-      style="font-size: 14px;color: rgb(204,204,204);">{{media.description ? media.description : '暂无说明'}}</span>
+    <span>{{media.description ? media.description : '暂无说明'}}</span>
   </div>
 </div>
 
-<button mat-icon-button (click)="toPre()" [disabled]="index===0"
-        style="background: rgba(30,30,30,.6);border-radius: unset;position: fixed;left: 6px;top: calc(50% - 20px);">
-  <mat-icon style="color: #ccc;">navigate_before</mat-icon>
+<button mat-icon-button class="action-button button-pre" (click)="toPre()" [disabled]="index===0">
+  <mat-icon>navigate_before</mat-icon>
 </button>
 
-<button mat-icon-button (click)="toNext()" [disabled]="index+1>=medias.length"
-        style="background: rgba(30,30,30,.6);border-radius: unset;position: fixed;right: 6px;top: calc(50% - 20px);">
-  <mat-icon style="color: #ccc;">navigate_next</mat-icon>
+<button mat-icon-button class="action-button button-next" (click)="toNext()" [disabled]="index+1>=medias.length">
+  <mat-icon>navigate_next</mat-icon>
 </button>
 

@@ -1,22 +1,12 @@
 <div>
-  <div
-    style="height: 0;padding-bottom: 72%;background-color: white;border:1px solid #e8e8e8;border-radius: 3px;position: relative;">
-
-    <div style="margin: 10px;background-color: rgb(238, 238, 238);padding-bottom: calc(72% - 20px);
-         background-repeat: no-repeat;
-         background-position: center center;
-         background-size: contain;"
-         [ngStyle]="{'background-image': 'url('+media.path+')'}">
-
+  <div class="media-item">
+    <div class="media-preview" [ngStyle]="{'background-image': 'url('+media.path+')'}">
     </div>
-
-    <mat-icon style="color: #fd4c5d;position: absolute;top: 10px;right: 10px;" *ngIf="media.selected">check_circle
-    </mat-icon>
+    <mat-icon class="select-icon" *ngIf="media.selected">check_circle</mat-icon>
 
   </div>
 
-  <div style="padding: 5px 10px;font-weight: 600;overflow: hidden;
-    text-overflow: ellipsis;white-space: nowrap;font-size: 14px;color: rgba(0, 0, 0, 0.65);">
+  <div class="media-item-title">
     {{media.name}}
   </div>
 

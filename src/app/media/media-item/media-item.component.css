@@ -1,0 +1,34 @@
+.media-item {
+  height: 0;
+  padding-bottom: 72%;
+  background-color: white;
+  border: 1px solid #e8e8e8;
+  border-radius: 3px;
+  position: relative;
+}
+
+.media-item .media-preview {
+  margin: 10px;
+  background-color: rgb(238, 238, 238);
+  padding-bottom: calc(72% - 20px);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+}
+
+.media-item .select-icon {
+  color: #fd4c5d;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.media-item-title {
+  padding: 5px 10px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.65);
+}

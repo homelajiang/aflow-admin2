@@ -33,6 +33,7 @@
 }
 
 .comment-content {
+  line-height: 180%;
   font-size: 16px;
   margin: 5px 0;
 }

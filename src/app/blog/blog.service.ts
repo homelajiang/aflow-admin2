@@ -56,6 +56,7 @@ export class BlogService {
           if (auth.accessToken) {
             saveAccessToken(auth);
             // TODO 跳转存储的url，并重置redirectUrl
+            this.router.navigate(['dashboard']);
           }
         })
       );

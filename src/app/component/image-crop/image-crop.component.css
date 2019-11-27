@@ -1,0 +1,16 @@
+.image-input-hidden{
+  display: none;
+  background-color: rgb(238, 238, 238);
+}
+
+.crop-area{
+  margin-top: 15px;
+}
+
+.crop-preview{
+  margin-left: 24px;
+}
+
+.crop-preview p{
+  margin-bottom: 10px;
+}

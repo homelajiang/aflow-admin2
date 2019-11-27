@@ -1,5 +1,5 @@
 <div>
-  <div style="display: none;">
+  <div class="image-input-hidden">
     <input #image_input type="file" accept="image/*" (change)="fileChangeListener($event)"/>
   </div>
 
@@ -7,16 +7,15 @@
     <button mat-button color="primary" (click)="image_input.click()">选择图片</button>
   </div>
 
-  <div fxLayout fxLayoutAlign="none start" style="margin-top: 15px;">
+  <div fxLayout fxLayoutAlign="none start" class="crop-area">
     <img-cropper #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
-    <div style="margin-left: 24px;">
-      <div style="margin-bottom: 10px;"> 预览</div>
+    <div class="crop-preview">
+      <p> 预览</p>
       <img
         [src]="data.image?data.image:'https://via.placeholder.com/100x100.png'"
         [width]="cropperSettings.croppedWidth"
         [height]="cropperSettings.croppedHeight"/>
     </div>
-
   </div>
 
 </div>

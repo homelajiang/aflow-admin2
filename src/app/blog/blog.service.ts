@@ -66,9 +66,10 @@ export class BlogService {
     removeAccessToken();
   }
 
-  uploadFile(file: File): Observable<any> {
+  uploadProtectedFile(file: File): Observable<any> {
     const fd = new FormData();
     fd.append('file', file);
+    fd.append('open', 'protected');
 
     const req = new HttpRequest('POST', 'api/v1/file', fd, {reportProgress: true});
 

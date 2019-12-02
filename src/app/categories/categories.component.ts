@@ -108,8 +108,8 @@ export class CategoriesComponent implements OnInit {
         switchMap((temp: Categories) => {
           categories = temp;
           if (temp.image && temp.image.startsWith('data:')) {
-            const file: File = Decoder.dataURLtoFile(temp.image, `tag_${temp.name}`);
-            return this.blogService.uploadFile(file);
+            const file: File = Decoder.dataURLtoFile(temp.image, `categories_${temp.name}`);
+            return this.blogService.uploadProtectedFile(file);
           } else {
             return of(0);
           }

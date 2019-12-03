@@ -196,7 +196,7 @@ export class BlogService {
 
   updateComment(comment: Comment): Observable<Comment> {
     return this.http.post<Comment>(`api/v1/comment/${comment.id}`, {
-      delete_reason: comment.deleteReason,
+      deleteReason: comment.deleteReason,
       status: comment.status
     }, this.defaultHttpOptions);
   }

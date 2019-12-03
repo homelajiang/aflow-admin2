@@ -110,7 +110,7 @@ export class CommentComponent implements OnInit {
   }
 
   replyComment(comment: Comment, index: number) {
-    SnackBar.open(this.snackBar, '暂无开放');
+    SnackBar.open(this.snackBar, '暂未开放');
   }
 
   /**
